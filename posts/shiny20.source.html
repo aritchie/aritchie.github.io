@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="The personal blog of Allan Ritchie">
 
-  <title>Allan Ritchie - Shiny 2.0</title>
+  <title>Allan Ritchie - Shiny 2.0 - Shinier Than Ever</title>
 
   <link rel="canonical" href="https://aritchie.github.io/posts/shiny20.source">
 
@@ -19,7 +19,7 @@
   <meta name="msapplication-tooltip" content="Allan Ritchie" />
   <meta name="msapplication-starturl" content="/" />
 
-  <meta property="og:title" content="Allan Ritchie - Shiny 2.0" />
+  <meta property="og:title" content="Allan Ritchie - Shiny 2.0 - Shinier Than Ever" />
     <meta property="og:image" content="/images/shiny_logo.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aritchie.github.io/posts/shiny20.source" />
@@ -64,6 +64,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -74,12 +80,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -94,7 +94,7 @@
       <div class="col-md-12">
         <div class="site-heading">
           <h1>
-            Shiny 2.0
+            Shiny 2.0 - Shinier Than Ever
           </h1>
         </div>
       </div>
@@ -106,8 +106,45 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <p>TODO</p>
-<p>snippet: Snippet.cs</p>
+        <p>Shiny has notoriously required a lot of boilerplate code especially on the Android side.  Thanks to the hard work of the Uno Platform team and their wonderful source generator work, Shiny is now generating most, if not all, of this boilerplate code now.</p>
+<h1 id="push">Push</h1>
+<ul>
+<li>Azure Notification Hubs</li>
+<li>Firebase Messaging</li>
+<li>Straight Native</li>
+</ul>
+<pre><code class="language-csharp">var result = await PushManager.RequestAccess();
+if (result.Status == Shiny.AccessState.Available) 
+{
+    result.RegistrationToken;
+}
+
+// foreground
+PushManager.WhenReceived().Subscribe(data =&gt; {
+
+});
+
+// background
+public class MyPushDelegate : Shiny.Push.IPushDelegate
+{
+
+}
+
+
+// configuring it and switch between them - 1 line of code!
+
+</code></pre>
+<h1 id="application-services">Application Services</h1>
+<p>Shiny's first purpose in life was to make cross platform device &amp; background services easy, but it was never going to stop there.  I'm now starting to work on services to make scenarios easy.  Here are the first two Shiny modules to follow this plan</p>
+<h2 id="shiny.locations.sync">Shiny.Locations.Sync</h2>
+<p>Sync geofence and GPS events to your backend using a consistent and aggressive practices to ensure this data calls home ASAP</p>
+<h2 id="shiny.mediasync">Shiny.MediaSync</h2>
+<p>This will scan and upload photos, videos, &amp; audio from your Android &amp; iOS media gallery</p>
+<h2 id="section"></h2>
+<h2 id="shiny.triptracker">Shiny.TripTracker</h2>
+<p>Continuing the theme of app services and making the hard tasks easy - trip tracker will record trips for walks, runs, cycling, and automotive.  It uses a combination of GPS and motion activity to record trips.</p>
+<h2 id="bluetoothle">BluetoothLE</h2>
+<p>the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to <a href="https://github.com/reactiveui/refit">Refit</a> and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.</p>
 
       </div>
     </div>
