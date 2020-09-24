@@ -1,0 +1,9 @@
+Host: aritchie.github.io
+SiteTitle: "Allan Ritchie's Blog"
+PostSources: posts/{*,!*source}.md
+Image: images/toronto_pan.jpg
+LinksUseHttps: true
+GitHubOwner: aritchie
+GitHubName: aritchie.github.io
+GitHubToken: => Config.FromSetting<string>("GITHUB_TOKEN")
+GitHubBranch: master

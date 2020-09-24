@@ -1,0 +1,9 @@
+FeedTitle: Allan Ritchie's Blog
+FeedDescription: Lots of Xamarin stuffs
+FeedFilter: => doc.GetString("Tags")?.Contains("Xamarin") ?? false
+# FeedFilter: => doc.GetString("Title")?.StartsWith("Shiny") ?? false
+FeedSources: => GetString("PostSources")
+FeedOrderKey: Published
+FeedOrderDescending: true
+FeedSize: 10
+FeedRss: true
