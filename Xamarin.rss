@@ -5,12 +5,12 @@
 		<link>https://aritchie.github.io/</link>
 		<description>Lots of Xamarin stuffs</description>
 		<copyright>2020</copyright>
-		<pubDate>Thu, 24 Sep 2020 00:59:35 GMT</pubDate>
-		<lastBuildDate>Thu, 24 Sep 2020 00:59:35 GMT</lastBuildDate>
+		<pubDate>Thu, 24 Sep 2020 01:21:15 GMT</pubDate>
+		<lastBuildDate>Thu, 24 Sep 2020 01:21:15 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
-			<description>&lt;p&gt;TODO&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny20</guid>
 			<pubDate>Wed, 09 Sep 2020 00:00:00 GMT</pubDate>
@@ -36,7 +36,7 @@ namespace Blog
 		<item>
 			<title>Shiny 1.1</title>
 			<link>https://aritchie.github.io/posts/shiny11</link>
-			<description>&lt;p&gt;It's only been a month since the 1.0 release and 1.1 is already here!  1.1 is packed with a ton of updates though.  I've received a ton of feedback over the past few weeks.  One of the big goals I have going forward is to make the boilerplate discovery even easier which hopefully is shown starting with this release.  Make sure to read to the end, the new Push library is pretty epic in my opinion.&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny11</guid>
 			<pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
@@ -230,7 +230,7 @@ Do you have any suggestions?  Do you have any device or background mode that is 
 		<item>
 			<title>Shiny - Easy Mode Statics</title>
 			<link>https://aritchie.github.io/posts/shiny-easymode</link>
-			<description>&lt;p&gt;While I was working on Shiny, a LOT of people emailed me telling me "Component.This" doesn't exist (they could have read the samples, but whatevs).  They wanted a Xamarin Essentials approach.  I disagree with this approach to a degree since it doesn't provide some enterprise practices that I require in my day-to-day, but I'm not everyone and people have different requirements.  Thus I decide to bring the static "shims" into Shiny as well as bring a registration model similar to Xamarin Forms.  You still need some of the Shiny startup boilerplate, but there are now ways to cut that down a great deal as well.&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-easymode</guid>
 			<pubDate>Tue, 28 Jan 2020 00:00:00 GMT</pubDate>
@@ -285,8 +285,7 @@ AndroidShinyHost.Init(ShinyStartup.AutoRegister());
 		<item>
 			<title>Shiny 1.0 Release</title>
 			<link>https://aritchie.github.io/posts/shiny10</link>
-			<description>&lt;p&gt;TLDR;
-Its been a while since I blogged because I've really been digging in to finish up a lot of the core parts of Shiny.  This has been such a fun OSS project to build.  I remember when I was discussing this over a year ago with a couple of colleagues.  Shiny had a horrid name when I first started called 'ACR Core'.  The name Shiny came to me one night on twitter when I was making fun of people complaining about updating to the latest Android Support libraries right away and having issues.... shocking.... when people see new NuGets, they must update them regardless of if they need them or not.  "They must have their Shinies" (said in the voice of Golem from LOTR).  The name stuck, but became more of an oxymoron because nothing in Shiny is what you see in your UI... EPIC!&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny10</guid>
 			<pubDate>Mon, 27 Jan 2020 00:00:00 GMT</pubDate>
@@ -369,7 +368,7 @@ Shiny has a lot of overlap with Essentials.  I had debated just taking it on as 
 		<item>
 			<title>Startup Tasks, Modules, and Stateful Delegates - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shiny-di</link>
-			<description>&lt;p&gt;Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-di</guid>
 			<pubDate>Mon, 01 Jul 2019 00:00:00 GMT</pubDate>
@@ -512,7 +511,7 @@ namespace Samples.ShinyDelegates
 		<item>
 			<title>Beacons - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shiny-beacons</link>
-			<description>&lt;p&gt;Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a "location" of some type.  They are like an invisible light house.  If you have a device that can "see" those signals, you can find out how close you are to it.&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_beacons.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-beacons</guid>
 			<pubDate>Mon, 10 Jun 2019 00:00:00 GMT</pubDate>
@@ -662,7 +661,7 @@ namespace YourNamespace
 		<item>
 			<title>Geofencing with a Pinch of Notifications - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shiny-geofencing</link>
-			<description>&lt;p&gt;GPS &amp;amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-geofencing</guid>
 			<pubDate>Tue, 21 May 2019 00:00:00 GMT</pubDate>
@@ -809,7 +808,7 @@ public class YourViewModel
 		<item>
 			<title>Settings in a New Light - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shinysettings</link>
-			<description>&lt;p&gt;I know - Preferences &amp;amp; Settings are a dime a dozen these days, but I'm such a big advocated of decoupled software that I had to do things differently.  With Shiny, I had a chance to move one of the features that I loved from my ACR Settings plugin over and give it a good home in a DI universe of awesome!&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shinysettings</guid>
 			<pubDate>Fri, 03 May 2019 00:00:00 GMT</pubDate>
@@ -953,7 +952,7 @@ public class MyStartup : Shiny.ShinyStartup
 		<item>
 			<title>Background Jobs - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shinyjobs</link>
-			<description>&lt;p&gt;Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the "pretty" from Android to Xamarin cross platform!&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shinyjobs</guid>
 			<pubDate>Fri, 03 May 2019 00:00:00 GMT</pubDate>
@@ -1117,7 +1116,7 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 		<item>
 			<title>Introducing Shiny</title>
 			<link>https://aritchie.github.io/posts/introducingshiny</link>
-			<description>&lt;p&gt;Ever wanted to write a backgrounding experience that is consistent across all of the .NET platforms you work with?  Between Xamarin Android, Xamarin iOS, and the Universal Windows Platform (UWP) - there are a variety of issues that I've seen commonly occuring that makes this difficult.  As .NET developers, we often want our dependency injection, our async/awaits, and our general way of doing things in our ecosystem.  The mobile platforms really flipped us on our head.  Android has services &amp;amp; broadcast receivers, iOS has too many different ways of coming at backgrounding, and UWP is somewhere in between.&lt;/p&gt;</description>
+			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/introducingshiny</guid>
 			<pubDate>Wed, 01 May 2019 00:00:00 GMT</pubDate>
