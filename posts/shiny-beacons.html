@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie&#x27;s Blog - Beacons - Shiny Style</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/posts/shiny-beacons">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+  
+  <meta name="application-name" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Allan Ritchie&#x27;s Blog - Beacons - Shiny Style" />
+    <meta property="og:image" content="/images/shiny_beacons.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/posts/shiny-beacons" />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+  
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+  
+  
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie&#x27;s Blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/livestream">Live Streams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/shiny_beacons.png&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="post-heading">
+          <h1>
+            Beacons - Shiny Style
+          </h1>
+              <div class="meta">Published on Monday, June 10, 2019</div>
+                <div class="mt-3">
+                      <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
+                      <a href="/tags/oss" class="badge badge-light"> OSS</a>
+                      <a href="/tags/shiny" class="badge badge-light"> Shiny</a>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container"> 
+    <div class="row">
+      <div id="content" class="col-md-12">  
+        <h2 id="what-are-beacons">What are Beacons</h2>
+<p>Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a &quot;location&quot; of some type.  They are like an invisible light house.  If you have a device that can &quot;see&quot; those signals, you can find out how close you are to it.</p>
+<p>Some beacons include sensors like temperature, accelerometers, ambient light, pressure, and more.  Head over to <a href="https://estimote.com/products/">Estimote</a> to take a look.  These guys are essentially the Rolls Royce of the beacon industry.</p>
+<p>Beacons from a software perspective actually come in several flavours/protocols.  The main one in practice is iBeacon which is a protocol created by Apple.  There is a beacon protocol by Google called Eddystone. Eddystone doesn't seem to have caught on like iBeacons did.  Eddystone is currently not a supported with Shiny.</p>
+<h2 id="terminology">Terminology</h2>
+<p>Beacons are riddled with terms and acronyms.  Let me hopefully clear up the ones that matter.</p>
+<ul>
+<li><strong>Identifier</strong> - this is a string, for you to set how you see fit (within reasons obviously)</li>
+<li><strong>UUID (Universally Unique Identifier)</strong> - This is a GUID in .NET terms.  You could equate this to the city where you live</li>
+<li><strong>Major</strong> - This is a ushort (uint16).  This would equate to the street on which you live</li>
+<li><strong>Minor</strong> - This is also a ushort (uint16).  This would equate to your street number.  Thereby, giving you the greatest precision in identification.</li>
+<li><strong>Ranging</strong> - Refers to scanning for all beacons within a certain address range.  You can see any and all beacons within your filter parameters as well as how close you are to it.  Think <a href="https://ghostbusters.fandom.com/wiki/P.K.E._Meter">GhostBuster PKE Meter</a></li>
+<li><strong>Monitoring</strong> - The art of scanning for a &quot;filtered&quot; set of beacon address in the background.  You don't know how close you are to the target in this mode, only if you are entering the region or leaving it.  If you watch the show &quot;Chernobyl&quot; on HBO - think the equivalent being the dosimeters on the belts of these guys (the clicking - you are in the bad zone) - <a href="https://www.youtube.com/watch?v=uXafEIdkx6c">Watch Here</a>
+<ul>
+<li><em>iOS</em> - You can monitor 20 beacons (this includes any geofences your app uses as well, so careful here) max</li>
+<li><em>UWP/Android</em> - Technically, there is no limit here, but I would stick to 20 as well.</li>
+</ul>
+</li>
+</ul>
+<h2 id="working-with-beacons-shiny-style">Working with Beacons - Shiny Style</h2>
+<p>Shiny provides the first fully managed beacon implementation for Android &amp; UWP.  It's reach is only limited currently by the reach of Shiny.BluetoothLE.  For iOS, it simply makes use of the iOS API because Apple hijacks all beacon packets (you can't touch them with raw BLE).</p>
+<h3 id="getting-started">Getting Started</h3>
+<p>Again, to save some time - the best place to go for getting the initial setup with shiny is <a href="introducingshiny">RIGHT HERE</a>.  For this article, I'm going to register <a href="https://www.nuget.org/packages/Shiny.Beacons/">Shiny.Beacons</a> and <a href="https://www.nuget.org/packages/Shiny.Notifications/">Shiny.Notifications</a> for backgrounding in the second part of this post under monitoring.</p>
+<h3 id="android">Android</h3>
+<p>Other than the normal Android setup for Shiny, you need to add the following to your manifest.xml - we'll need a few bluetooth permissions here.  Bluetooth on Android requires location permissions as well as Bluetooth since Android 6 due to the use of beacons.</p>
+<p>Let's get started with the traditional OS setup (yes UWP is supported, but is left out for now)</p>
+<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
+
+&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH_ADMIN&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.BLUETOOTH&quot; /&gt;
+</code></pre>
+<h3 id="ios">iOS</h3>
+<p>Again, same typical iOS initialization.  Just add the following to your info.plist.  The UIBackgroundModes is required for Beacons since they are location context even though they are bluetooth devices - so just like <a href="shiny-geofencing">Geofences</a>.</p>
+<pre><code class="language-xml">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+&lt;key&gt;NSLocationAlwaysAndWhenInUseUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+&lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+
+&lt;key&gt;UIBackgroundModes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;location&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+<h3 id="in-your-shared-code">In Your Shared Code</h3>
+<pre><code class="language-csharp">using System;
+using Shiny;
+using Shiny.Beacons;
+using Shiny.Notifications;
+using Microsoft.Extensions.DependencyInjection;
+
+
+namespace YourNamespace
+{
+    public class SampleStartup : ShinyStartup
+    {
+        public override void ConfigureServices(IServiceCollection builder)
+        {
+            // only necessary for the monitoring - for ranging only you can use UseBeacons()
+            builder.UseBeacons&lt;MyBeaconDelegate&gt;();
+            builder.UseNotifications();
+        }
+    }
+}
+</code></pre>
+<h3 id="ranging">Ranging</h3>
+<p>Ranging is particularily easy - you can do this right in your viewmodel.  With ranging, you are given the specific beacon with its proximity.  You still have to set a beacon region to monitor that filters by at least your global UUID.</p>
+<pre><code class="language-csharp">
+public class YourViewModel
+{
+    IDisposable scanSub;
+
+
+    public YourViewModel()
+    {
+        this.Start = new Command(() =&gt;
+        {
+            this.scanSub = Shiny
+                .ShinyHost
+                .Resolve&lt;IBeaconManager&gt;()
+                .WhenRanged(new BeaconRegion(YourUuid))
+                .Subscribe(x =&gt; Device.BeginInvokeOnMainThread(() =&gt;                
+                    this.Beacons.Add(x)
+                ))
+        });
+
+        this.Stop = new Command(() =&gt; this.scanSub?.Dispose());
+    }
+
+
+    public ICommand Start { get; }
+    public ICommand Stop { get; }
+    public IList&lt;Beacon&gt; Beacons { get; private set; }
+}
+
+</code></pre>
+<h3 id="monitoring">Monitoring</h3>
+<p>With monitoring, you aren't given the specific beacon or how close the phone is to the beacon in terms of proximity.  You are basically handed back the filter you used.  This is to protect the privacy of the user (which I actually agree with).  This is a pretty easy task to perform on iOS, but brutally painful to do in Android.  Shiny makes this an absolutely delightful to do.</p>
+<pre><code class="language-csharp">using System;
+using System.Threading.Tasks;
+using Samples.Models;
+using Shiny.Beacons;
+using Shiny.Notifications;
+
+
+namespace YourNamespace
+{
+    public class MyBeaconDelegate : IBeaconDelegate
+    {
+        readonly INotificationManager notifications;
+        public MyBeaconDelegate(INotificationManager notifications) 
+        {
+            this.notifications = notifications;
+        }
+
+
+        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
+        {
+            await this.notifications.Send(
+                $&quot;Beacon Region {newStatus}&quot;,
+                $&quot;{region.Identifier} - {region.Uuid}/{region.Major}/{region.Minor}&quot;
+            );
+        }
+    }
+}
+</code></pre>
+<h2 id="in-closing">In Closing</h2>
+<p>Give Beacons a try - they are great for a variety of business applications from marketing to employee management</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="introducingshiny">Initial Shiny Setup</a></li>
+<li><a href="https://github.com/shinyorg/shinysamples/tree/master/Samples/Beacons">Samples</a></li>
+<li><a href="https://shinylib.net">Documentation</a></li>
+<li>Shiny.Core - <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li>Shiny.Beacons - <a href="https://www.nuget.org/packages/Shiny.Beacons/"><img src="https://img.shields.io/nuget/v/Shiny.Beacons.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li>Shiny.Notifications - <a href="https://www.nuget.org/packages/Shiny.Notifications/"><img src="https://img.shields.io/nuget/v/Shiny.Notifications.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li><a href="https://estimote.com/products/">Estimote Beacons</a></li>
+</ul>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    <!-- allan-ritchies-blog.disqus.com -->
+    var disqus_shortname = 'allan-ritchies-blog'; // required: replace example with your forum shortname
+    var disqus_identifier = 'shiny-beacons';
+    var disqus_title = 'Beacons - Shiny Style';
+    var disqus_url = 'https://aritchie.github.io/posts/shiny-beacons';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->  
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2020 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>

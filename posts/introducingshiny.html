@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie&#x27;s Blog - Introducing Shiny</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/posts/introducingshiny">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+  
+  <meta name="application-name" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Allan Ritchie&#x27;s Blog - Introducing Shiny" />
+    <meta property="og:image" content="/images/shiny_logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/posts/introducingshiny" />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+  
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+  
+  
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie&#x27;s Blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/livestream">Live Streams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/shiny_logo.png&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="post-heading">
+          <h1>
+            Introducing Shiny
+          </h1>
+              <div class="meta">Published on Wednesday, May 1, 2019</div>
+                <div class="mt-3">
+                      <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
+                      <a href="/tags/oss" class="badge badge-light"> OSS</a>
+                      <a href="/tags/shiny" class="badge badge-light"> Shiny</a>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container"> 
+    <div class="row">
+      <div id="content" class="col-md-12">  
+        <h3 id="what-is-it">What is it?</h3>
+<p>Ever wanted to write a backgrounding experience that is consistent across all of the .NET platforms you work with?  Between Xamarin Android, Xamarin iOS, and the Universal Windows Platform (UWP) - there are a variety of issues that I've seen commonly occuring that makes this difficult.  As .NET developers, we often want our dependency injection, our async/awaits, and our general way of doing things in our ecosystem.  The mobile platforms really flipped us on our head.  Android has services &amp; broadcast receivers, iOS has too many different ways of coming at backgrounding, and UWP is somewhere in between.</p>
+<p>There have been several plugins over time to help combat this problem, but all fail at some point because they lack the necessary infrastructure to bring it all together.  I have seen developers frequently fight this issue with things like BluetoothLE, GPS, Geofencing, background synchronization, etc.  Making this code testable is even harder and often painful to work with.</p>
+<p><img src="images/shiny_logo.png" width="100" /> Enter <a href="https://github.com/shinyorg/shiny">Shiny</a> - a new framework that tackles problems that no other framework currently tackles - backgrounding and device hardware with all the bells and whistles you are use to in the .NET ecosystem.  Shiny was built on the premise of making depenendency injection and cross platform backgrounding a consistent &amp; testable experience.</p>
+<p>Out of the box, Shiny will offer:</p>
+<ul>
+<li>A Centralized Hosting Platform</li>
+<li>Environment (App &amp; Device Information)</li>
+<li>Logging</li>
+<li>Connectivity</li>
+<li>File System &amp; IO Extensions</li>
+<li>Power Management</li>
+<li>Permissions</li>
+<li>Settings</li>
+<li>Background Jobs</li>
+<li>Geofencing</li>
+<li>GPS (Foreground &amp; Background)</li>
+<li>Bluetooth LE (GATT Peripheral &amp; Central)</li>
+<li>Beacons</li>
+<li>Speech Recognition</li>
+<li>HTTP File Transfers</li>
+<li>Sensors</li>
+<li>Notifications</li>
+<li>Integrations with 3rd Party MVVM Frameworks like Prism, ReactiveUI, &amp; MvvmCross</li>
+</ul>
+<h3 id="why-another-essentials-or-set-of-plugins">Why Another Essentials or Set of Plugins?</h3>
+<p>Well - to be fair, I've had most of these libraries before some of the other plugins existed.  I also set out to offer a DI and background experience in a cross platform way first.  I also wanted to open the door to other platforms like Tizen, macOS, Linux, Blazor, Uno, &amp; possibly even Meadow as other platforms for the future.  This library has zero focus on UI and will only focus on service processes - I'll leave the frontend stuff to Xamarin Forms &amp; Uno.</p>
+<p>Current plugins also tend to lack features because they need an underlying layer to help keep things in check.  For instance, Plugin.Jobs (one of my plugins) spins up periodic jobs.  These jobs are essentially useless if you can't get your service layer into them in a consistent manner.</p>
+<h2 id="interoperability">Interoperability</h2>
+<p>Because Shiny sits a bit higher in the execution pipeline (before Xamarin Forms gets going for example), it has its own set of registration principles and bootstrapping.  However, I wanted to play nice with Xamarin Forms &amp; great frameworks like MvvmCross and Prism (shoot to Dan &amp; Brian - you guys are awesome)!  There are already mechanisms to help these frameworks play nice out of the box from Day 1, but there is a roadmap to make this experience nearly seemless in the near future.</p>
+<h3 id="at-its-core">At It's Core</h3>
+<p>Shiny was built with Reactive Extensions (RX) and Microsoft Extension (DI) out of the box.  The Microsoft.Extensions.DependencyInjection had the greatest balance of speed, flexibility, and forward thinking support.  Reactive Extensions brings a different paradigm of programming which is often seen as complex.  I choose to embrace it because all other ecosystems embrace it fully (RXJS, Flutter, Java, etc).  I argue that RX isn't complex, it is powerful.  Shiny wants to offer that power at its roots!  As for dependency injection, it often has the same set of arguments and that it is slow.  For backgrounding, DI is extremely POWERFUL and gives you your infrastructure &amp; business logic where you need it.  It also makes your code testable!</p>
+<h3 id="lets-see-it-in-action">Let's see it in action</h3>
+<p>Step 1 - Install from nuget (given)
+Step 2 - In your xplat project, create
+Step 3 - Create your &quot;Startup&quot; class</p>
+<pre><code class="language-csharp">// this sample uses everything imaginable in Core - YOU DO NOT NEED IT ALL
+using Shiny;
+using Shiny.BluetoothLE;
+using Shiny.Beacons;
+using Shiny.Logging;
+using Shiny.Locations;
+using Shiny.Notifications;
+using Shiny.Sensors;
+using Shiny.SpeechRecognition;
+using Shiny.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
+
+
+namespace Samples
+{
+    public class SampleStart : ShinyStartup
+    {
+        public override void ConfigureServices(IServiceCollection builder)
+        {
+            // custom logging
+            Log.UseConsole();
+            Log.UseDebug();
+
+            // create your infrastructure
+            builder.AddSingleton&lt;SampleSqliteConnection&gt;();
+
+            // register all of the acr stuff you want to use
+            builder.UseHttpTransfers&lt;SampleDelegate&gt;();
+            builder.UseBeacons&lt;SampleDelegate&gt;();
+            builder.UseBleCentral();
+            builder.UseBlePeripherals();
+            builder.UseGpsBackground&lt;SampleDelegate&gt;();
+            builder.UseGeofencing&lt;SampleDelegate&gt;();
+            builder.UseNotifications();
+            builder.UseSpeechRecognition();
+
+            builder.UseAccelerometer();
+            builder.UseAmbientLightSensor();
+            builder.UseBarometer();
+            builder.UseCompass();
+            builder.UseDeviceOrientationSensor();
+            builder.UseMagnetometer();
+            builder.UsePedometer();
+            builder.UseProximitySensor();
+        }
+    }
+}
+</code></pre>
+<h3 id="step-4-create-some-delegates">Step 4 - Create Some Delegates</h3>
+<p>Notice those &quot;SampleDelegate&quot; generics above, that's where you register your background handler(s).  It is truly this simple to get up and running.</p>
+<pre><code class="language-csharp">// again - this runs everything and the kitchen sink - pick and choose what you need
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Shiny;
+using Shiny.Beacons;
+using Shiny.BluetoothLE.Central;
+using Shiny.Locations;
+using Shiny.Jobs;
+using Shiny.Net.Http;
+using Shiny.Notifications;
+using Samples.Models;
+
+
+namespace Samples
+{
+    public class SampleAllDelegate : IGeofenceDelegate,
+                                     IGpsDelegate,
+                                     IBeaconDelegate,
+                                     IHttpTransferDelegate,
+                                     IBleStateRestoreDelegate,
+                                     IJob
+    {
+        // notice you can inject anything you registered in your application here
+        readonly SampleSqliteConnection conn;
+        readonly INotificationManager notifications;
+
+
+        public SampleAllDelegate(SampleSqliteConnection conn, INotificationManager notifications)
+        {
+            this.conn = conn;
+            this.notifications = notifications;
+        }
+
+
+
+        public async Task OnConnected(IPeripheral peripheral)
+        {
+        }
+
+
+        public async Task OnStatusChanged(GeofenceState newStatus, GeofenceRegion region)
+        {
+        }
+
+
+        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
+        {
+        }
+
+
+        public async Task&lt;bool&gt; Run(JobInfo jobInfo, CancellationToken cancelToken)
+        {
+            return true;
+        }
+
+
+        public async Task OnError(HttpTransfer transfer, Exception ex)
+        {
+        }
+
+
+        public async Task OnCompleted(HttpTransfer transfer)
+        {
+        }
+
+
+        public async Task OnReading(IGpsReading reading)
+        {
+        }
+    }
+}
+
+</code></pre>
+<h3 id="step-5.1-initializing-ios">Step 5.1 - Initializing iOS</h3>
+<p>iOS is pretty easy - GO to AppDelegate and add the following stuff</p>
+<pre><code class="language-csharp">// in your FinishedLaunching method
+Shiny.iOSShinyHost.Init(new Startup(), services =&gt; 
+{
+    // register any platform specific stuff you need here
+});
+
+// and add this guy - if you don't use jobs, you won't need it
+public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler)
+    =&gt; JobManager.OnBackgroundFetch(completionHandler);
+
+</code></pre>
+<h4 id="step-5.2-initializing-android">Step 5.2 - Initializing Android</h4>
+<p>Android requires a fair bit more setup to get going.  Android requires a top level custom Application definition.  This is necessary as the Host needs to be initialized prior to any services or broadcast receivers warming up.</p>
+<pre><code class="language-csharp">using System;
+using Android.App;
+using Android.Runtime;
+
+
+[Application]
+public class YourApplication : Application
+{
+    public YourApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+    {
+    }
+
+
+    public override void OnCreate()
+    {
+        base.OnCreate();
+        Shiny.AndroidShinyHost.Init(this, new Startup(), services =&gt; {
+            // register any platform specific stuff you need here
+        });
+    }
+}
+
+
+// and lastly - in your main/current activity
+
+public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+{
+    Shiny.AndroidShinyHost.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+}
+</code></pre>
+<h3 id="like-what-you-see">Like What You See?</h3>
+<p>Head over to see the full <a href="https://github.com/shinyorg/shinysamples">GitHub Samples</a> or official documentation located <a href="https://shinydocs.azurewebsites.net">here</a>.  Packages on nuget can be found <a href="https://www.nuget.org/packages?q=shiny">here</a>.</p>
+<p>Follow the <a href="/tags/shiny">links here</a> for more upcoming articles</p>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    <!-- allan-ritchies-blog.disqus.com -->
+    var disqus_shortname = 'allan-ritchies-blog'; // required: replace example with your forum shortname
+    var disqus_identifier = 'introducingshiny';
+    var disqus_title = 'Introducing Shiny';
+    var disqus_url = 'https://aritchie.github.io/posts/introducingshiny';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->  
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2020 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>

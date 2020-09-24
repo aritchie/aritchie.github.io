@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie&#x27;s Blog - Common Pitfalls with Shiny</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/drafts/shiny-pitfalls">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+  
+  <meta name="application-name" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Allan Ritchie&#x27;s Blog - Common Pitfalls with Shiny" />
+    <meta property="og:image" content="/images/shiny_logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/drafts/shiny-pitfalls" />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+  
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+  
+  
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie&#x27;s Blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/livestream">Live Streams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/shiny_logo.png&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="site-heading">
+          <h1>
+            Common Pitfalls with Shiny
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container"> 
+    <div class="row">
+      <div id="content" class="col-md-12">  
+        <p>During the course of the LOOOOONG Shiny beta.  I learned quite a bit of how people write there software and even how they think the operating systems work.  Some of these issues I'm able to deal with, others - I am not.  Here's a list of DO's and DONT's I've seen over the past few months.</p>
+<ol>
+<li>DON'T broadcast to the UI from a delegate</li>
+</ol>
+<p>Why? If the task is truly executing in the background, you don't have a UI to broadcast to you.  This can lead to errors.  Also, delegates generally execute on a different thread and sometimes quite rapidly, thus threading your UI thread.  Record these events in table OR in most cases, Shiny has a &quot;foreground&quot; equivalent method.  ie. Instead of using IGpsDelegate to send events, you can inject IGpsManager and use WhenReading to display data.</p>
+<ol start="2">
+<li>DON'T hook events or have long running tasks in delegates</li>
+</ol>
+<p>Why? Android broadcast receivers and iOS delegates only give you a few seconds to execute</p>
+<ol start="3">
+<li>DO use jobs if you have something that is going to run for a 20-30 seconds</li>
+</ol>
+<p>Background fetch on iOS and job manager on Android give give you a fair bit of time to do things. However, they execute when certain criteria</p>
+<ol start="4">
+<li><p>DON'T assume that your network calls will work at any time</p>
+</li>
+<li><p>DO use logging (and check those logs for job and delegate errors)</p>
+</li>
+</ol>
+<p>Shiny does trap all user code exceptions from delegates and jobs.  It also will log these to whatever logging store you may have</p>
+<ol start="6">
+<li>Treat jobs as periodic tasks, not scheduled tasks</li>
+</ol>
+<p>There is a huge difference here.  Scheduled means it will run at a time of your choosing.  Periodic in this case, means when the OS thinks it really is a good time to run based on things like
+* Time of day - will the user be using their phone in the little bit
+* Has your app been a &quot;good citizen&quot; meaning that it isn't chewing CPU, memory, and battery while it runs in the background</p>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->  
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2020 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>

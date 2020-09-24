@@ -1,0 +1,340 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie&#x27;s Blog - Background Jobs - Shiny Style</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/posts/shinyjobs">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+  
+  <meta name="application-name" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Allan Ritchie&#x27;s Blog - Background Jobs - Shiny Style" />
+    <meta property="og:image" content="/images/shiny_logo.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/posts/shinyjobs" />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+  
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+  
+  
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie&#x27;s Blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/livestream">Live Streams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/shiny_logo.png&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="post-heading">
+          <h1>
+            Background Jobs - Shiny Style
+          </h1>
+              <div class="meta">Published on Friday, May 3, 2019</div>
+                <div class="mt-3">
+                      <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
+                      <a href="/tags/oss" class="badge badge-light"> OSS</a>
+                      <a href="/tags/shiny" class="badge badge-light"> Shiny</a>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container"> 
+    <div class="row">
+      <div id="content" class="col-md-12">  
+        <img src="images/shiny_logo.png" width="100" /> 
+<p>Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the &quot;pretty&quot; from Android to Xamarin cross platform!</p>
+<p>Jobs is something that is built into the main Shiny library as alot of what it does is the center point of the library and a lot of things will be built on it in the near future :)</p>
+<hr />
+<h2 id="getting-setup">Getting Setup</h2>
+<p>Obviously, first things first - install the <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a> package</p>
+<h3 id="android">Android</h3>
+<p>Add the following to your AndroidManifest.xml</p>
+<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.BATTERY_STATS&quot; /&gt;	
+&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
+</code></pre>
+<p>You need to have an actual Application class in your android project.  You can do this two ways:</p>
+<pre><code class="language-csharp">[Application]
+public class YourApplication : Application
+{
+    public YourApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
+    {
+    }
+
+
+    public override void OnCreate()
+    {
+        base.OnCreate();
+        Shiny.AndroidShinyHost.Init(this, new YourNamespace.Startup());
+    }
+}
+
+</code></pre>
+<h3 id="ios">iOS</h3>
+<p>iOS doesn't have a set period.  It runs on background fetch which means when iOS feels like running it will.  To be fair, it is fairly intelligent when it does the sync (it knows when the user intends to be active, what the network is like, etc).</p>
+<p>To get iOS going, you have to wire the following into your AppDelegate:</p>
+<pre><code class="language-csharp">// in your FinishedLaunching method
+iOSShinyHost.Init();
+
+// and add this guy
+public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler)
+{
+    Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
+}
+</code></pre>
+<p>And for your Info.plist</p>
+<pre><code class="language-xml">&lt;key&gt;UIBackgroundModes&lt;/key&gt;
+&lt;array&gt;
+	&lt;string&gt;fetch&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+<hr />
+<h2 id="adhoc-jobs">Adhoc Jobs</h2>
+<p>Adhoc jobs are on-the-spot types of execution.  You need something to finish before your app takes a dirt nap... this is the guy to call</p>
+<pre><code class="language-csharp">// IJobManager can and should be injected into your viewmodel code
+await Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().RunTask(async () =&gt; 
+{
+    // your code goes here - async stuff is welcome (and necessary)
+});
+</code></pre>
+<hr />
+<h2 id="scheduled-jobs">Scheduled Jobs</h2>
+<p>Scheduled jobs are the real meat though.  These are really what you need to make things happen when your app is backgrounded or needs to do something with some degree of regularity.  Don't go crazy, you still only get a finite amount of time to work with.  On iOS, this is 30 seconds and not a drop more.</p>
+<p>Note that jobs support injecting your dependencies if they are registered within the Shiny Startup</p>
+<p>So first things first, let's build a job.  Building a job is as simple as implementing Shiny.Jobs.IJob.</p>
+<pre><code class="language-csharp">public class YourFirstJob : Shiny.Jobs.IJob
+{
+    readonly IYourDepdendency depdency;
+    public YourFirstJob(IYourDependency dependency)
+    {
+        this.dependency = dependency;
+    }
+
+
+    public async Task&lt;bool&gt; Run(JobInfo jobInfo, CancellationToken cancelToken)
+    {
+        var id = jobInfo.GetValue(&quot;Id&quot;, 25); // we'll cover this in a minute
+        await this.dependency.SomeAsyncMethod(id);
+
+        return true; // this is for iOS - try not to lie about this - return true when you actually do receive new data from the remote method
+    }
+}
+
+</code></pre>
+<p>Lastly, you have to register your job.  With scheduled jobs, I wanted to make sure that I could pass in metadata like last date run, some sort of identifiers, etc.  You also have the ability to set to preconditions of when your job is allowed to run.  Maybe you don't want to run unless you are on WiFi because you want to sync like 500+ megs?  Maybe you are going to run an infinite loop that melts the battery, so you want the battery to be charging or at least be above 20% - well, this is the place to make that happen.</p>
+<pre><code class="language-csharp">var job = new JobInfo
+{
+    Name = &quot;YourFirstJob&quot;,
+    Type = typeof(YourFirstJob),
+
+    // these are criteria that must be met in order for your job to run
+    BatteryNotLow = true,
+    DeviceCharging = false
+    RequiredInternetAccess = InternetAccess.Any,
+    Repeat = true //defaults to true, set to false to run once OR set it inside a job to cancel further execution
+};
+
+// you can pass variables to your job
+job.SetValue(&quot;Id&quot;, 10);
+
+
+// lastly, schedule it to go - don't worry about scheduling something more than once, we just update if your job name matches an existing one
+await ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().Schedule(job);
+</code></pre>
+<p>This is good for registering jobs in a controlled fashion in your viewmodel.</p>
+<p>However, if you have a service that you always want to run with your app, you can use a quick trick as part of your shiny startup file.</p>
+<pre><code class="language-csharp">
+namespace YourNamespace
+{
+    public class Startup : Shiny.ShinyStartup
+    {
+        var job = new JobInfo
+        {
+            Name = &quot;YourFirstJob&quot;,
+            Type = typeof(YourFirstJob),
+
+            // these are criteria that must be met in order for your job to run
+            BatteryNotLow = true,
+            DeviceCharging = false
+            RequiredInternetAccess = InternetAccess.Any,
+            Repeat = true //defaults to true, set to false to run once OR set it inside a job to cancel further execution
+        };
+
+        services.RegisterJob(job);
+    }
+}
+
+</code></pre>
+<hr />
+<h2 id="canceling-jobs">Canceling Jobs</h2>
+<p>When your user logs out, you likely don't need to keep sucking away at their battery, so cancelling jobs is a necessary action to perform.  You have to ways to cancel jobs, by the specific ID of what you registered as the job name OR cancelling ALL jobs.</p>
+<pre><code class="language-csharp">// Cancelling A Job
+Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().Cancel(&quot;YourJobName&quot;);
+
+// Cancelling All Jobs
+Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().CancelAll();
+</code></pre>
+<hr />
+<h2 id="running-on-demand">Running On-Demand</h2>
+<p>Unlike adhoc jobs, this is designed to run your registered job(s) when you need them.  On iOS, maybe you are using silent push notifications to give your app a kick to start pulling a gig of data?</p>
+<pre><code class="language-csharp">// Run All Jobs On-Demand
+var results = await Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().RunAll();
+
+// Run A Specific Job On-Demand
+var result = await Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().Run(&quot;YourJobName&quot;);
+</code></pre>
+<p>NOTE: you can see the result(s) of a job pass by taking a look at the result object!</p>
+<hr />
+<h2 id="ios-be-prepared">IOS - Be Prepared</h2>
+<p>iOS is not &quot;periodic&quot; in the sense that you can rely on it to run every X mins.  In fact, it is quite intelligent about when/how it runs.  Do remember, you are piggybacking on &quot;background fetch&quot;, so you really need to do some sort of remote data call if you don't want to aggrevate the apple gods that be.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="introducingshiny">Initial Shiny Setup</a></li>
+<li><a href="https://github.com/shinyorg/shiny">Source Code</a></li>
+<li><a href="https://github.com/shinyorg/shinysamples">Samples</a></li>
+<li><a href="https://shinylib.net">Documentation</a></li>
+<li><a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
+</ul>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    <!-- allan-ritchies-blog.disqus.com -->
+    var disqus_shortname = 'allan-ritchies-blog'; // required: replace example with your forum shortname
+    var disqus_identifier = 'shinyjobs';
+    var disqus_title = 'Background Jobs - Shiny Style';
+    var disqus_url = 'https://aritchie.github.io/posts/shinyjobs';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->  
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2020 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>

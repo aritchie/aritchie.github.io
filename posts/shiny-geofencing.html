@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie&#x27;s Blog - Geofencing with a Pinch of Notifications - Shiny Style</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/posts/shiny-geofencing">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+  
+  <meta name="application-name" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie&#x27;s Blog" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Allan Ritchie&#x27;s Blog - Geofencing with a Pinch of Notifications - Shiny Style" />
+    <meta property="og:image" content="/images/toronto_pan.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/posts/shiny-geofencing" />
+  
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+  
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+  
+  
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie&#x27;s Blog</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/livestream">Live Streams</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/toronto_pan.jpg&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="post-heading">
+          <h1>
+            Geofencing with a Pinch of Notifications - Shiny Style
+          </h1>
+              <div class="meta">Published on Tuesday, May 21, 2019</div>
+                <div class="mt-3">
+                      <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
+                      <a href="/tags/oss" class="badge badge-light"> OSS</a>
+                      <a href="/tags/shiny" class="badge badge-light"> Shiny</a>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container"> 
+    <div class="row">
+      <div id="content" class="col-md-12">  
+        <p>GPS &amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)</p>
+<p>We'll talk about GPS in a future article.  In this article, we'll focus on the geofencing and add in some notifications to make things awesome!</p>
+<h2 id="what-are-geofences">What Are Geofences?</h2>
+<p>Geofencing is a location-based virtual boundary that uses GPS.  When you enter or exit this boundary, an event is executed in your application code.  A good example of this is a user coming close to your store and triggering a local notification - &quot;Hey Peoples - come buy some stuff.  I'll make a deal you can't refuse&quot;.  When the user leaves the area &quot;We're so sorry to see you leave.  Come back again and I'll give you 99% off with this magic code&quot;.  It's beautiful.... can be annoying, but if you do it right - you can create a good conversion opportunity.</p>
+<h2 id="geofencing-why">Geofencing - Why?</h2>
+<p>Geofencing is very efficient on battery for the mobile operating systems.  One of the pitfalls is that it isn't exact in terms of fire times.  Sometimes it can take a couple of minutes before the event is actually triggered.  I often get asked why use a geofence over raw GPS.  The explanation I use is, are you in the mall or not - if you are in the mall, you likely won't have a good GPS signal either.  The calculation for determining the circular area of a geofence is also not 2 lines of code if you need to do the effort yourself using raw GPS.  Geofences are good for when you enter and exit a particular area, GPS is better for real time &quot;where are you&quot;.</p>
+<h2 id="pitfalls">Pitfalls</h2>
+<p>I've also seen a number of &quot;gone bad&quot; geofence routines.  This one implementation tried to register over 300 geofences at startup.... so ya... don't do that.  In fact, iOS limits you to 20 and Android caps it at 60.  You may think &quot;wow that is limiting&quot;, but really - it isn't.  If you can't get the job done in 20 geofence registrations, honestly, in my opinion - you're doing something wrong.  I generally set a geofence on the center of a structure/area that I'm interested in and set a circular distance of 200 meters.  This is the perfect balance between battery and quick OS response time in my experience.</p>
+<h2 id="making-it-happen-with-shiny">Making It Happen With Shiny</h2>
+<p>Do all of your normal Shiny setup - you can read my <a href="introducingshiny">Introducing Shiny</a> to get going on the general setup stuff.</p>
+<p><a href="https://www.nuget.org/packages/Shiny.Locations/">Shiny.Locations</a> comes as a separate nuget package, but provides functionality for GPS &amp; Geofencing.<br />
+You'll also want to pickup <a href="https://www.nuget.org/packages/Shiny.Notifications/">Shiny.Notifications</a> to complete the sample in this article.</p>
+<h3 id="in-your-shared-code">In Your Shared code</h3>
+<p>First, let's create our geofence delegate.  This is the guy that catches those events in the background.  As with all delegates in Shiny, you can inject your own services as long as they are registered with the Shiny container in your startup file.</p>
+<pre><code class="language-csharp">using Shiny.Locations;
+
+namespace MyNamespace
+{
+    public class MyGeofenceDelegate : IGeofenceDelegate
+    {
+        readonly INotificationManager notifications;
+
+        public MyGeofenceDelegate(INotificationManager notifications)
+        {
+            this.notifications = notifications;
+        }
+
+
+        public async Task OnStatusChanged(GeofenceState newStatus, GeofenceRegion region)
+        {
+            if (newState == GeofenceState.Entered)
+            {
+                await this.notifications.Send(new Notification 
+                { 
+                    Title = &quot;WELCOME!&quot;,
+                    Message = &quot;It is good to have you back &quot; + region.Identifier 
+                });
+            }
+            else 
+            {
+                await this.notifications.Send(new Notification 
+                { 
+                    Title = &quot;GOODBYE!&quot;, 
+                    Message = &quot;You will be missed at &quot; + region.Identifier
+                });
+            }
+        } 
+    }
+}
+</code></pre>
+<p>Now, let's hook this guy up to Shiny, so we can get everything running</p>
+<pre><code class="language-csharp">using System;
+using Shiny;
+using Shiny.Locations;
+using Shiny.Notifications;
+using Microsoft.Extensions.DependencyInjection;
+
+
+public class SampleStartup : ShinyStartup
+{
+    public override void ConfigureServices(IServiceCollection builder)
+    {
+        builder.UseGeofencing&lt;MyGeofenceDelegate&gt;();
+        builder.UseNotifications(true);
+    }
+}
+</code></pre>
+<h3 id="android">Android</h3>
+<p>Other than the normal Android setup for Shiny, you need to add the following to your manifest.xml - we'll need a few bluetooth permissions here</p>
+<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
+</code></pre>
+<h3 id="ios">iOS</h3>
+<p>Again, same typical iOS initialization.  Just add the following to your info.plist.  The UIBackgroundModes is required for geofencing.</p>
+<pre><code class="language-xml">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+&lt;key&gt;NSLocationAlwaysAndWhenInUseUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+&lt;key&gt;NSLocationWhenInUseUsageDescription&lt;/key&gt;
+&lt;string&gt;Your message&lt;/string&gt;
+
+&lt;key&gt;UIBackgroundModes&lt;/key&gt;
+&lt;array&gt;
+    &lt;string&gt;location&lt;/string&gt;
+&lt;/array&gt;
+</code></pre>
+<h2 id="registering-an-actual-geofence">Registering an actual Geofence</h2>
+<p>Your viewmodel is the best place to register a geofence.</p>
+<p>Please note that while registering a geofence will request the necessary user permissions through the OS, if the user declines the necessary permission, the method will toss an exception.  It is a good practice to use IGeofenceManager.RequestAccess to know the state of things yourself.</p>
+<pre><code class="language-csharp">using Shiny;
+using Shiny.Locations;
+using Shiny.Notifications;
+
+
+public class YourViewModel
+{
+    public YourViewModel()
+    {
+        // shiny doesn't usually manage your viewmodels, so we'll do this for now
+        var geofences = ShinyHost.Resolve&lt;IGeofenceManager&gt;();
+        var notifications = ShinyHost.Resolve&lt;INotificationManager&gt;();
+
+        Register = new Command(async () =&gt; 
+        {
+            // this is really only required on iOS, but do it to be safe
+            var access = await notifications.RequestAccess();
+            if (access == AccessState.Available)
+            {
+                await this.geofences.StartMonitoring(new GeofenceRegion(
+                    &quot;CN Tower - Toronto, Canada&quot;,
+                    new Position(43.6425662, -79.3892508),
+                    Distance.FromMeters(200)
+                )
+                {
+                    NotifyOnEntry = true,
+                    NotifyOnExit = true,
+                    SingleUse = false
+                });
+            }
+        });
+    }
+
+    public ICommand Register { get; }
+}
+</code></pre>
+<h2 id="in-closing">In Closing</h2>
+<p>Geofencing + Notifications is a powerful combination for things like marketing.  Hopefully, Shiny helps make this combo easy for you!</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="introducingshiny">Initial Shiny Setup</a></li>
+<li><a href="https://github.com/shinyorg/shiny">Source Code</a></li>
+<li><a href="https://github.com/shinyorg/shinysamples">Samples</a></li>
+<li><a href="https://shinylib.net">Documentation</a></li>
+<li>Shiny.Core - <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li>Shiny.Locations - <a href="https://www.nuget.org/packages/Shiny.Locations/"><img src="https://img.shields.io/nuget/v/Shiny.Locations.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li>Shiny.Notifications - <a href="https://www.nuget.org/packages/Shiny.Notifications/"><img src="https://img.shields.io/nuget/v/Shiny.Notifications.svg?maxAge=2592000" alt="NuGet" /></a></li>
+</ul>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    <!-- allan-ritchies-blog.disqus.com -->
+    var disqus_shortname = 'allan-ritchies-blog'; // required: replace example with your forum shortname
+    var disqus_identifier = 'shiny-geofencing';
+    var disqus_title = 'Geofencing with a Pinch of Notifications - Shiny Style';
+    var disqus_url = 'https://aritchie.github.io/posts/shiny-geofencing';
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->  
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2020 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>
