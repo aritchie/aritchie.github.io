@@ -13,4 +13,4 @@ jobs:
         dotnet-version: '3.1.100' # SDK Version to use.
     - run: dotnet run -- deploy -l Debug
       env:
-        MY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
