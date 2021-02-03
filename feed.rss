@@ -4,364 +4,91 @@
 		<title />
 		<link>https://aritchie.github.io/</link>
 		<description>The personal blog of Allan Ritchie</description>
-		<copyright>2020</copyright>
-		<pubDate>Thu, 24 Sep 2020 17:31:51 GMT</pubDate>
-		<lastBuildDate>Thu, 24 Sep 2020 17:31:51 GMT</lastBuildDate>
+		<copyright>2021</copyright>
+		<pubDate>Wed, 03 Feb 2021 19:59:33 GMT</pubDate>
+		<lastBuildDate>Wed, 03 Feb 2021 19:59:33 GMT</lastBuildDate>
 		<item>
-			<title>Shiny 2.0</title>
+			<title>Shiny 2.0 - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
 			<description>The personal blog of Allan Ritchie</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny20</guid>
-			<pubDate>Wed, 09 Sep 2020 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;TODO&lt;/p&gt;
-&lt;!-- snippet: Snippet.cs --&gt;
-&lt;p&gt;&lt;a id="snippet-Snippet.cs"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-cs"&gt;using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog
-{
-    class Snippet
-    {
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;sup&gt;&lt;a href="https://aritchie.github.io/Snippet.cs%23L1-L10" title="File snippet `Snippet.cs` was extracted from"&gt;snippet source&lt;/a&gt; | &lt;a href="https://aritchie.github.io/%23snippet-Snippet.cs" title="Navigate to start of snippet `Snippet.cs`"&gt;anchor&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
-&lt;!-- endSnippet --&gt;
-</content:encoded>
-			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
-		</item>
-		<item>
-			<title>Shiny 1.1</title>
-			<link>https://aritchie.github.io/posts/shiny11</link>
-			<description>The personal blog of Allan Ritchie</description>
-			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
-			<guid>https://aritchie.github.io/posts/shiny11</guid>
-			<pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;It's only been a month since the 1.0 release and 1.1 is already here!  1.1 is packed with a ton of updates though.  I've received a ton of feedback over the past few weeks.  One of the big goals I have going forward is to make the boilerplate discovery even easier which hopefully is shown starting with this release.  Make sure to read to the end, the new Push library is pretty epic in my opinion.&lt;/p&gt;
-&lt;h2 id="easier-boilerplate"&gt;Easier Boilerplate&lt;/h2&gt;
-&lt;p&gt;I found that users were often missing some of the unfortunate boilerplate code that is necessary to integrate with the OS.  With 1.1, I set out to make the discovery a bit easier to work with.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny; // important - this will link in the extension methods
-
-// iOS 
-public class YourAppDelegate : ApplicationDelegate
-{
-    public void FinishedLaunching() 
-    {
-        // 1.0
-        iOSShiny.Init(new YourStartup());
-
-        // 1.1
-        this.ShinyFinishedLaunching(new YourStartup());
-    }
-
-    public override void PerformFetch(UIApplication application, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler)
-    {
-        // 1.0
-        Shiny.Jobs.JobManager.PerformFetch(completionHandler);
-
-        // 1.1
-        this.ShinyPerformFetch(completionHandler);
-    }
-
-    public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler)
-    {
-        // 1.0
-        Shiny.Net.Http.HttpTransferManager.HandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
-        
-        // 1.1
-        this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);    
-    }
-}
+			<pubDate>Fri, 12 Jun 2020 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;h2 id="tldr"&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;Version 2.0 is months of work, hundreds of commits, and a lot of discovery around how to improve the end experience.  This release focused on improving the background experience
+even more especially on Android.  Android is the source of great pain when it comes to backgrounding and especially around expectations that people
+have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
+transparent change for you unless you want to customize the notification.&lt;/p&gt;
+&lt;p&gt;Now that I'm done with the boring rant.  Let's talk about some of the cool new features&lt;/p&gt;
+&lt;h2 id="death-to-boilerplate-code"&gt;Death to Boilerplate Code&lt;/h2&gt;
+&lt;p&gt;This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C#/.NET5 release,
+source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
+Xamarin Forms, Xamarin Essentials, and other 3rd party source code.&lt;/p&gt;
+&lt;p&gt;To get an idea, here is a before and after showing both iOS and Android boilerplate&lt;/p&gt;
+&lt;h3 id="before-no-code-gen"&gt;BEFORE (no code gen)&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;// Android App
 
 // Android Activity
-public class MainActivity : FormsAppCompatActivity
-{
-    protected override void OnCreate(Bundle savedInstanceState)
-    {
-        TabLayoutResource = Resource.Layout.Tabbar;
-        ToolbarResource = Resource.Layout.Toolbar;
 
-        base.OnCreate(savedInstanceState);
-
-        Forms.Init(this, savedInstanceState);
-        this.LoadApplication(new App());
-
-        // new with 1.1
-        this.ShinyOnCreate();
-    }
-
-
-    protected override void OnNewIntent(Intent intent)
-    {
-        base.OnNewIntent(intent);
-
-        // new with 1.1
-        this.ShinyOnNewIntent(intent);
-    }
-
-
-    public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-    {
-        base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // 1.0
-        Shiny.AndroidShinyHost.RequestPermissionsResult(requestCode, permissions, grantResults);
-
-        // 1.1
-        this.ShinyRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
-}
+// iOS AppDelegate - all features used
 
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="app-state-delegates"&gt;App State Delegates&lt;/h2&gt;
-&lt;p&gt;Shiny often needs to watch when the app is foregrounding and backgrounding to run stuff internally, so why not expose this functionality to everyone else.&lt;br&gt;
-This delegate does behave a tad different than other async delegates in Shiny.  Why?  Because app state changes wait for no one.  You need to do something here quick and synchronously if you want it to get done!&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// to register in your Startup
-services.AddAppState&amp;lt;YourAppStateDelegate&amp;gt;();
-
-// and now for the delegate - you can DI as with all other Shiny things
-public class AppStateDelegate : IAppStateDelegate
-{
-    public void OnStart() {}
-    public void OnForeground() {}
-    public void OnBackground() {}
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="foreground-on-jobs"&gt;Foreground on Jobs&lt;/h2&gt;
-&lt;p&gt;Building on AppStates, you can configure jobs to run while your app is open.  This is useful if you've got a task that you might want calling home often while you are online.  Perhaps you want to try and synchronize a bunch of offline data while your user is moving around the application?  This is your chance.&lt;/p&gt;
-&lt;p&gt;To get jobs to run in the foreground, you need to do 2 things&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;In your Shiny startup - add services.UseJobForegroundService(TimeSpan.FromSeconds(30));.  The timespan is how often you want it to poll the jobs to run.&lt;/li&gt;
-&lt;li&gt;When registering your job, set the JobInfo.RunOnForeground parameter to true;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="androidx"&gt;AndroidX&lt;/h2&gt;
-&lt;p&gt;AndroidX is now supported in most of the Shiny packages where possible.  Simply upgrade your Android target framework in your head project to use Android 10 and voila, you will automatically have the new AndroidX Shiny libraries.&lt;/p&gt;
-&lt;p&gt;There is really only 1 significant upgrade other than freeing yourself from those evil support libraries.  I've replaced the default JobScheduler engine with the new shiny WorkManager.  The awesome part, you don't have to change a thing in your job code to get the benefits of this!&lt;/p&gt;
-&lt;h2 id="other-core-updates"&gt;Other Core Updates&lt;/h2&gt;
-&lt;p&gt;A lot of these services already exist in Xamarin Essentials, but are needed by Shiny internals, so I continue to build on these.  These services often have different twists vs Essentials.  For instance, PowerManager &amp;amp; Connectivity both implement INotifyPropertyChanged very much like an MVVM viewmodel and in fact, they behave exactly like that.  You can use old school .NET events to wire up to PropertyChanged or bring in some RX muscle to watch changes on the properties.&lt;/p&gt;
-&lt;p&gt;In 1.1,&lt;/p&gt;
-&lt;p&gt;Connectivity now has the ability to return the current cellular carrier of your device.  PowerManager adds the ability to check if the energy save mode is on.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;ShinyConnectivity.CellularCarrier; // AT&amp;amp;T, etc
-
-ShinyPowerManager.IsEnergySaverEnabled; // Boolean
-
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="after"&gt;AFTER&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To get this &amp;quot;voodoo&amp;quot; magic.  Simply install the Shiny nuget package.  It's new with 2.0 and add the attribute shown above in &amp;quot;after&amp;quot;.&lt;/p&gt;
+&lt;h2 id="static-class-generation"&gt;Static Class Generation&lt;/h2&gt;
+&lt;p&gt;There are a lot of users that don't like dependency injection.  I finally decided to bring the best of both worlds, one where I can live on my hill of DI and not code statics, and one where users could have static classes.&lt;/p&gt;
+&lt;p&gt;The answer was again, source generation.&lt;/p&gt;
 &lt;h2 id="notifications"&gt;Notifications&lt;/h2&gt;
-&lt;p&gt;There are several minor, but nice updates to the local notifications library&lt;/p&gt;
+&lt;h3 id="channels"&gt;Channels&lt;/h3&gt;
+&lt;p&gt;Channels are essentially configuration groups.  This provides equivalent functionality to what you find on Android 8+&lt;/p&gt;
+&lt;h3 id="actions"&gt;Actions&lt;/h3&gt;
+&lt;p&gt;PHOTO OF ACTIONS&lt;/p&gt;
+&lt;h3 id="progress"&gt;Progress&lt;/h3&gt;
+&lt;p&gt;PHOTO OF PROGRESS NOTIFICATIONS&lt;/p&gt;
+&lt;h2 id="push-notifications"&gt;Push Notifications&lt;/h2&gt;
+&lt;p&gt;Since the mobile era began, I can't count on two hands how many push notification service providers I've seen come and go.  AppCenter, HockeyApp&lt;/p&gt;
+&lt;h2 id="bluetooth-le"&gt;Bluetooth LE&lt;/h2&gt;
+&lt;h2 id="app-services"&gt;App Services&lt;/h2&gt;
+&lt;p&gt;The Shiny project has focused mainly on device hardware and backgrounding.  Over the past couple of years, I've seen so many issues bringing the &amp;quot;pieces&amp;quot; together.  With App Services,
+I'm now setting out to tackle raw business issues by bringing Shiny services together and providing a very easy to use API to accomplish this.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;A better way to set sounds either from custom or system&lt;/li&gt;
-&lt;li&gt;AndroidX upgrade - remove those pesky support libraries!&lt;/li&gt;
-&lt;li&gt;Android now allows you to use Big text styles and large icons - check the Notification.AndroidOptions&lt;/li&gt;
+&lt;li&gt;Azure Notification Hubs&lt;/li&gt;
+&lt;li&gt;Firebase Messaging&lt;/li&gt;
+&lt;li&gt;Straight Native&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="location-updates"&gt;Location Updates&lt;/h2&gt;
-&lt;p&gt;Mostly bugfixes for this one with some minor updates&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;We are now checking for the new Android 10 background location permission as necessary&lt;/li&gt;
-&lt;li&gt;The addition of a pure GPS to Geofence module.  Some customers have stated they don't like the requirement on Google Play Services for many reasons, thus, I wanted to give this option.  This is now also the fallback option (automagically) when Google Play Services is not available!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// in your shiny startup file - this is to force use the GPS geofence module
-services.UseGpsDirectGeofencing&amp;lt;YourGeofenceDelegate&amp;gt;();
-
-// otherwise, the regular geofence module will fallback with the usual
-services.UseGeofencing&amp;lt;YourGeofenceDelegate&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="push"&gt;Push&lt;/h2&gt;
-&lt;p&gt;It turns out, a lot of people started to use AppCenter push notifications and like most push centers, it will be disappearing into the wind.  What if you could have a push notification engine that had "one easy abstraction to rule them all"?  This is what I set out to do.&lt;/p&gt;
-&lt;p&gt;This module is still in beta, but very close to release.&lt;/p&gt;
-&lt;p&gt;Currently, Shiny supports the default native OS push mechanisms as well as Azure Push Notification Hubs.  Firebase is coming soon!&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// install Shiny.Push.AzureNotifications nuget into your netstandard project
-services.UsePushAzureNotificationHubs&amp;lt;PushDelegate&amp;gt;("Your listener connection string", "your hub name");
-
-// don't want any of those provider and like going your own - simply install 
-services.UsePushNotifications&amp;lt;PushDelegate&amp;gt;();
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that there are several other arguments you can (should) pass to the notification provider such as categories &amp;amp; actions if you use them in your notifications.  Also, you can have Shiny request permission to use push notifications right off the app start.&lt;/p&gt;
-&lt;p&gt;The push delegate is where you can integrate with data in your backend&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;namespace Samples.ShinyDelegates
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var result = await PushManager.RequestAccess();
+if (result.Status == Shiny.AccessState.Available) 
 {
-    public class PushDelegate : IPushDelegate
-    {
-        public Task OnEntry(PushEntryArgs args)
-        {
-            // the user tapped on a notification
-        }
-
-        public Task OnReceived(IDictionary&amp;lt;string, string&amp;gt; data)
-        {
-            // you received a push, you can work with the payload data here OR maybe go retrieve data from your server
-        }
-
-        public Task OnTokenChanged(string token)
-        {
-            // you should store this and send it off to your server so you send notifications in the future
-        }     
-    }
+    result.RegistrationToken;
 }
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The push abstraction has a few "neat" additions.  If you have a UI that listens for silent notifications like I often do, you need an easy way for listening to those notifications.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// this uses the static host, but you really should DI this!
-ShinyPush.WhenReceived().Subscribe(x =&amp;gt; {
-    // x is a dictionary that contains the data section of your push notification
-})
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="closing"&gt;Closing&lt;/h3&gt;
-&lt;p&gt;There's still more - feel free to check out the changelog in the links below!&lt;br&gt;
-Do you have any suggestions?  Do you have any device or background mode that is difficult to work with?  Send over a suggestion to &lt;a href="https://github.com/shinyorg/shiny"&gt;GitHub&lt;/a&gt;!&lt;/p&gt;
-&lt;p&gt;For those that are watching, I have been actively working on macOS and Tizen implementations.  Still some work to go to get all of those parts stabilized before them make it into Shiny.&lt;/p&gt;
-&lt;h2 id="links"&gt;Links&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny/blob/master/ChangeLog.md"&gt;1.1 Change Log&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://aritchie.github.io/tags/Shiny"&gt;All Shiny Articles&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples/tree/master/Samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Core - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Locations - &lt;a href="https://www.nuget.org/packages/Shiny.Locations/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Locations.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Notifications - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Net.Http - &lt;a href="https://www.nuget.org/packages/Shiny.Net.Http/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Net.Http.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Push - &lt;a href="https://www.nuget.org/packages/Shiny.Push/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.NFC.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Push.AzureNotificationHubs - &lt;a href="https://www.nuget.org/packages/Shiny.Push.AzureNotificationHubs/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Push.AzureNotificationHubs.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded>
-			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
-		</item>
-		<item>
-			<title>Shiny - Easy Mode Statics</title>
-			<link>https://aritchie.github.io/posts/shiny-easymode</link>
-			<description>The personal blog of Allan Ritchie</description>
-			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
-			<guid>https://aritchie.github.io/posts/shiny-easymode</guid>
-			<pubDate>Tue, 28 Jan 2020 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;h2 id="easy-mode"&gt;Easy Mode&lt;/h2&gt;
-&lt;p&gt;While I was working on Shiny, a LOT of people emailed me telling me "Component.This" doesn't exist (they could have read the samples, but whatevs).  They wanted a Xamarin Essentials approach.  I disagree with this approach to a degree since it doesn't provide some enterprise practices that I require in my day-to-day, but I'm not everyone and people have different requirements.  Thus I decide to bring the static "shims" into Shiny as well as bring a registration model similar to Xamarin Forms.  You still need some of the Shiny startup boilerplate, but there are now ways to cut that down a great deal as well.&lt;/p&gt;
-&lt;h2 id="static-access"&gt;Static Access&lt;/h2&gt;
-&lt;p&gt;Let's start with the static accessors.  Essentially, if we have a service called Shiny.Jobs.IJobManager, we now have an equivalent ShinyJobManager with all of the functions of the interface.  No more DI necessary.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// examples
-await ShinyJobManager.Schedule(new JobInfo(...));
-ShinySettings.Set("1");
-ShinyEnvironment.AppVersion
 
-ShinyGeofences.StartMonitoring(...)
-ShinyGps.StartListener(...)
-ShinyMotionActivity.Query(...)
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Don't like the boilerplate?  I can only get rid of so much, but I've made service registration match the Xamarin Forms assembly attribute.&lt;/p&gt;
-&lt;h2 id="registering-with-assemblies"&gt;Registering with Assemblies&lt;/h2&gt;
-&lt;p&gt;I wanted a fast way to skip the startup file and give a familiar style, so I borrowed a page from Xamarin Forms.  You can register you services very similar to how XF does it, so that you can use your services inside of Shiny delegates and jobs&lt;/p&gt;
-&lt;p&gt;In the usual "init" places, simply do the following&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;iOSShinyHost.Init(ShinyStartup.FromAssemblyRegistration(typeof(App).Assembly));
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now, somewhere in your shared project - add attributes similar to the following to wire up some of your stuff&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;[assembly: ShinySqliteIntegration(true, true, true, true, true)]
-[assembly: ShinyJob(typeof(SampleJob), "MyIdentifier", BatteryNotLow = true, DeviceCharging = false, RequiredInternetAccess = Shiny.Jobs.InternetAccess.Any)]
-[assembly: ShinyAppCenterIntegration(Constants.AppCenterTokens, true, true)]
-[assembly: ShinyService(typeof(YourOwnService))]
-[assembly: ShinyService(typeof(IYourOwnService, typeof(YourOwnService))]
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id="auto-registering-everything"&gt;Auto-Registering Everything!&lt;/h2&gt;
-&lt;p&gt;For any and all Shiny libraries, we automatically setup the services for you.  You don't even need a startup file (similar to registering with assembly attributes).  Note that if you do you use DI in your delegates, you will need to use assembly attribute registrations if you want to take a "bite of both pies".  With auto assemblies, we also go out and detect the appropriate delegates for each service type.  If one isn't found and it is required, we throw an exception during Init.&lt;/p&gt;
-&lt;p&gt;Auto-registration is by far the easiest way to get up and running, but it comes at the cost of startup performance.  On Android, you may notice it during startup.  You also may run into linker specific issues - my suggestion is to disable linking on Shiny libraries.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// iOS - Normal AppDelegate addition
-iOSShinyHost.Init(ShinyStartup.AutoRegister());
+// foreground
+PushManager.WhenReceived().Subscribe(data =&amp;gt; {
 
-// Android - YourAndroidApplication.OnCreate
-AndroidShinyHost.Init(ShinyStartup.AutoRegister());
+});
+
+// background
+public class MyPushDelegate : Shiny.Push.IPushDelegate
+{
+
+}
+
+
+// configuring it and switch between them - 1 line of code!
+
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We don't do this for jobs though.  You need to schedule those yourself just like before.&lt;/p&gt;
-&lt;h2 id="closing-thoughts"&gt;Closing Thoughts&lt;/h2&gt;
-&lt;p&gt;If speed and testability are things that are important to you, I don't recommend this approach for everyone.  Use the traditional mechanisms with DI.&lt;/p&gt;
-&lt;h2 id="links"&gt;Links&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples/tree/master/Samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Core - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</content:encoded>
-			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
-		</item>
-		<item>
-			<title>Shiny 1.0 Release</title>
-			<link>https://aritchie.github.io/posts/shiny10</link>
-			<description>The personal blog of Allan Ritchie</description>
-			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
-			<guid>https://aritchie.github.io/posts/shiny10</guid>
-			<pubDate>Mon, 27 Jan 2020 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;h2 id="the-road-to-1.0"&gt;The Road To 1.0&lt;/h2&gt;
-&lt;p&gt;TLDR;
-Its been a while since I blogged because I've really been digging in to finish up a lot of the core parts of Shiny.  This has been such a fun OSS project to build.  I remember when I was discussing this over a year ago with a couple of colleagues.  Shiny had a horrid name when I first started called 'ACR Core'.  The name Shiny came to me one night on twitter when I was making fun of people complaining about updating to the latest Android Support libraries right away and having issues.... shocking.... when people see new NuGets, they must update them regardless of if they need them or not.  "They must have their Shinies" (said in the voice of Golem from LOTR).  The name stuck, but became more of an oxymoron because nothing in Shiny is what you see in your UI... EPIC!&lt;/p&gt;
-&lt;p&gt;When I started doing Xamarin plugins a few years ago, they were just one off pieces of code.  The issue was that I always need some sort of persistence, permissions, settings, logging, etc.  It would also be a struggle to get people to wire things up properly for things to work.  I needed a way that would force a bit structure, bring all of the components I needed to services, and bring the users services into a solid unit while also providing a testable end product.  Thus Shiny had to become more of a framework than a plugin. The project intent is to create a simple way to create background services and work with some of the complex hardware on mobile devices (ie. BLE) while having a clean testing pattern and tie-in to your infrastructure.&lt;/p&gt;
-&lt;h2 id="whats-in-the-release"&gt;What's In The Release&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Background Jobs&lt;/li&gt;
-&lt;li&gt;GPS, Geofencing, &amp;amp; Motion Activity&lt;/li&gt;
-&lt;li&gt;Local Notifications with all the bells and whistles (blog post to follow)&lt;/li&gt;
-&lt;li&gt;HTTP Transfers - Background File Uploads and Downloads with metrics to track things like speed, estimate time remaining, etc&lt;/li&gt;
-&lt;li&gt;Sensors (RX Style) - pedometer, heart rate, accelerometer, etc&lt;/li&gt;
-&lt;li&gt;A lot of the Essentials stuff (file system access, environment, settings, permissions, etc)&lt;/li&gt;
-&lt;li&gt;PS - for those that don't like DI - there are now Static Shims (blog post to follow)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="whats-next"&gt;What's Next?&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;Bluetooth &amp;amp; Beacons&lt;/strong&gt; - BLE just simply wasn't where I wanted it to be in terms of functionality and background ability, but I wanted to release everything else.  It's close and is the next priority.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;MvvmCross&lt;/li&gt;
-&lt;li&gt;ReactiveUI&lt;/li&gt;
-&lt;li&gt;Xamarin Essentials
-Shiny has a lot of overlap with Essentials.  I had debated just taking it on as a dependency as opposed to continuing to use my implementations that I've collected over the years, but Microsoft simply can't change course, introduce breaking changes, or release as fast as Shiny can.  That isn't a knock against them at all.  They've got a larger community and a process they have to follow.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Documentation&lt;/strong&gt; - It needs to be done.  It is a lot of work.  It will get there when it gets there&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Universal Windows Platform&lt;/strong&gt; - It is in the core packages, but I want to make it more of a first class citizen.  With the Surface Neo coming, I feel like there is a bunch of potential here.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Tizen, watchOS, &amp;amp; macOS&lt;/strong&gt; - There is lots of Shiny that I want to bring to these platforms.  There has been some interest and to reach these guys isn't too difficult.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;WASM, Blazor, &amp;amp; Uno&lt;/strong&gt; - These are definitely on the radar.  I think WASM is going to be a huge game changer in our industry.  The only reason I haven't done it yet is that I'm not looking to be an early adopter around an OSS project of this size without help (and especially since WASM isn't even in a stable state yet).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="thanks"&gt;Thanks&lt;/h2&gt;
-&lt;p&gt;A big thank you to all of those who have contributed in any way, shape, or form to Shiny.  I want to send out a few of special thank yous to people&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://twitter.com/DanJSiegel"&gt;Dan Siegel&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;My good friend Dan has been helping really get the word out about Shiny over the last few months.  He's blogged, tweeted, contributed many issue reports, and even developed a beautiful and direct integration with Prism (Shiny.Prism).  Dan has been the go-to for fixing devops stuff and also did me the solid of starting the twitter hashtags #ShutUpAllan and #TakeMyBugReport.  In turn, I now refer to Dan as Troy McClure from the Simpsons.  Go listen to one of his YouTube feeds.  BIG CHEERS DAN&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://twitter.com/JamesMontemagno"&gt;James Montemagno&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;James has made a ton of mentions in the community standups, podcasts, and various shows he runs. He even tried Shiny on out one of his livestreams while building the Hanselmann app which included some bugfixing on my part - BUT IT WAS A BETA :)  Thanks so much James&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://twitter.com/dahlbyk"&gt;Keith Dahlby&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Keith has been contributing issue reports, pull requests with fixes &amp;amp; features for a few months.  He's just been a general good open source citizen and a fantastic person to have working in the project.  Thanks Keith!&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://twitter.com/ClaudioASanchez"&gt;Claudio Sanchez&lt;/a&gt; and &lt;a href="https://twitter.com/dannyackerman"&gt;Danny Ackerman&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;The only long term sponsors I've ever had!  It's very humbling you that you guys contribute money because you find value out of the bugs...cough.... code I write :)&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id="links"&gt;Links&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="https://aritchie.github.io/tags/Shiny"&gt;All Shiny Articles&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples/tree/master/Samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Core - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Locations - &lt;a href="https://www.nuget.org/packages/Shiny.Locations/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Locations.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Notifications - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.BluetoothLE - &lt;a href="https://www.nuget.org/packages/Shiny.BluetoothLE/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.BluetoothLE.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Beacons - &lt;a href="https://www.nuget.org/packages/Shiny.Beacons/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Beacons.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Sensors - &lt;a href="https://www.nuget.org/packages/Shiny.Sensors/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Sensors.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Net.Http - &lt;a href="https://www.nuget.org/packages/Shiny.Net.Http/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Net.Http.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.SpeechRecognition - &lt;a href="https://www.nuget.org/packages/Shiny.SpeechRecognition/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.SpeechRecognition.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Testing - &lt;a href="https://www.nuget.org/packages/Shiny.Testing/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Testing.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.Push - &lt;a href="https://www.nuget.org/packages/Shiny.Push/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Push.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Shiny.NFC - &lt;a href="https://www.nuget.org/packages/Shiny.NFC/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.NFC.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h1 id="application-services"&gt;Application Services&lt;/h1&gt;
+&lt;p&gt;Shiny's first purpose in life was to make cross platform device &amp;amp; background services easy, but it was never going to stop there.  I'm now starting to work on services to make scenarios easy.  Here are the first two Shiny modules to follow this plan&lt;/p&gt;
+&lt;h2 id="shiny.locations.sync"&gt;Shiny.Locations.Sync&lt;/h2&gt;
+&lt;p&gt;Sync geofence and GPS events to your backend using a consistent and aggressive practices to ensure this data calls home ASAP&lt;/p&gt;
+&lt;h2 id="shiny.mediasync"&gt;Shiny.MediaSync&lt;/h2&gt;
+&lt;p&gt;This will scan and upload photos, videos, &amp;amp; audio from your Android &amp;amp; iOS media gallery&lt;/p&gt;
+&lt;h2 id="section"&gt;&lt;/h2&gt;
+&lt;h2 id="shiny.triptracker"&gt;Shiny.TripTracker&lt;/h2&gt;
+&lt;p&gt;Continuing the theme of app services and making the hard tasks easy - trip tracker will record trips for walks, runs, cycling, and automotive.  It uses a combination of GPS and motion activity to record trips.&lt;/p&gt;
+&lt;h2 id="bluetoothle"&gt;BluetoothLE&lt;/h2&gt;
+&lt;p&gt;the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to &lt;a href="https://github.com/reactiveui/refit"&gt;Refit&lt;/a&gt; and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.&lt;/p&gt;
 </content:encoded>
 			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
 		</item>
@@ -372,7 +99,8 @@ Shiny has a lot of overlap with Essentials.  I had debated just taking it on as 
 			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-di</guid>
 			<pubDate>Mon, 01 Jul 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.&lt;/p&gt;
+			<content:encoded>&lt;h1 id="this-article-applies-to-all-versions-of-shiny"&gt;THIS ARTICLE APPLIES TO ALL VERSIONS OF SHINY&lt;/h1&gt;
+&lt;p&gt;Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.&lt;/p&gt;
 &lt;p&gt;I love Autofac and a lot of the functions it has.  It really is a great DI framework though is known for being a tad on the slow side.  With Shiny, I went with Microsoft.Extensions.DependencyInjection as the DI platform of choice.  It is fast, has "enough" features, built on a great set of abstractions, and has monolith company backing it.  However, it is no Autofac in terms of features - so I wanted to carry a few of them forward.  Namely, modules and startables.  I've also added a very useful feature in stateful delegates which is my personal favorite!  I'll explain what this in this article as well.&lt;/p&gt;
 &lt;h2 id="modules"&gt;Modules&lt;/h2&gt;
 &lt;p&gt;Inversion of Control (IoC) acts as the basic building blocks of your application.  However, as your application grows, registering all of these components within a single point of entry can lead to a fat file.&lt;/p&gt;
@@ -498,12 +226,10 @@ namespace Samples.ShinyDelegates
 &lt;p&gt;Modules &amp;amp; startup tasks provide a great way to modulizing your application and providing a rich set of wiring services together without coupling them within your normal application logic (ie. ViewModels).&lt;/p&gt;
 &lt;h2 id="links"&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny/samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/aritchie/stream-todo"&gt;Shiny TODOs Sample App&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded>
 			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
@@ -576,7 +302,7 @@ namespace YourNamespace
         public override void ConfigureServices(IServiceCollection builder)
         {
             // only necessary for the monitoring - for ranging only you can use UseBeacons()
-            builder.UseBeacons&amp;lt;MyBeaconDelegate&amp;gt;();
+            builder.UseBeaconRanging&amp;lt;MyBeaconDelegate&amp;gt;();
             builder.UseNotifications();
         }
     }
@@ -665,7 +391,8 @@ namespace YourNamespace
 			<enclosure url="https://aritchie.github.io/images/toronto_pan.jpg" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny-geofencing</guid>
 			<pubDate>Tue, 21 May 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;p&gt;GPS &amp;amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)&lt;/p&gt;
+			<content:encoded>&lt;h1 id="this-article-has-been-updated-to-shiny-2.0"&gt;THIS ARTICLE HAS BEEN UPDATED TO SHINY 2.0&lt;/h1&gt;
+&lt;p&gt;GPS &amp;amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)&lt;/p&gt;
 &lt;p&gt;We'll talk about GPS in a future article.  In this article, we'll focus on the geofencing and add in some notifications to make things awesome!&lt;/p&gt;
 &lt;h2 id="what-are-geofences"&gt;What Are Geofences?&lt;/h2&gt;
 &lt;p&gt;Geofencing is a location-based virtual boundary that uses GPS.  When you enter or exit this boundary, an event is executed in your application code.  A good example of this is a user coming close to your store and triggering a local notification - "Hey Peoples - come buy some stuff.  I'll make a deal you can't refuse".  When the user leaves the area "We're so sorry to see you leave.  Come back again and I'll give you 99% off with this magic code".  It's beautiful.... can be annoying, but if you do it right - you can create a good conversion opportunity.&lt;/p&gt;
@@ -732,13 +459,8 @@ public class SampleStartup : ShinyStartup
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="android"&gt;Android&lt;/h3&gt;
-&lt;p&gt;Other than the normal Android setup for Shiny, you need to add the following to your manifest.xml - we'll need a few bluetooth permissions here&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /&amp;gt;
-&amp;lt;uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="ios"&gt;iOS&lt;/h3&gt;
-&lt;p&gt;Again, same typical iOS initialization.  Just add the following to your info.plist.  The UIBackgroundModes is required for geofencing.&lt;/p&gt;
+&lt;p&gt;Only iOS requires a bit of extra configuration.  Just add the following to your info.plist.  The UIBackgroundModes is required for geofencing.&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;key&amp;gt;NSLocationAlwaysUsageDescription&amp;lt;/key&amp;gt;
 &amp;lt;string&amp;gt;Your message&amp;lt;/string&amp;gt;
 &amp;lt;key&amp;gt;NSLocationAlwaysAndWhenInUseUsageDescription&amp;lt;/key&amp;gt;
@@ -791,7 +513,7 @@ public class YourViewModel
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id="in-closing"&gt;In Closing&lt;/h2&gt;
-&lt;p&gt;Geofencing + Notifications is a powerful combination for things like marketing.  Hopefully, Shiny helps make this combo easy for you!&lt;/p&gt;
+&lt;p&gt;Geofencing + Notifications is a powerful combination.  Hopefully, Shiny helps make this combo easy for you!&lt;/p&gt;
 &lt;h2 id="links"&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
@@ -812,7 +534,7 @@ public class YourViewModel
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shinysettings</guid>
 			<pubDate>Fri, 03 May 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;img src="images/shiny_logo.png" width="100"&gt; 
+			<content:encoded>&lt;h1 id="this-article-applies-to-all-versions-of-shiny"&gt;THIS ARTICLE APPLIES TO ALL VERSIONS OF SHINY&lt;/h1&gt;
 &lt;p&gt;I know - Preferences &amp;amp; Settings are a dime a dozen these days, but I'm such a big advocated of decoupled software that I had to do things differently.  With Shiny, I had a chance to move one of the features that I loved from my ACR Settings plugin over and give it a good home in a DI universe of awesome!&lt;/p&gt;
 &lt;p&gt;You've probably seen code similar to this before:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;
@@ -820,8 +542,8 @@ public static class AppSettings
 {
     public static string ApiBaseUri
     {
-        get =&amp;gt; Settings.Get("ApiBaseUri");
-        set =&amp;gt; Settings.Set("ApiBaseUri", value);
+        get =&amp;gt; Settings.Get(&amp;quot;ApiBaseUri&amp;quot;);
+        set =&amp;gt; Settings.Set(&amp;quot;ApiBaseUri&amp;quot;, value);
     }
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -842,7 +564,7 @@ public static class AppSettings
     {
         // values set here are like defaults and not pushed settings 
         // they are overwritten by the settings binding if they were set
-        this.RememberText = "Hello"; 
+        this.RememberText = &amp;quot;Hello&amp;quot;; 
     }
 
 
@@ -940,11 +662,10 @@ public class MyStartup : Shiny.ShinyStartup
 &lt;p&gt;Pretty epic right!?  This can serve in a bunch of capacities - you can use it as a good global store that you can monitor for changes (ie. Message Bus).   Give it a try - give us feedback - and may all your apps be Shiny!&lt;/p&gt;
 &lt;h2 id="links"&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/shinyorg/tree/master/samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded>
 			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
@@ -956,47 +677,13 @@ public class MyStartup : Shiny.ShinyStartup
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shinyjobs</guid>
 			<pubDate>Fri, 03 May 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;img src="images/shiny_logo.png" width="100"&gt; 
+			<content:encoded>&lt;h1 id="this-artcile-has-been-updated-to-shiny-2.0"&gt;THIS ARTCILE HAS BEEN UPDATED TO SHINY 2.0&lt;/h1&gt;
+&lt;img src="images/shiny_logo.png" width="100"&gt; 
 &lt;p&gt;Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the "pretty" from Android to Xamarin cross platform!&lt;/p&gt;
 &lt;p&gt;Jobs is something that is built into the main Shiny library as alot of what it does is the center point of the library and a lot of things will be built on it in the near future :)&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="getting-setup"&gt;Getting Setup&lt;/h2&gt;
-&lt;p&gt;Obviously, first things first - install the &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt; package&lt;/p&gt;
-&lt;h3 id="android"&gt;Android&lt;/h3&gt;
-&lt;p&gt;Add the following to your AndroidManifest.xml&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /&amp;gt;
-&amp;lt;uses-permission android:name="android.permission.BATTERY_STATS" /&amp;gt;	
-&amp;lt;uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You need to have an actual Application class in your android project.  You can do this two ways:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;[Application]
-public class YourApplication : Application
-{
-    public YourApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
-    {
-    }
-
-
-    public override void OnCreate()
-    {
-        base.OnCreate();
-        Shiny.AndroidShinyHost.Init(this, new YourNamespace.Startup());
-    }
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="ios"&gt;iOS&lt;/h3&gt;
-&lt;p&gt;iOS doesn't have a set period.  It runs on background fetch which means when iOS feels like running it will.  To be fair, it is fairly intelligent when it does the sync (it knows when the user intends to be active, what the network is like, etc).&lt;/p&gt;
-&lt;p&gt;To get iOS going, you have to wire the following into your AppDelegate:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// in your FinishedLaunching method
-iOSShinyHost.Init();
-
-// and add this guy
-public override void PerformFetch(UIApplication application, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler)
-{
-    Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
-}
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviously, first things first - install the &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt; package into your head projects as well as your shared project.&lt;/p&gt;
 &lt;p&gt;And for your Info.plist&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-xml"&gt;&amp;lt;key&amp;gt;UIBackgroundModes&amp;lt;/key&amp;gt;
 &amp;lt;array&amp;gt;
@@ -1120,7 +807,8 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/introducingshiny</guid>
 			<pubDate>Wed, 01 May 2019 00:00:00 GMT</pubDate>
-			<content:encoded>&lt;h3 id="what-is-it"&gt;What is it?&lt;/h3&gt;
+			<content:encoded>&lt;h1 id="this-article-was-for-shiny-1.x-and-now-deprecated"&gt;THIS ARTICLE WAS FOR SHINY 1.x AND NOW DEPRECATED&lt;/h1&gt;
+&lt;h3 id="what-is-it"&gt;What is it?&lt;/h3&gt;
 &lt;p&gt;Ever wanted to write a backgrounding experience that is consistent across all of the .NET platforms you work with?  Between Xamarin Android, Xamarin iOS, and the Universal Windows Platform (UWP) - there are a variety of issues that I've seen commonly occuring that makes this difficult.  As .NET developers, we often want our dependency injection, our async/awaits, and our general way of doing things in our ecosystem.  The mobile platforms really flipped us on our head.  Android has services &amp;amp; broadcast receivers, iOS has too many different ways of coming at backgrounding, and UWP is somewhere in between.&lt;/p&gt;
 &lt;p&gt;There have been several plugins over time to help combat this problem, but all fail at some point because they lack the necessary infrastructure to bring it all together.  I have seen developers frequently fight this issue with things like BluetoothLE, GPS, Geofencing, background synchronization, etc.  Making this code testable is even harder and often painful to work with.&lt;/p&gt;
 &lt;p&gt;&lt;img src="https://aritchie.github.io/images/shiny_logo.png" width="100"&gt; Enter &lt;a href="https://github.com/shinyorg/shiny"&gt;Shiny&lt;/a&gt; - a new framework that tackles problems that no other framework currently tackles - backgrounding and device hardware with all the bells and whistles you are use to in the .NET ecosystem.  Shiny was built on the premise of making depenendency injection and cross platform backgrounding a consistent &amp;amp; testable experience.&lt;/p&gt;
@@ -1143,7 +831,6 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 &lt;li&gt;HTTP File Transfers&lt;/li&gt;
 &lt;li&gt;Sensors&lt;/li&gt;
 &lt;li&gt;Notifications&lt;/li&gt;
-&lt;li&gt;Integrations with 3rd Party MVVM Frameworks like Prism, ReactiveUI, &amp;amp; MvvmCross&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="why-another-essentials-or-set-of-plugins"&gt;Why Another Essentials or Set of Plugins?&lt;/h3&gt;
 &lt;p&gt;Well - to be fair, I've had most of these libraries before some of the other plugins existed.  I also set out to offer a DI and background experience in a cross platform way first.  I also wanted to open the door to other platforms like Tizen, macOS, Linux, Blazor, Uno, &amp;amp; possibly even Meadow as other platforms for the future.  This library has zero focus on UI and will only focus on service processes - I'll leave the frontend stuff to Xamarin Forms &amp;amp; Uno.&lt;/p&gt;

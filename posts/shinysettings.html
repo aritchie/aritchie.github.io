@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -112,7 +112,7 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <img src="images/shiny_logo.png" width="100" /> 
+        <h1 id="this-article-applies-to-all-versions-of-shiny">THIS ARTICLE APPLIES TO ALL VERSIONS OF SHINY</h1>
 <p>I know - Preferences &amp; Settings are a dime a dozen these days, but I'm such a big advocated of decoupled software that I had to do things differently.  With Shiny, I had a chance to move one of the features that I loved from my ACR Settings plugin over and give it a good home in a DI universe of awesome!</p>
 <p>You've probably seen code similar to this before:</p>
 <pre><code class="language-csharp">
@@ -240,9 +240,8 @@ public class MyStartup : Shiny.ShinyStartup
 <p>Pretty epic right!?  This can serve in a bunch of capacities - you can use it as a good global store that you can monitor for changes (ie. Message Bus).   Give it a try - give us feedback - and may all your apps be Shiny!</p>
 <h2 id="links">Links</h2>
 <ul>
-<li><a href="introducingshiny">Initial Shiny Setup</a></li>
 <li><a href="https://github.com/shinyorg/shiny">Source Code</a></li>
-<li><a href="https://github.com/shinyorg/shinysamples">Samples</a></li>
+<li><a href="https://github.com/shinyorg/tree/master/samples">Samples</a></li>
 <li><a href="https://shinylib.net">Documentation</a></li>
 <li><a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
 </ul>

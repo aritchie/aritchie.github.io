@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -113,21 +113,24 @@
 
 
 <div class="post-preview">
-    <h2 class="post-title"><a href="/posts/shiny20">Shiny 2.0</a></h2>
-    <p class="post-meta">Published on Wednesday, September 9, 2020</p>                
-<p>TODO</p>        <p class="small"><a href="/posts/shiny20">Read more...</a></p>
+    <h2 class="post-title"><a href="/posts/shiny20">Shiny 2.0 - Shinier Than Ever</a></h2>
+    <p class="post-meta">Published on Friday, June 12, 2020</p>                
+<p>Version 2.0 is months of work, hundreds of commits, and a lot of discovery around how to improve the end experience.  This release focused on improving the background experience
+even more especially on Android.  Android is the source of great pain when it comes to backgrounding and especially around expectations that people
+have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
+transparent change for you unless you want to customize the notification.</p>        <p class="small"><a href="/posts/shiny20">Read more...</a></p>
 </div>
 
 <div class="post-preview">
-    <h2 class="post-title"><a href="/posts/shiny11">Shiny 1.1</a></h2>
-    <p class="post-meta">Published on Thursday, March 12, 2020</p>                
-<p>It's only been a month since the 1.0 release and 1.1 is already here!  1.1 is packed with a ton of updates though.  I've received a ton of feedback over the past few weeks.  One of the big goals I have going forward is to make the boilerplate discovery even easier which hopefully is shown starting with this release.  Make sure to read to the end, the new Push library is pretty epic in my opinion.</p>        <p class="small"><a href="/posts/shiny11">Read more...</a></p>
+    <h2 class="post-title"><a href="/posts/shiny-di">Startup Tasks, Modules, and Stateful Delegates - Shiny Style</a></h2>
+    <p class="post-meta">Published on Monday, July 1, 2019</p>                
+<p>Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.</p>        <p class="small"><a href="/posts/shiny-di">Read more...</a></p>
 </div>
 
 <div class="post-preview">
-    <h2 class="post-title"><a href="/posts/shiny-easymode">Shiny - Easy Mode Statics</a></h2>
-    <p class="post-meta">Published on Tuesday, January 28, 2020</p>                
-<p>While I was working on Shiny, a LOT of people emailed me telling me "Component.This" doesn't exist (they could have read the samples, but whatevs).  They wanted a Xamarin Essentials approach.  I disagree with this approach to a degree since it doesn't provide some enterprise practices that I require in my day-to-day, but I'm not everyone and people have different requirements.  Thus I decide to bring the static "shims" into Shiny as well as bring a registration model similar to Xamarin Forms.  You still need some of the Shiny startup boilerplate, but there are now ways to cut that down a great deal as well.</p>        <p class="small"><a href="/posts/shiny-easymode">Read more...</a></p>
+    <h2 class="post-title"><a href="/posts/shiny-beacons">Beacons - Shiny Style</a></h2>
+    <p class="post-meta">Published on Monday, June 10, 2019</p>                
+<p>Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a "location" of some type.  They are like an invisible light house.  If you have a device that can "see" those signals, you can find out how close you are to it.</p>        <p class="small"><a href="/posts/shiny-beacons">Read more...</a></p>
 </div>
     <div>
         <div class="float-sm-left">
@@ -142,9 +145,9 @@
         <div class="col-md-4 mt-4 mt-md-0 col-sm-height">
                     <div>
                         <h5>Tags</h5>
-                            <a href="/tags/xamarin" class="badge badge-light"> Xamarin (10)</a>
-                            <a href="/tags/oss" class="badge badge-light"> OSS (10)</a>
-                            <a href="/tags/shiny" class="badge badge-light"> Shiny (9)</a>
+                            <a href="/tags/xamarin" class="badge badge-light"> Xamarin (7)</a>
+                            <a href="/tags/oss" class="badge badge-light"> OSS (7)</a>
+                            <a href="/tags/shiny" class="badge badge-light"> Shiny (7)</a>
                         <div class="mt-3">
                             <div class="float-sm-right">
                                 <a class="btn btn-sm btn-primary" href="/tags" role="button">All Tags <i class="fas fa-angle-double-right"></i></a>

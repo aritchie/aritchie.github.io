@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -112,47 +112,13 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <img src="images/shiny_logo.png" width="100" /> 
+        <h1 id="this-artcile-has-been-updated-to-shiny-2.0">THIS ARTCILE HAS BEEN UPDATED TO SHINY 2.0</h1>
+<img src="images/shiny_logo.png" width="100" /> 
 <p>Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the &quot;pretty&quot; from Android to Xamarin cross platform!</p>
 <p>Jobs is something that is built into the main Shiny library as alot of what it does is the center point of the library and a lot of things will be built on it in the near future :)</p>
 <hr />
 <h2 id="getting-setup">Getting Setup</h2>
-<p>Obviously, first things first - install the <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a> package</p>
-<h3 id="android">Android</h3>
-<p>Add the following to your AndroidManifest.xml</p>
-<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.BATTERY_STATS&quot; /&gt;	
-&lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot; /&gt;
-</code></pre>
-<p>You need to have an actual Application class in your android project.  You can do this two ways:</p>
-<pre><code class="language-csharp">[Application]
-public class YourApplication : Application
-{
-    public YourApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer)
-    {
-    }
-
-
-    public override void OnCreate()
-    {
-        base.OnCreate();
-        Shiny.AndroidShinyHost.Init(this, new YourNamespace.Startup());
-    }
-}
-
-</code></pre>
-<h3 id="ios">iOS</h3>
-<p>iOS doesn't have a set period.  It runs on background fetch which means when iOS feels like running it will.  To be fair, it is fairly intelligent when it does the sync (it knows when the user intends to be active, what the network is like, etc).</p>
-<p>To get iOS going, you have to wire the following into your AppDelegate:</p>
-<pre><code class="language-csharp">// in your FinishedLaunching method
-iOSShinyHost.Init();
-
-// and add this guy
-public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler)
-{
-    Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
-}
-</code></pre>
+<p>Obviously, first things first - install the <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.svg?maxAge=2592000" alt="NuGet" /></a> package into your head projects as well as your shared project.</p>
 <p>And for your Info.plist</p>
 <pre><code class="language-xml">&lt;key&gt;UIBackgroundModes&lt;/key&gt;
 &lt;array&gt;

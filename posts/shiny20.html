@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="The personal blog of Allan Ritchie">
 
-  <title>Allan Ritchie - Shiny 2.0</title>
+  <title>Allan Ritchie - Shiny 2.0 - Shinier Than Ever</title>
 
   <link rel="canonical" href="https://aritchie.github.io/posts/shiny20">
 
@@ -19,7 +19,7 @@
   <meta name="msapplication-tooltip" content="Allan Ritchie" />
   <meta name="msapplication-starturl" content="/" />
 
-  <meta property="og:title" content="Allan Ritchie - Shiny 2.0" />
+  <meta property="og:title" content="Allan Ritchie - Shiny 2.0 - Shinier Than Ever" />
     <meta property="og:image" content="/images/shiny_logo.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aritchie.github.io/posts/shiny20" />
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -94,12 +94,13 @@
       <div class="col-md-12">
         <div class="post-heading">
           <h1>
-            Shiny 2.0
+            Shiny 2.0 - Shinier Than Ever
           </h1>
-              <div class="meta">Published on Wednesday, September 9, 2020</div>
+              <div class="meta">Published on Friday, June 12, 2020</div>
                 <div class="mt-3">
                       <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
                       <a href="/tags/oss" class="badge badge-light"> OSS</a>
+                      <a href="/tags/shiny" class="badge badge-light"> Shiny</a>
                 </div>
         </div>
       </div>
@@ -111,22 +112,81 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <p>TODO</p>
-<!-- snippet: Snippet.cs -->
-<p><a id='snippet-Snippet.cs'></a></p>
-<pre><code class="language-cs">using System;
-using System.Collections.Generic;
-using System.Text;
+        <h2 id="tldr">TL;DR</h2>
+<p>Version 2.0 is months of work, hundreds of commits, and a lot of discovery around how to improve the end experience.  This release focused on improving the background experience
+even more especially on Android.  Android is the source of great pain when it comes to backgrounding and especially around expectations that people
+have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
+transparent change for you unless you want to customize the notification.</p>
+<p>Now that I'm done with the boring rant.  Let's talk about some of the cool new features</p>
+<h2 id="death-to-boilerplate-code">Death to Boilerplate Code</h2>
+<p>This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C#/.NET5 release,
+source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
+Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
+<p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
+<h3 id="before-no-code-gen">BEFORE (no code gen)</h3>
+<pre><code class="language-csharp">// Android App
 
-namespace Blog
-{
-    class Snippet
-    {
-    }
-}
+// Android Activity
+
+// iOS AppDelegate - all features used
+
 </code></pre>
-<p><sup><a href='/Snippet.cs#L1-L10' title='File snippet `Snippet.cs` was extracted from'>snippet source</a> | <a href='#snippet-Snippet.cs' title='Navigate to start of snippet `Snippet.cs`'>anchor</a></sup></p>
-<!-- endSnippet -->
+<h3 id="after">AFTER</h3>
+<pre><code class="language-csharp"></code></pre>
+<p>To get this &quot;voodoo&quot; magic.  Simply install the Shiny nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
+<h2 id="static-class-generation">Static Class Generation</h2>
+<p>There are a lot of users that don't like dependency injection.  I finally decided to bring the best of both worlds, one where I can live on my hill of DI and not code statics, and one where users could have static classes.</p>
+<p>The answer was again, source generation.</p>
+<h2 id="notifications">Notifications</h2>
+<h3 id="channels">Channels</h3>
+<p>Channels are essentially configuration groups.  This provides equivalent functionality to what you find on Android 8+</p>
+<h3 id="actions">Actions</h3>
+<p>PHOTO OF ACTIONS</p>
+<h3 id="progress">Progress</h3>
+<p>PHOTO OF PROGRESS NOTIFICATIONS</p>
+<h2 id="push-notifications">Push Notifications</h2>
+<p>Since the mobile era began, I can't count on two hands how many push notification service providers I've seen come and go.  AppCenter, HockeyApp</p>
+<h2 id="bluetooth-le">Bluetooth LE</h2>
+<h2 id="app-services">App Services</h2>
+<p>The Shiny project has focused mainly on device hardware and backgrounding.  Over the past couple of years, I've seen so many issues bringing the &quot;pieces&quot; together.  With App Services,
+I'm now setting out to tackle raw business issues by bringing Shiny services together and providing a very easy to use API to accomplish this.</p>
+<ul>
+<li>Azure Notification Hubs</li>
+<li>Firebase Messaging</li>
+<li>Straight Native</li>
+</ul>
+<pre><code class="language-csharp">var result = await PushManager.RequestAccess();
+if (result.Status == Shiny.AccessState.Available) 
+{
+    result.RegistrationToken;
+}
+
+// foreground
+PushManager.WhenReceived().Subscribe(data =&gt; {
+
+});
+
+// background
+public class MyPushDelegate : Shiny.Push.IPushDelegate
+{
+
+}
+
+
+// configuring it and switch between them - 1 line of code!
+
+</code></pre>
+<h1 id="application-services">Application Services</h1>
+<p>Shiny's first purpose in life was to make cross platform device &amp; background services easy, but it was never going to stop there.  I'm now starting to work on services to make scenarios easy.  Here are the first two Shiny modules to follow this plan</p>
+<h2 id="shiny.locations.sync">Shiny.Locations.Sync</h2>
+<p>Sync geofence and GPS events to your backend using a consistent and aggressive practices to ensure this data calls home ASAP</p>
+<h2 id="shiny.mediasync">Shiny.MediaSync</h2>
+<p>This will scan and upload photos, videos, &amp; audio from your Android &amp; iOS media gallery</p>
+<h2 id="section"></h2>
+<h2 id="shiny.triptracker">Shiny.TripTracker</h2>
+<p>Continuing the theme of app services and making the hard tasks easy - trip tracker will record trips for walks, runs, cycling, and automotive.  It uses a combination of GPS and motion activity to record trips.</p>
+<h2 id="bluetoothle">BluetoothLE</h2>
+<p>the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to <a href="https://github.com/reactiveui/refit">Refit</a> and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.</p>
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
@@ -134,7 +194,7 @@ namespace Blog
     <!-- allan-ritchies-blog.disqus.com -->
     var disqus_shortname = 'allan-ritchies-blog'; // required: replace example with your forum shortname
     var disqus_identifier = 'shiny20';
-    var disqus_title = 'Shiny 2.0';
+    var disqus_title = 'Shiny 2.0 - Shinier Than Ever';
     var disqus_url = 'https://aritchie.github.io/posts/shiny20';
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

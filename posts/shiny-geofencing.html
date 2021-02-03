@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -112,7 +112,8 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <p>GPS &amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)</p>
+        <h1 id="this-article-has-been-updated-to-shiny-2.0">THIS ARTICLE HAS BEEN UPDATED TO SHINY 2.0</h1>
+<p>GPS &amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)</p>
 <p>We'll talk about GPS in a future article.  In this article, we'll focus on the geofencing and add in some notifications to make things awesome!</p>
 <h2 id="what-are-geofences">What Are Geofences?</h2>
 <p>Geofencing is a location-based virtual boundary that uses GPS.  When you enter or exit this boundary, an event is executed in your application code.  A good example of this is a user coming close to your store and triggering a local notification - &quot;Hey Peoples - come buy some stuff.  I'll make a deal you can't refuse&quot;.  When the user leaves the area &quot;We're so sorry to see you leave.  Come back again and I'll give you 99% off with this magic code&quot;.  It's beautiful.... can be annoying, but if you do it right - you can create a good conversion opportunity.</p>
@@ -179,13 +180,8 @@ public class SampleStartup : ShinyStartup
     }
 }
 </code></pre>
-<h3 id="android">Android</h3>
-<p>Other than the normal Android setup for Shiny, you need to add the following to your manifest.xml - we'll need a few bluetooth permissions here</p>
-<pre><code class="language-xml">&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
-</code></pre>
 <h3 id="ios">iOS</h3>
-<p>Again, same typical iOS initialization.  Just add the following to your info.plist.  The UIBackgroundModes is required for geofencing.</p>
+<p>Only iOS requires a bit of extra configuration.  Just add the following to your info.plist.  The UIBackgroundModes is required for geofencing.</p>
 <pre><code class="language-xml">&lt;key&gt;NSLocationAlwaysUsageDescription&lt;/key&gt;
 &lt;string&gt;Your message&lt;/string&gt;
 &lt;key&gt;NSLocationAlwaysAndWhenInUseUsageDescription&lt;/key&gt;
@@ -238,7 +234,7 @@ public class YourViewModel
 }
 </code></pre>
 <h2 id="in-closing">In Closing</h2>
-<p>Geofencing + Notifications is a powerful combination for things like marketing.  Hopefully, Shiny helps make this combo easy for you!</p>
+<p>Geofencing + Notifications is a powerful combination.  Hopefully, Shiny helps make this combo easy for you!</p>
 <h2 id="links">Links</h2>
 <ul>
 <li><a href="introducingshiny">Initial Shiny Setup</a></li>

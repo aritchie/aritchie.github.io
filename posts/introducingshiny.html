@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -112,7 +112,8 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <h3 id="what-is-it">What is it?</h3>
+        <h1 id="this-article-was-for-shiny-1.x-and-now-deprecated">THIS ARTICLE WAS FOR SHINY 1.x AND NOW DEPRECATED</h1>
+<h3 id="what-is-it">What is it?</h3>
 <p>Ever wanted to write a backgrounding experience that is consistent across all of the .NET platforms you work with?  Between Xamarin Android, Xamarin iOS, and the Universal Windows Platform (UWP) - there are a variety of issues that I've seen commonly occuring that makes this difficult.  As .NET developers, we often want our dependency injection, our async/awaits, and our general way of doing things in our ecosystem.  The mobile platforms really flipped us on our head.  Android has services &amp; broadcast receivers, iOS has too many different ways of coming at backgrounding, and UWP is somewhere in between.</p>
 <p>There have been several plugins over time to help combat this problem, but all fail at some point because they lack the necessary infrastructure to bring it all together.  I have seen developers frequently fight this issue with things like BluetoothLE, GPS, Geofencing, background synchronization, etc.  Making this code testable is even harder and often painful to work with.</p>
 <p><img src="images/shiny_logo.png" width="100" /> Enter <a href="https://github.com/shinyorg/shiny">Shiny</a> - a new framework that tackles problems that no other framework currently tackles - backgrounding and device hardware with all the bells and whistles you are use to in the .NET ecosystem.  Shiny was built on the premise of making depenendency injection and cross platform backgrounding a consistent &amp; testable experience.</p>
@@ -135,7 +136,6 @@
 <li>HTTP File Transfers</li>
 <li>Sensors</li>
 <li>Notifications</li>
-<li>Integrations with 3rd Party MVVM Frameworks like Prism, ReactiveUI, &amp; MvvmCross</li>
 </ul>
 <h3 id="why-another-essentials-or-set-of-plugins">Why Another Essentials or Set of Plugins?</h3>
 <p>Well - to be fair, I've had most of these libraries before some of the other plugins existed.  I also set out to offer a DI and background experience in a cross platform way first.  I also wanted to open the door to other platforms like Tizen, macOS, Linux, Blazor, Uno, &amp; possibly even Meadow as other platforms for the future.  This library has zero focus on UI and will only focus on service processes - I'll leave the frontend stuff to Xamarin Forms &amp; Uno.</p>

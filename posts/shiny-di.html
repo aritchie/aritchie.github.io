@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,12 +64,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -80,6 +74,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -112,7 +112,8 @@
   <div class="container"> 
     <div class="row">
       <div id="content" class="col-md-12">  
-        <p>Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.</p>
+        <h1 id="this-article-applies-to-all-versions-of-shiny">THIS ARTICLE APPLIES TO ALL VERSIONS OF SHINY</h1>
+<p>Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.</p>
 <p>I love Autofac and a lot of the functions it has.  It really is a great DI framework though is known for being a tad on the slow side.  With Shiny, I went with Microsoft.Extensions.DependencyInjection as the DI platform of choice.  It is fast, has &quot;enough&quot; features, built on a great set of abstractions, and has monolith company backing it.  However, it is no Autofac in terms of features - so I wanted to carry a few of them forward.  Namely, modules and startables.  I've also added a very useful feature in stateful delegates which is my personal favorite!  I'll explain what this in this article as well.</p>
 <h2 id="modules">Modules</h2>
 <p>Inversion of Control (IoC) acts as the basic building blocks of your application.  However, as your application grows, registering all of these components within a single point of entry can lead to a fat file.</p>
@@ -238,12 +239,10 @@ namespace Samples.ShinyDelegates
 <p>Modules &amp; startup tasks provide a great way to modulizing your application and providing a rich set of wiring services together without coupling them within your normal application logic (ie. ViewModels).</p>
 <h2 id="links">Links</h2>
 <ul>
-<li><a href="introducingshiny">Initial Shiny Setup</a></li>
 <li><a href="https://github.com/shinyorg/shiny">Source Code</a></li>
-<li><a href="https://github.com/shinyorg/shinysamples">Samples</a></li>
+<li><a href="https://github.com/shinyorg/shiny/samples">Samples</a></li>
 <li><a href="https://shinylib.net">Documentation</a></li>
 <li><a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
-<li><a href="https://github.com/aritchie/stream-todo">Shiny TODOs Sample App</a></li>
 </ul>
 
 <div id="disqus_thread"></div>
