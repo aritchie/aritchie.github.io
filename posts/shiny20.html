@@ -5,15 +5,14 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="The personal blog of Allan Ritchie">
 
   <title>Allan Ritchie - Shiny 2.0 - Shinier Than Ever</title>
 
   <link rel="canonical" href="https://aritchie.github.io/posts/shiny20">
 
       <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
-      <link type="application/rss+xml" rel="alternate" href="/feed.rss" />
-      <link type="application/atom+xml" rel="alternate" href="/feed.atom" />
+      <link type="application/rss+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.atom" />
   
   <meta name="application-name" content="Allan Ritchie" />
   <meta name="msapplication-tooltip" content="Allan Ritchie" />
@@ -64,6 +63,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="/posts">Personal Blog of Allan Ritchie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -74,12 +79,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -125,14 +124,90 @@ Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <h3 id="before-no-code-gen">BEFORE (no code gen)</h3>
 <pre><code class="language-csharp">// Android App
+[global::Android.App.ApplicationAttribute]
+public partial class MainApplication : global::Android.App.Application
+{
+	public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer) {}
+
+	public override void OnCreate()
+	{
+		this.ShinyOnCreate(new Samples.SampleStartup());
+		global::Xamarin.Essentials.Platform.Init(this);
+		base.OnCreate();
+	}
+}
 
 // Android Activity
+public partial class MainActivity
+{
+	protected override void OnCreate(Bundle savedInstanceState)
+	{
+		this.ShinyOnCreate();
+		TabLayoutResource = Resource.Layout.Tabbar;
+		ToolbarResource = Resource.Layout.Toolbar;
+		base.OnCreate(savedInstanceState);
+		global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+		this.LoadApplication(new Samples.App());
+	}
+
+	protected override void OnNewIntent(Intent intent)
+	{
+		base.OnNewIntent(intent);
+		this.ShinyOnNewIntent(intent);
+	}
+
+	protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+	{
+		base.OnActivityResult(requestCode, resultCode, data);
+		this.ShinyOnActivityResult(requestCode, resultCode, data);
+	}
+	public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+	{
+		base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		this.ShinyOnRequestPermissionsResult(requestCode, permissions, grantResults);
+		global::Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+}
 
 // iOS AppDelegate - all features used
+public partial class AppDelegate
+{
+	partial void OnPreFinishedLaunching(UIApplication app, NSDictionary options);
+	partial void OnPostFinishedLaunching(UIApplication app, NSDictionary options);
+	public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+	{
+		this.ShinyFinishedLaunching(new Samples.SampleStartup());
+		global::Xamarin.Forms.Forms.Init();
+		this.LoadApplication(new Samples.App());
+		return base.FinishedLaunching(app, options);
+	}
+	public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken) =&gt; this.ShinyRegisteredForRemoteNotifications(deviceToken);
+	public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo) =&gt; this.ShinyDidReceiveRemoteNotification(userInfo, null);
+	public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action&lt;UIBackgroundFetchResult&gt; completionHandler) =&gt; this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
+	public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error) =&gt; this.ShinyFailedToRegisterForRemoteNotifications(error);
+	public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler) =&gt; this.ShinyPerformFetch(completionHandler);
+	public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler) =&gt; this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
+}
 
 </code></pre>
 <h3 id="after">AFTER</h3>
-<pre><code class="language-csharp"></code></pre>
+<pre><code class="language-csharp">// Android Application - you don't even have to make one
+// Android Activity
+public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+{
+}
+
+// iOS AppDelegate
+[Register(&quot;AppDelegate&quot;)]
+public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+{
+}
+
+[assembly: ShinyApplication(
+    ShinyStartupTypeName = &quot;Samples.SampleStartup&quot;,
+    XamarinFormsAppTypeName = &quot;Samples.App&quot;
+)]
+</code></pre>
 <p>To get this &quot;voodoo&quot; magic.  Simply install the Shiny nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
 <h2 id="static-class-generation">Static Class Generation</h2>
 <p>There are a lot of users that don't like dependency injection.  I finally decided to bring the best of both worlds, one where I can live on my hill of DI and not code statics, and one where users could have static classes.</p>

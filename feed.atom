@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 	<id>https://aritchie.github.io/</id>
-	<title />
+	<title>Personal Blog of Allan Ritchie</title>
 	<link rel="self" href="https://aritchie.github.io/" />
 	<rights>2021</rights>
-	<updated>2021-02-03T19:59:33Z</updated>
+	<updated>2021-02-04T17:51:44Z</updated>
 	<logo>https://aritchie.github.io/images/toronto_pan.jpg</logo>
-	<subtitle>The personal blog of Allan Ritchie</subtitle>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny20</id>
 		<title>Shiny 2.0 - Shinier Than Ever</title>
@@ -26,14 +25,90 @@ Xamarin Forms, Xamarin Essentials, and other 3rd party source code.&lt;/p&gt;
 &lt;p&gt;To get an idea, here is a before and after showing both iOS and Android boilerplate&lt;/p&gt;
 &lt;h3 id="before-no-code-gen"&gt;BEFORE (no code gen)&lt;/h3&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;// Android App
+[global::Android.App.ApplicationAttribute]
+public partial class MainApplication : global::Android.App.Application
+{
+	public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer) {}
+
+	public override void OnCreate()
+	{
+		this.ShinyOnCreate(new Samples.SampleStartup());
+		global::Xamarin.Essentials.Platform.Init(this);
+		base.OnCreate();
+	}
+}
 
 // Android Activity
+public partial class MainActivity
+{
+	protected override void OnCreate(Bundle savedInstanceState)
+	{
+		this.ShinyOnCreate();
+		TabLayoutResource = Resource.Layout.Tabbar;
+		ToolbarResource = Resource.Layout.Toolbar;
+		base.OnCreate(savedInstanceState);
+		global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+		this.LoadApplication(new Samples.App());
+	}
+
+	protected override void OnNewIntent(Intent intent)
+	{
+		base.OnNewIntent(intent);
+		this.ShinyOnNewIntent(intent);
+	}
+
+	protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+	{
+		base.OnActivityResult(requestCode, resultCode, data);
+		this.ShinyOnActivityResult(requestCode, resultCode, data);
+	}
+	public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+	{
+		base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+		this.ShinyOnRequestPermissionsResult(requestCode, permissions, grantResults);
+		global::Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+	}
+}
 
 // iOS AppDelegate - all features used
+public partial class AppDelegate
+{
+	partial void OnPreFinishedLaunching(UIApplication app, NSDictionary options);
+	partial void OnPostFinishedLaunching(UIApplication app, NSDictionary options);
+	public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+	{
+		this.ShinyFinishedLaunching(new Samples.SampleStartup());
+		global::Xamarin.Forms.Forms.Init();
+		this.LoadApplication(new Samples.App());
+		return base.FinishedLaunching(app, options);
+	}
+	public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken) =&amp;gt; this.ShinyRegisteredForRemoteNotifications(deviceToken);
+	public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo) =&amp;gt; this.ShinyDidReceiveRemoteNotification(userInfo, null);
+	public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler) =&amp;gt; this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
+	public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error) =&amp;gt; this.ShinyFailedToRegisterForRemoteNotifications(error);
+	public override void PerformFetch(UIApplication application, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler) =&amp;gt; this.ShinyPerformFetch(completionHandler);
+	public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler) =&amp;gt; this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
+}
 
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="after"&gt;AFTER&lt;/h3&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;// Android Application - you don't even have to make one
+// Android Activity
+public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+{
+}
+
+// iOS AppDelegate
+[Register(&amp;quot;AppDelegate&amp;quot;)]
+public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+{
+}
+
+[assembly: ShinyApplication(
+    ShinyStartupTypeName = &amp;quot;Samples.SampleStartup&amp;quot;,
+    XamarinFormsAppTypeName = &amp;quot;Samples.App&amp;quot;
+)]
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To get this &amp;quot;voodoo&amp;quot; magic.  Simply install the Shiny nuget package.  It's new with 2.0 and add the attribute shown above in &amp;quot;after&amp;quot;.&lt;/p&gt;
 &lt;h2 id="static-class-generation"&gt;Static Class Generation&lt;/h2&gt;
 &lt;p&gt;There are a lot of users that don't like dependency injection.  I finally decided to bring the best of both worlds, one where I can live on my hill of DI and not code statics, and one where users could have static classes.&lt;/p&gt;
@@ -89,7 +164,10 @@ public class MyPushDelegate : Shiny.Push.IPushDelegate
 &lt;h2 id="bluetoothle"&gt;BluetoothLE&lt;/h2&gt;
 &lt;p&gt;the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to &lt;a href="https://github.com/reactiveui/refit"&gt;Refit&lt;/a&gt; and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.&lt;/p&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;Version 2.0 is months of work, hundreds of commits, and a lot of discovery around how to improve the end experience.  This release focused on improving the background experience
+even more especially on Android.  Android is the source of great pain when it comes to backgrounding and especially around expectations that people
+have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
+transparent change for you unless you want to customize the notification.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny-di</id>
@@ -230,7 +308,7 @@ namespace Samples.ShinyDelegates
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;Shiny isn't all about backgrounding, DI, RX, and all of that cool stuff.  It actually provides a ton of utility functions as well.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny-beacons</id>
@@ -379,7 +457,7 @@ namespace YourNamespace
 &lt;li&gt;&lt;a href="https://estimote.com/products/"&gt;Estimote Beacons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a "location" of some type.  They are like an invisible light house.  If you have a device that can "see" those signals, you can find out how close you are to it.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny-geofencing</id>
@@ -521,7 +599,7 @@ public class YourViewModel
 &lt;li&gt;Shiny.Notifications - &lt;a href="https://www.nuget.org/packages/Shiny.Notifications/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Notifications.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;GPS &amp;amp; Geofencing is a common need for mobile and IoT platforms alike.  However, mobile platforms with backgrounding in this area are always painful and that is being nice.  We've tried several plugins over the years, but they have all some sort of pain point.  Shiny aims to solve all of these as it provides a lot of base infrastructure to make things... shiny ;)&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shinysettings</id>
@@ -663,7 +741,7 @@ public class MyStartup : Shiny.ShinyStartup
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;I know - Preferences &amp;amp; Settings are a dime a dozen these days, but I'm such a big advocated of decoupled software that I had to do things differently.  With Shiny, I had a chance to move one of the features that I loved from my ACR Settings plugin over and give it a good home in a DI universe of awesome!&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shinyjobs</id>
@@ -792,7 +870,7 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the "pretty" from Android to Xamarin cross platform!&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/introducingshiny</id>
@@ -1010,6 +1088,6 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 &lt;p&gt;Head over to see the full &lt;a href="https://github.com/shinyorg/shinysamples"&gt;GitHub Samples&lt;/a&gt; or official documentation located &lt;a href="https://shinydocs.azurewebsites.net"&gt;here&lt;/a&gt;.  Packages on nuget can be found &lt;a href="https://www.nuget.org/packages?q=shiny"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Follow the &lt;a href="https://aritchie.github.io/tags/shiny"&gt;links here&lt;/a&gt; for more upcoming articles&lt;/p&gt;
 </content>
-		<summary>The personal blog of Allan Ritchie</summary>
+		<summary>&lt;p&gt;Ever wanted to write a backgrounding experience that is consistent across all of the .NET platforms you work with?  Between Xamarin Android, Xamarin iOS, and the Universal Windows Platform (UWP) - there are a variety of issues that I've seen commonly occuring that makes this difficult.  As .NET developers, we often want our dependency injection, our async/awaits, and our general way of doing things in our ecosystem.  The mobile platforms really flipped us on our head.  Android has services &amp;amp; broadcast receivers, iOS has too many different ways of coming at backgrounding, and UWP is somewhere in between.&lt;/p&gt;</summary>
 	</entry>
 </feed>
