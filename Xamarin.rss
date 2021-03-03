@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description>Lots of Xamarin stuffs</description>
 		<copyright>2021</copyright>
-		<pubDate>Wed, 03 Mar 2021 19:15:39 GMT</pubDate>
-		<lastBuildDate>Wed, 03 Mar 2021 19:15:39 GMT</lastBuildDate>
+		<pubDate>Wed, 03 Mar 2021 19:16:10 GMT</pubDate>
+		<lastBuildDate>Wed, 03 Mar 2021 19:16:10 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -328,7 +328,7 @@ namespace Samples.ShinyDelegates
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny/samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://shinylib.net/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded>
@@ -475,7 +475,7 @@ namespace YourNamespace
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples/tree/master/Samples/Beacons"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://shinylib.net/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Core - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Beacons - &lt;a href="https://www.nuget.org/packages/Shiny.Beacons/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Beacons.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Notifications - &lt;a href="https://www.nuget.org/packages/Shiny.Notifications/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Notifications.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
@@ -619,7 +619,7 @@ public class YourViewModel
 &lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://shinylib.net/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Core - &lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Locations - &lt;a href="https://www.nuget.org/packages/Shiny.Locations/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Locations.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Shiny.Notifications - &lt;a href="https://www.nuget.org/packages/Shiny.Notifications/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Notifications.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
@@ -764,7 +764,7 @@ public class MyStartup : Shiny.ShinyStartup
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/tree/master/samples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://shinylib.net/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded>
@@ -894,7 +894,7 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 &lt;li&gt;&lt;a href="https://aritchie.github.io/introducingshiny"&gt;Initial Shiny Setup&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shiny"&gt;Source Code&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/shinyorg/shinysamples"&gt;Samples&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://shinylib.net"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://shinylib.net/"&gt;Documentation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.nuget.org/packages/Shiny.Core/"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet"&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content:encoded>
@@ -1114,7 +1114,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="like-what-you-see"&gt;Like What You See?&lt;/h3&gt;
-&lt;p&gt;Head over to see the full &lt;a href="https://github.com/shinyorg/shinysamples"&gt;GitHub Samples&lt;/a&gt; or official documentation located &lt;a href="https://shinydocs.azurewebsites.net"&gt;here&lt;/a&gt;.  Packages on nuget can be found &lt;a href="https://www.nuget.org/packages?q=shiny"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Head over to see the full &lt;a href="https://github.com/shinyorg/shinysamples"&gt;GitHub Samples&lt;/a&gt; or official documentation located &lt;a href="https://shinydocs.azurewebsites.net/"&gt;here&lt;/a&gt;.  Packages on nuget can be found &lt;a href="https://www.nuget.org/packages?q=shiny"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Follow the &lt;a href="https://aritchie.github.io/tags/shiny"&gt;links here&lt;/a&gt; for more upcoming articles&lt;/p&gt;
 </content:encoded>
 			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
