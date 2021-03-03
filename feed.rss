@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Thu, 04 Feb 2021 17:51:44 GMT</pubDate>
-		<lastBuildDate>Thu, 04 Feb 2021 17:51:44 GMT</lastBuildDate>
+		<pubDate>Wed, 03 Mar 2021 19:15:38 GMT</pubDate>
+		<lastBuildDate>Wed, 03 Mar 2021 19:15:38 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -23,6 +23,14 @@ even more especially on Android.  Android is the source of great pain when it co
 have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
 transparent change for you unless you want to customize the notification.&lt;/p&gt;
 &lt;p&gt;Now that I'm done with the boring rant.  Let's talk about some of the cool new features&lt;/p&gt;
+&lt;p&gt;The main topics&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Boilerplate Code&lt;/li&gt;
+&lt;li&gt;BluetoothLE&lt;/li&gt;
+&lt;li&gt;Push Notifications&lt;/li&gt;
+&lt;li&gt;Local Notifications&lt;/li&gt;
+&lt;li&gt;What's Next - App Services!&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="death-to-boilerplate-code"&gt;Death to Boilerplate Code&lt;/h2&gt;
 &lt;p&gt;This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C#/.NET5 release,
 source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
@@ -117,17 +125,29 @@ public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDe
 &lt;p&gt;To get this &amp;quot;voodoo&amp;quot; magic.  Simply install the Shiny nuget package.  It's new with 2.0 and add the attribute shown above in &amp;quot;after&amp;quot;.&lt;/p&gt;
 &lt;h2 id="static-class-generation"&gt;Static Class Generation&lt;/h2&gt;
 &lt;p&gt;There are a lot of users that don't like dependency injection.  I finally decided to bring the best of both worlds, one where I can live on my hill of DI and not code statics, and one where users could have static classes.&lt;/p&gt;
-&lt;p&gt;The answer was again, source generation.&lt;/p&gt;
+&lt;p&gt;The answer was again, source generation.  By simply adding the &amp;quot;Shiny&amp;quot; nuget package and adding [assembly: StaticClasses(&amp;quot;YourNamespace&amp;quot;)], the code generators will look through all of the Shiny libraries you have referenced in that project and
+generate a pretty static class for you to use.  NO DI!&lt;/p&gt;
 &lt;h2 id="notifications"&gt;Notifications&lt;/h2&gt;
-&lt;h3 id="channels"&gt;Channels&lt;/h3&gt;
+&lt;p&gt;Notifications had to undergo some changes to make sure things like sounds worked and response actions from notifications were consistent across platforms, thus, channels were
+created as to play ball properly with channels on Android and to a far lesser degree, categories on iOS.&lt;/p&gt;
 &lt;p&gt;Channels are essentially configuration groups.  This provides equivalent functionality to what you find on Android 8+&lt;/p&gt;
-&lt;h3 id="actions"&gt;Actions&lt;/h3&gt;
 &lt;p&gt;PHOTO OF ACTIONS&lt;/p&gt;
-&lt;h3 id="progress"&gt;Progress&lt;/h3&gt;
-&lt;p&gt;PHOTO OF PROGRESS NOTIFICATIONS&lt;/p&gt;
 &lt;h2 id="push-notifications"&gt;Push Notifications&lt;/h2&gt;
 &lt;p&gt;Since the mobile era began, I can't count on two hands how many push notification service providers I've seen come and go.  AppCenter, HockeyApp&lt;/p&gt;
+&lt;p&gt;Currently, Shiny is working with Native, Google Firebase Messaging, and Azure Push Notification Hubs.&lt;/p&gt;
+&lt;p&gt;Tag Support&lt;/p&gt;
 &lt;h2 id="bluetooth-le"&gt;Bluetooth LE&lt;/h2&gt;
+&lt;p&gt;I really went through all of the API calls this library had to offer.&lt;/p&gt;
+&lt;p&gt;BLE is still firmly (and always will be) rooted in Reactive Extensions, but I wanted to make the APIs easier to consume for all users including myself.&lt;/p&gt;
+&lt;p&gt;Managed Scans
+Scanning was riddled with potential issues&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;maintaining a list of unique peripherals while still watching things like the RSSI and&lt;/li&gt;
+&lt;li&gt;synchronizing list updates to your UI&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Managed Peripheral
+The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
+This was painful&lt;/p&gt;
 &lt;h2 id="app-services"&gt;App Services&lt;/h2&gt;
 &lt;p&gt;The Shiny project has focused mainly on device hardware and backgrounding.  Over the past couple of years, I've seen so many issues bringing the &amp;quot;pieces&amp;quot; together.  With App Services,
 I'm now setting out to tackle raw business issues by bringing Shiny services together and providing a very easy to use API to accomplish this.&lt;/p&gt;
@@ -159,15 +179,16 @@ public class MyPushDelegate : Shiny.Push.IPushDelegate
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id="application-services"&gt;Application Services&lt;/h1&gt;
 &lt;p&gt;Shiny's first purpose in life was to make cross platform device &amp;amp; background services easy, but it was never going to stop there.  I'm now starting to work on services to make scenarios easy.  Here are the first two Shiny modules to follow this plan&lt;/p&gt;
+&lt;h2 id="obd"&gt;OBD&lt;/h2&gt;
 &lt;h2 id="shiny.locations.sync"&gt;Shiny.Locations.Sync&lt;/h2&gt;
 &lt;p&gt;Sync geofence and GPS events to your backend using a consistent and aggressive practices to ensure this data calls home ASAP&lt;/p&gt;
 &lt;h2 id="shiny.mediasync"&gt;Shiny.MediaSync&lt;/h2&gt;
 &lt;p&gt;This will scan and upload photos, videos, &amp;amp; audio from your Android &amp;amp; iOS media gallery&lt;/p&gt;
-&lt;h2 id="section"&gt;&lt;/h2&gt;
 &lt;h2 id="shiny.triptracker"&gt;Shiny.TripTracker&lt;/h2&gt;
 &lt;p&gt;Continuing the theme of app services and making the hard tasks easy - trip tracker will record trips for walks, runs, cycling, and automotive.  It uses a combination of GPS and motion activity to record trips.&lt;/p&gt;
-&lt;h2 id="bluetoothle"&gt;BluetoothLE&lt;/h2&gt;
+&lt;h2 id="bluetoothle-refit-client"&gt;BluetoothLE &amp;quot;Refit&amp;quot; Client&lt;/h2&gt;
 &lt;p&gt;the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to &lt;a href="https://github.com/reactiveui/refit"&gt;Refit&lt;/a&gt; and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.&lt;/p&gt;
+&lt;h2 id="bluetoothle-signalr-hosting"&gt;BluetoothLE SignalR Hosting&lt;/h2&gt;
 </content:encoded>
 			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
 		</item>
