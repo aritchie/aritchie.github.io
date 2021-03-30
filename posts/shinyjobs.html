@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -117,7 +117,7 @@
 <p>Jobs is something that is built into the main Shiny library as alot of what it does is the center point of the library and a lot of things will be built on it in the near future :)</p>
 <hr />
 <h2 id="getting-setup">Getting Setup</h2>
-<p>Obviously, first things first - install the <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.svg?maxAge=2592000" alt="NuGet" /></a> package into your head projects as well as your shared project.</p>
+<p>Obviously, first things first - install the <a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?label=Shiny.Core&style=for-the-badge" /></a> package into your head projects as well as your shared project.</p>
 <p>And for your Info.plist</p>
 <pre><code class="language-xml">&lt;key&gt;UIBackgroundModes&lt;/key&gt;
 &lt;array&gt;
@@ -225,11 +225,16 @@ var result = await Shiny.ShinyHost.Resolve&lt;Shiny.Jobs.IJobManager&gt;().Run(&
 <p>iOS is not &quot;periodic&quot; in the sense that you can rely on it to run every X mins.  In fact, it is quite intelligent about when/how it runs.  Do remember, you are piggybacking on &quot;background fetch&quot;, so you really need to do some sort of remote data call if you don't want to aggrevate the apple gods that be.</p>
 <h2 id="links">Links</h2>
 <ul>
-<li><a href="introducingshiny">Initial Shiny Setup</a></li>
-<li><a href="https://github.com/shinyorg/shiny">Source Code</a></li>
-<li><a href="https://github.com/shinyorg/shinysamples">Samples</a></li>
-<li><a href="https://shinylib.net/">Documentation</a></li>
-<li><a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?maxAge=2592000" alt="NuGet" /></a></li>
+<li><a href="https://shinylib.org">Documentation</a>
+</li>
+<li><a href="https://github.com/shinyorg/shiny">Samples</a>
+</li>
+<li><a href="https://github.com/shinyorg/shiny/tree/master/samples">GitHub</a>
+</li>
+<li><a href="https://www.nuget.org/profiles/ShinyLib">NuGets</a>
+</li>
+<li><a href="https://www.nuget.org/packages/Shiny.Core/"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?label=Shiny.Core&style=for-the-badge" /></a>
+</li>
 </ul>
 
 <div id="disqus_thread"></div>

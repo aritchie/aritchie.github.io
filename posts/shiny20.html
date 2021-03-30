@@ -126,7 +126,7 @@ transparent change for you unless you want to customize the notification.</p>
 <li><a href="#bluetooth-le">BluetoothLE</a></li>
 <li><a href="#notifications">Local Notifications</a></li>
 <li><a href="#push-notifications">Push Notifications</a></li>
-<li><a href="#whats-next-app-services">What's Next - App Services</a></li>
+<li><a href="#beacons">Beacons</a></li>
 </ul>
 <h2 id="death-to-boilerplate-code">Death to Boilerplate Code</h2>
 <p>This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C#/.NET5 release,
@@ -277,7 +277,7 @@ created as to play ball properly with channels on Android and to a far lesser de
 worlds together for a consistent design between them (oh... and that UWP thing can come along too).  What's better, channel is required on Android - if you don't care
 about the additional functionality - omit it and Shiny will default it for you!</p>
 <pre><code class="language-cs">var manager = ShinyHost.Resolve&lt;INotificationManager&gt;(); // INJECT THIS
-manager.AddChannel(new Channel 
+await manager.AddChannel(new Channel 
 {
 	Identifier = &quot;YourChannelName&quot;,
 	Description = &quot;This is your channel&quot;,
@@ -324,7 +324,7 @@ await manager.Send(
 </ul>
 <p>Why is this such an awesome API? Because you can swap between
 push notification providers with 1 single line of code:</p>
-<pre><code>using Shiny;
+<pre><code class="language-csharp">using Shiny;
 
 namespace YourApp
 {
@@ -408,35 +408,35 @@ await push.TryClearTags(...);
 <h2 id="bluetooth-le">Bluetooth LE</h2>
 <p>I really went through all of the API calls this library had to offer.</p>
 <p>BLE is still firmly (and always will be) rooted in Reactive Extensions, but I wanted to make the APIs easier to consume for all users including myself.</p>
-<p>Managed Scans
-Scanning was riddled with potential issues</p>
+<h4 id="managed-scans">Managed Scans</h4>
+<p>Scanning was riddled with potential issues</p>
 <ul>
 <li>maintaining a list of unique peripherals while still watching things like the RSSI and</li>
 <li>synchronizing list updates to your UI</li>
 <li>Removing a device from the list that hasn't been heard in a specific time</li>
 </ul>
-<p>Managed Peripheral
-The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
+<h4 id="managed-peripheral">Managed Peripheral</h4>
+<p>The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
 This was painful</p>
-<h1 id="whats-next-app-services">What's Next - App Services</h1>
-<p>Shiny's first purpose in life was to make cross platform device &amp; background services easy, but it was never going to stop there.  I'm now starting to work on services to make scenarios easy.  Here are the first two Shiny modules to follow this plan</p>
-<h2 id="obd">OBD</h2>
-<h2 id="shiny.locations.sync">Shiny.Locations.Sync</h2>
-<p>Sync geofence and GPS events to your backend using a consistent and aggressive practices to ensure this data calls home ASAP</p>
-<h2 id="shiny.mediasync">Shiny.MediaSync</h2>
-<p>This will scan and upload photos, videos, &amp; audio from your Android &amp; iOS media gallery</p>
-<h2 id="shiny.triptracker">Shiny.TripTracker</h2>
-<p>Continuing the theme of app services and making the hard tasks easy - trip tracker will record trips for walks, runs, cycling, and automotive.  It uses a combination of GPS and motion activity to record trips.</p>
-<h2 id="bluetoothle-refit-client">BluetoothLE &quot;Refit&quot; Client</h2>
-<p>the one mechanism that people seem to keep coming back to me about.  The work has begun.  There will be 2 packages, Shiny.BluetoothLE and Shiny.BluetoothLE.Hosting.  I'm looking to simplify the APIs while still making them as powerful as ever.  There is also a scope of work to have the client work similar to <a href="https://github.com/reactiveui/refit">Refit</a> and having the GATT host look like SignalR hubs.  This is still in a very early proof-of-concept.</p>
-<h2 id="bluetoothle-signalr-hosting">BluetoothLE SignalR Hosting</h2>
-<h1 id="links">LINKS</h1>
+<h2 id="beacons">Beacons</h2>
+<p>Beacons aren't really new, but there has always been a bit of a gap here in the Xamarin community.  You also had to always count on the beacon manufacturer supplying an SDK.
+With Shiny, you get iBeacon (yes the Apple Beacons) out of the box on all of the platforms Shiny supports.  The thing I love about this library is that it is 100% C# and supports all of the monitoring/background scenarios
+on Android as well!</p>
+<h4 id="using-beacons">Using Beacons</h4>
+<h4 id="managed-scan">Managed Scan</h4>
+<p>This essentially works identical to the BLE managed scan.</p>
 <ul>
-<li><a href="Statiq.Common.Config`1[System.String]">Statiq.Common.Config`1[System.String]</a>
+<li>It will remove beacons from your list that haven't been &quot;heard&quot; in a configurable timestamp</li>
+</ul>
+<h2 id="links">LINKS</h2>
+<ul>
+<li><a href="https://shinylib.org">Documentation</a>
 </li>
-<li><a href="Statiq.Common.Config`1[System.String]">Statiq.Common.Config`1[System.String]</a>
+<li><a href="https://github.com/shinyorg/shiny">Samples</a>
 </li>
-<li><a href="Statiq.Common.Config`1[System.String]">Statiq.Common.Config`1[System.String]</a>
+<li><a href="https://github.com/shinyorg/shiny/tree/master/samples">GitHub</a>
+</li>
+<li><a href="https://www.nuget.org/profiles/ShinyLib">NuGets</a>
 </li>
 </ul>
 
