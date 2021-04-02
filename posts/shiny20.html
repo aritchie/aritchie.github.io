@@ -220,7 +220,7 @@ public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDe
     XamarinFormsAppTypeName = &quot;Samples.App&quot;
 )]
 </code></pre>
-<p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/"><img src="https://img.shields.io/nuget/v/Shiny.svg?label=Shiny&style=for-the-badge" /></a> nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
+<p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?label=Shiny&style=for-the-badge" /></a> nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
 <h2 id="static-class-generation">Static Class Generation</h2>
 <p>There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).  Not all users like dependency injection and I don't want to maintain static classes of everything.
 With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the TODO in the library where you want the classes generated and add the attribute in any file as shown below.
@@ -240,8 +240,8 @@ ILikeStatics.ShinyBleManager.Scan();
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.</p>
 <p>With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
 to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp; Firebase - so I've added the following libs to Shiny</p>
-<a href="https://www.nuget.org/packages/Shiny.Logging.Firebase/"><img src="https://img.shields.io/nuget/v/Shiny.Logging.Firebase.svg?label=Shiny.Logging.Firebase&style=for-the-badge" /></a>
-<a href="https://www.nuget.org/packages/Shiny.Logging.AppCenter/"><img src="https://img.shields.io/nuget/v/Shiny.Logging.AppCenter.svg?label=Shiny.Logging.AppCenter&style=for-the-badge" /></a>
+<a href="https://www.nuget.org/packages/Shiny.Logging.Firebase/" target="Shiny.Logging.Firebase"><img src="https://img.shields.io/nuget/v/Shiny.Logging.Firebase.svg?label=Shiny.Logging.Firebase&style=for-the-badge" /></a>
+<a href="https://www.nuget.org/packages/Shiny.Logging.AppCenter/" target="Shiny.Logging.AppCenter"><img src="https://img.shields.io/nuget/v/Shiny.Logging.AppCenter.svg?label=Shiny.Logging.AppCenter&style=for-the-badge" /></a>
 <p>Wiring providers up is also almost just like ASP.NET Core.  In your Shiny startup file:</p>
 <pre><code class="language-csharp">using System;
 using Shiny;
