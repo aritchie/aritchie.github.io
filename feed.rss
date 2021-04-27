@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Sun, 25 Apr 2021 03:05:50 GMT</pubDate>
-		<lastBuildDate>Sun, 25 Apr 2021 03:05:50 GMT</lastBuildDate>
+		<pubDate>Tue, 27 Apr 2021 04:19:06 GMT</pubDate>
+		<lastBuildDate>Tue, 27 Apr 2021 04:19:06 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -37,93 +37,22 @@ transparent change for you unless you want to customize the notification.&lt;/p&
 source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.&lt;/p&gt;
 &lt;p&gt;To get an idea, here is a before and after showing both iOS and Android boilerplate&lt;/p&gt;
-&lt;h3 id="before-no-code-gen"&gt;BEFORE (no code gen)&lt;/h3&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// Android App
-[global::Android.App.ApplicationAttribute]
-public partial class MainApplication : global::Android.App.Application
-{
-	public MainApplication(IntPtr handle, JniHandleOwnership transfer) : base(handle, transfer) {}
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Android Before
+    include: "../../includes/shiny20/androidbefore.md"
 
-	public override void OnCreate()
-	{
-		this.ShinyOnCreate(new Samples.SampleStartup());
-		global::Xamarin.Essentials.Platform.Init(this);
-		base.OnCreate();
-	}
-}
+  - name: iOS Before
+    include: "../../includes/shiny20/iosbefore.md"
 
-// Android Activity
-public partial class MainActivity
-{
-	protected override void OnCreate(Bundle savedInstanceState)
-	{
-		this.ShinyOnCreate();
-		TabLayoutResource = Resource.Layout.Tabbar;
-		ToolbarResource = Resource.Layout.Toolbar;
-		base.OnCreate(savedInstanceState);
-		global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-		this.LoadApplication(new Samples.App());
-	}
+  - name: Android After
+    include: "../../includes/shiny20/androidafter.md"
 
-	protected override void OnNewIntent(Intent intent)
-	{
-		base.OnNewIntent(intent);
-		this.ShinyOnNewIntent(intent);
-	}
-
-	protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-	{
-		base.OnActivityResult(requestCode, resultCode, data);
-		this.ShinyOnActivityResult(requestCode, resultCode, data);
-	}
-
-	public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
-	{
-		base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-		this.ShinyOnRequestPermissionsResult(requestCode, permissions, grantResults);
-		global::Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-	}
-}
-
-// iOS AppDelegate - all features used
-public partial class AppDelegate
-{
-	partial void OnPreFinishedLaunching(UIApplication app, NSDictionary options);
-	partial void OnPostFinishedLaunching(UIApplication app, NSDictionary options);
-	public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-	{
-		this.ShinyFinishedLaunching(new Samples.SampleStartup());
-		global::Xamarin.Forms.Forms.Init();
-		this.LoadApplication(new Samples.App());
-		return base.FinishedLaunching(app, options);
-	}
-	public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken) =&amp;gt; this.ShinyRegisteredForRemoteNotifications(deviceToken);
-	public override void ReceivedRemoteNotification(UIApplication application, NSDictionary userInfo) =&amp;gt; this.ShinyDidReceiveRemoteNotification(userInfo, null);
-	public override void DidReceiveRemoteNotification(UIApplication application, NSDictionary userInfo, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler) =&amp;gt; this.ShinyDidReceiveRemoteNotification(userInfo, completionHandler);
-	public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error) =&amp;gt; this.ShinyFailedToRegisterForRemoteNotifications(error);
-	public override void PerformFetch(UIApplication application, Action&amp;lt;UIBackgroundFetchResult&amp;gt; completionHandler) =&amp;gt; this.ShinyPerformFetch(completionHandler);
-	public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler) =&amp;gt; this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
-}
-
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id="after"&gt;AFTER&lt;/h3&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;// Android Application - you don't even have to make one
-// Android Activity
-public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
-{
-}
-
-// iOS AppDelegate
-[Register("AppDelegate")]
-public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
-{
-}
-
-[assembly: ShinyApplication(
-    ShinyStartupTypeName = "Samples.SampleStartup",
-    XamarinFormsAppTypeName = "Samples.App"
-)]
-&lt;/code&gt;&lt;/pre&gt;
+  - name: iOS After
+    include: "../../includes/shiny20/iosafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
 &lt;p&gt;To get this "voodoo" magic.  Simply install the &lt;!--?# NugetShield "Shiny" /?--&gt; nuget package.  It's new with 2.0 and add the attribute shown above in "after".&lt;/p&gt;
 &lt;h2 id="static-class-generation"&gt;Static Class Generation&lt;/h2&gt;
 &lt;p&gt;There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).  Not all users like dependency injection and I don't want to maintain static classes of everything.
@@ -275,20 +204,24 @@ subscription.Dispose();
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Background (this still runs in the foreground)&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny.Push;
+using System.Threading.Tasks;
 
-public class MyPushDelegate : IPushDelegate
+namespace MyNamespace
 {
-	public async Task OnEntry(PushNotificationResponse push) 
-	{
-	}
+    public class MyPushDelegate : IPushDelegate
+    {
+        public async Task OnEntry(PushNotificationResponse response)
+        {
+        }
 
-    public async Task OnReceived(PushNotification push)
-	{
-	}
-    
-    public Task OnTokenChanged(string token)
-	{
-	}
+        public async Task OnReceived(PushNotification notification)
+        {
+        }
+
+        public async Task OnTokenChanged(string token)
+        {
+        }
+    }
 }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="tag-support"&gt;Tag Support&lt;/h3&gt;

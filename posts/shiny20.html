@@ -43,7 +43,7 @@
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
   
-  
+  <link href="/scss/TabGroup.css" rel="stylesheet" type="text/css">
 
 
   
@@ -63,12 +63,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Personal Blog of Allan Ritchie</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -79,6 +73,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Personal Blog of Allan Ritchie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -133,7 +133,13 @@ transparent change for you unless you want to customize the notification.</p>
 source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
-<h3 id="before-no-code-gen">BEFORE (no code gen)</h3>
+<div class="tab-wrap">
+<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-dc05397b65a741439fdeb67db653508e" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" checked><label for="c2442436414246ef8c8c944cc74fe5b3-dc05397b65a741439fdeb67db653508e" >Android Before</label>
+<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-ced267099fce49f080ac14f1f65427ab" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-ced267099fce49f080ac14f1f65427ab" >iOS Before</label>
+<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-bb30914b0d5e44589060fc740d675c49" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-bb30914b0d5e44589060fc740d675c49" >Android After</label>
+<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-ea5a9b359f994e32b0e961cac16b747d" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-ea5a9b359f994e32b0e961cac16b747d" >iOS After</label>
+<div class="tab__content">
+
 <pre><code class="language-csharp">// Android App
 [global::Android.App.ApplicationAttribute]
 public partial class MainApplication : global::Android.App.Application
@@ -180,8 +186,13 @@ public partial class MainActivity
 		global::Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 	}
 }
+</code></pre>
 
-// iOS AppDelegate - all features used
+
+</div>
+<div class="tab__content">
+
+<pre><code class="language-csharp">// iOS AppDelegate - all features used
 public partial class AppDelegate
 {
 	partial void OnPreFinishedLaunching(UIApplication app, NSDictionary options);
@@ -200,26 +211,38 @@ public partial class AppDelegate
 	public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler) =&gt; this.ShinyPerformFetch(completionHandler);
 	public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler) =&gt; this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
 }
-
 </code></pre>
-<h3 id="after">AFTER</h3>
+
+
+</div>
+<div class="tab__content">
+
 <pre><code class="language-csharp">// Android Application - you don't even have to make one
 // Android Activity
 public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
 {
 }
+</code></pre>
 
-// iOS AppDelegate
-[Register(&quot;AppDelegate&quot;)]
+
+</div>
+<div class="tab__content">
+
+<pre><code class="language-csharp">[Register(&quot;AppDelegate&quot;)]
 public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
 {
 }
 
 [assembly: ShinyApplication(
-    ShinyStartupTypeName = &quot;Samples.SampleStartup&quot;,
-    XamarinFormsAppTypeName = &quot;Samples.App&quot;
+	ShinyStartupTypeName = &quot;Samples.SampleStartup&quot;,
+	XamarinFormsAppTypeName = &quot;Samples.App&quot;
 )]
 </code></pre>
+
+
+</div>
+</div>
+
 <p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge" /></a> nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
 <h2 id="static-class-generation">Static Class Generation</h2>
 <p>There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).  Not all users like dependency injection and I don't want to maintain static classes of everything.
@@ -371,20 +394,24 @@ subscription.Dispose();
 </code></pre>
 <p><em><strong>Background (this still runs in the foreground)</strong></em></p>
 <pre><code class="language-csharp">using Shiny.Push;
+using System.Threading.Tasks;
 
-public class MyPushDelegate : IPushDelegate
+namespace MyNamespace
 {
-	public async Task OnEntry(PushNotificationResponse push) 
-	{
-	}
+    public class MyPushDelegate : IPushDelegate
+    {
+        public async Task OnEntry(PushNotificationResponse response)
+        {
+        }
 
-    public async Task OnReceived(PushNotification push)
-	{
-	}
-    
-    public Task OnTokenChanged(string token)
-	{
-	}
+        public async Task OnReceived(PushNotification notification)
+        {
+        }
+
+        public async Task OnTokenChanged(string token)
+        {
+        }
+    }
 }
 </code></pre>
 <h3 id="tag-support">Tag Support</h3>
