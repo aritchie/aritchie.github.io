@@ -95,7 +95,7 @@
           <h1>
             Shiny 2.0 For Xamarin - Shinier Than Ever
           </h1>
-              <div class="meta">Published on Friday, June 12, 2020</div>
+              <div class="meta">Published on Tuesday, April 27, 2021</div>
                 <div class="mt-3">
                       <a href="/tags/xamarin" class="badge badge-light"> Xamarin</a>
                       <a href="/tags/oss" class="badge badge-light"> OSS</a>
@@ -129,15 +129,16 @@ transparent change for you unless you want to customize the notification.</p>
 <li><a href="#beacons">Beacons</a></li>
 </ul>
 <h2 id="death-to-boilerplate-code">Death to Boilerplate Code</h2>
+<hr />
 <p>This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C#/.NET5 release,
 source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-dc05397b65a741439fdeb67db653508e" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" checked><label for="c2442436414246ef8c8c944cc74fe5b3-dc05397b65a741439fdeb67db653508e" >Android Before</label>
-<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-ced267099fce49f080ac14f1f65427ab" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-ced267099fce49f080ac14f1f65427ab" >iOS Before</label>
-<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-bb30914b0d5e44589060fc740d675c49" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-bb30914b0d5e44589060fc740d675c49" >Android After</label>
-<input type="radio" id="c2442436414246ef8c8c944cc74fe5b3-ea5a9b359f994e32b0e961cac16b747d" name="c2442436414246ef8c8c944cc74fe5b3" class="tab" ><label for="c2442436414246ef8c8c944cc74fe5b3-ea5a9b359f994e32b0e961cac16b747d" >iOS After</label>
+<input type="radio" id="ee6daef67edb4f438be462e256281e27-a19136150a714a8fb556375242084ae3" name="ee6daef67edb4f438be462e256281e27" class="tab" checked><label for="ee6daef67edb4f438be462e256281e27-a19136150a714a8fb556375242084ae3" >Android Before</label>
+<input type="radio" id="ee6daef67edb4f438be462e256281e27-bee20666dd994825a9fa294bcff1474e" name="ee6daef67edb4f438be462e256281e27" class="tab" ><label for="ee6daef67edb4f438be462e256281e27-bee20666dd994825a9fa294bcff1474e" >iOS Before</label>
+<input type="radio" id="ee6daef67edb4f438be462e256281e27-ed2d6f43debc4ea0999ae2c66f3f3292" name="ee6daef67edb4f438be462e256281e27" class="tab" ><label for="ee6daef67edb4f438be462e256281e27-ed2d6f43debc4ea0999ae2c66f3f3292" >Android After</label>
+<input type="radio" id="ee6daef67edb4f438be462e256281e27-23e68c319d3148a3bf1fdb73a95cf2d8" name="ee6daef67edb4f438be462e256281e27" class="tab" ><label for="ee6daef67edb4f438be462e256281e27-23e68c319d3148a3bf1fdb73a95cf2d8" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -245,8 +246,9 @@ public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDe
 
 <p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge" /></a> nuget package.  It's new with 2.0 and add the attribute shown above in &quot;after&quot;.</p>
 <h2 id="static-class-generation">Static Class Generation</h2>
+<hr />
 <p>There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).  Not all users like dependency injection and I don't want to maintain static classes of everything.
-With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the TODO in the library where you want the classes generated and add the attribute in any file as shown below.
+With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge" /></a> in the library where you want the classes generated and add the attribute in any file as shown below.
 For any Shiny library you have installed in your library, the source generator will create a static equivalent class of the interface.</p>
 <pre><code class="language-csharp">[assembly: StaticClasses(&quot;ILikeStatics&quot;)]
 
@@ -254,11 +256,12 @@ For any Shiny library you have installed in your library, the source generator w
 ILikeStatics.ShinyJobs.Register(...);
 
 // ble
-ILikeStatics.ShinyBleManager.Scan();
+ILikeStatics.ShinyBle.Scan();
 
 </code></pre>
 <p>Pretty statics and NO dependency injection to be seen anywhere.</p>
 <h2 id="logging">Logging</h2>
+<hr />
 <p>Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of hoping the errors in your VS output window.<br />
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.</p>
 <p>With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
@@ -288,6 +291,7 @@ namespace YourApp
 
 </code></pre>
 <h2 id="notifications">Notifications</h2>
+<hr />
 <p>Notifications had to undergo some changes to make sure things like sounds worked and response actions from notifications were consistent across platforms, thus, channels were
 created as to play ball properly with channels on Android and to a far lesser degree, categories on iOS.</p>
 <p>Channels are essentially configuration groups.  This provides equivalent functionality to what you find on Android 8+ such as</p>
@@ -338,6 +342,7 @@ await manager.Send(
 <p>Which gives you this!</p>
 <p><img src="images/shiny20/notificationactions.gif" alt="Actions1" /></p>
 <h2 id="push-notifications">Push Notifications</h2>
+<hr />
 <p>Since the mobile era began, I can't count on two hands how many push notification service providers I've seen come and go.  AppCenter, HockeyApp</p>
 <p>Currently, Shiny is working with Native, Google Firebase Messaging, and Azure Push Notification Hubs.</p>
 <ul>
@@ -347,27 +352,30 @@ await manager.Send(
 </ul>
 <p>Why is this such an awesome API? Because you can swap between
 push notification providers with 1 single line of code:</p>
-<pre><code class="language-csharp">using Shiny;
+<pre><code class="language-csharp">using Microsoft.Extensions.DependencyInjection;
+using Shiny;
 
-namespace YourApp
+namespace YourNamespace
 {
-    public class YourStartup : ShinyStartup
+    public class YourShinyStartup : ShinyStartup
     {
         public override void ConfigureServices(IServiceCollection services, IPlatform platform)
         {
-			// NATIVE
-			services.UsePush&lt;MyPushDelegate&gt;(); // native
+            
+				// NATIVE
+				services.UsePush&lt;MyPushDelegate&gt;(); // native
        
-			// OR FIREBASE 
-			services.UseFirebaseMessaging&lt;MyPushDelegate&gt;();
+				// OR FIREBASE 
+				services.UseFirebaseMessaging&lt;MyPushDelegate&gt;();
 
-			// OR AZURE NOTIFICATION HUBS
-			services.UsePushAzureNotificationHubs&lt;MyPushDelegate&gt;(
-			    &quot;Your Listener Connection String&quot;,
-				&quot;Your Hub Name&quot;
-			);
-		}
-	}
+				// OR AZURE NOTIFICATION HUBS
+				services.UsePushAzureNotificationHubs&lt;MyPushDelegate&gt;(
+					&quot;Your Listener Connection String&quot;,
+					&quot;Your Hub Name&quot;
+				);
+
+        }
+    }
 }
 </code></pre>
 <p>This doesn't cover the general push setup like the Info/Entitlements.plist setup and google-services.json</p>
@@ -433,6 +441,7 @@ await push.TryClearTags(...);
 
 </code></pre>
 <h2 id="bluetooth-le">Bluetooth LE</h2>
+<hr />
 <p>I really went through all of the API calls this library had to offer.</p>
 <p>BLE is still firmly (and always will be) rooted in Reactive Extensions, but I wanted to make the APIs easier to consume for all users including myself.</p>
 <h4 id="managed-scans">Managed Scans</h4>
@@ -442,10 +451,179 @@ await push.TryClearTags(...);
 <li>synchronizing list updates to your UI</li>
 <li>Removing a device from the list that hasn't been heard in a specific time</li>
 </ul>
+<div class="tab-wrap">
+<input type="radio" id="1c90590104724388b9c5715b40937ea0-c0dac05142864d17bf01e242b98e05af" name="1c90590104724388b9c5715b40937ea0" class="tab" checked><label for="1c90590104724388b9c5715b40937ea0-c0dac05142864d17bf01e242b98e05af" >Before</label>
+<input type="radio" id="1c90590104724388b9c5715b40937ea0-4954918184e0499b8b7d4caf14d7be96" name="1c90590104724388b9c5715b40937ea0" class="tab" ><label for="1c90590104724388b9c5715b40937ea0-4954918184e0499b8b7d4caf14d7be96" >After</label>
+<div class="tab__content">
+
+<p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
+<pre><code class="language-csharp">using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive.Linq;
+using System.Windows.Input;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Samples.Infrastructure;
+using Shiny;
+using Shiny.BluetoothLE;
+
+
+namespace Samples.BluetoothLE
+{
+    public class AdapterViewModel : ViewModel
+    {
+        IDisposable? scanSub;
+
+
+        public AdapterViewModel(IBleManager bleManager)
+        {
+            this.ScanToggle = ReactiveCommand.CreateFromTask(
+                async () =&gt;
+                {
+                    if (this.IsScanning)
+                    {
+                        this.StopScan();
+                    }
+                    else
+                    {
+                        this.Peripherals.Clear();
+                        this.IsScanning = true;
+
+                        this.scanSub = bleManager
+                            .Scan()
+                            .Buffer(TimeSpan.FromSeconds(1))
+                            .SubOnMainThread(
+                                results =&gt;
+                                {
+                                    var list = new List&lt;PeripheralItemViewModel&gt;();
+                                    foreach (var result in results)
+                                    {
+                                        var peripheral = this.Peripherals.FirstOrDefault(x =&gt; x.Equals(result.Peripheral));
+                                        if (peripheral == null)
+                                            peripheral = list.FirstOrDefault(x =&gt; x.Equals(result.Peripheral));
+
+                                        if (peripheral != null)
+                                        {
+                                            peripheral.Update(result);
+                                        }
+                                        else
+                                        {
+                                            peripheral = new PeripheralItemViewModel(result.Peripheral);
+                                            peripheral.Update(result);
+                                            list.Add(peripheral);
+                                        }
+                                    }
+                                    if (list.Any())
+                                    {
+                                        // XF is not able to deal with an observablelist/addrange properly
+                                        foreach (var item in list)
+                                            this.Peripherals.Add(item);
+                                    }
+                                }
+                            );
+                    }
+                }
+            );
+        }
+
+
+        public ICommand ScanToggle { get; }
+        public ObservableCollection&lt;PeripheralItemViewModel&gt; Peripherals { get; } = new ObservableCollection&lt;PeripheralItemViewModel&gt;();
+        [Reactive] public PeripheralItemViewModel? SelectedPeripheral { get; set; }
+        [Reactive] public bool IsScanning { get; private set; }
+
+
+        void StopScan()
+        {
+            this.scanSub?.Dispose();
+            this.scanSub = null;
+            this.IsScanning = false;
+        }
+    }
+
+
+    public class PeripheralItemViewModel : ViewModel
+    {
+        public PeripheralItemViewModel(IPeripheral peripheral)
+            =&gt; this.Peripheral = peripheral;
+
+
+        public override bool Equals(object obj)
+            =&gt; this.Peripheral.Equals(obj);
+
+        public IPeripheral Peripheral { get; }
+        public string Uuid =&gt; this.Peripheral.Uuid;
+
+        [Reactive] public string Name { get; private set; }
+        [Reactive] public int Rssi { get; private set; }
+        [Reactive] public string LocalName { get; private set; }
+        [Reactive] public int TxPower { get; private set; }
+
+
+        public void Update(ScanResult result)
+        {
+            this.Name = this.Peripheral.Name;
+            this.Rssi = result.Rssi;
+        }
+    }
+}
+</code></pre>
+
+
+</div>
+<div class="tab__content">
+
+<pre><code class="language-csharp">using System;
+using System.Collections.ObjectModel;
+using System.Reactive.Linq;
+using System.Windows.Input;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Shiny;
+using Shiny.BluetoothLE;
+using Shiny.BluetoothLE.Managed;
+
+
+namespace Samples.BluetoothLE
+{
+    public class ManagedScanViewModel : ViewModel
+    {
+        readonly IManagedScan scanner;
+
+
+        public ManagedScanViewModel(IBleManager bleManager)
+        {
+            this.scanner = bleManager
+                .CreateManagedScanner(RxApp.MainThreadScheduler, TimeSpan.FromSeconds(10))
+                .DisposedBy(this.DeactivateWith);
+
+            this.Toggle = ReactiveCommand.CreateFromTask(async () =&gt;
+                this.IsBusy = await this.scanner.Toggle()
+            );
+        }
+
+
+        public ICommand Toggle { get;  }
+        [Reactive] public ManagedScanResult? SelectedPeripheral { get; set; }
+        public ObservableCollection&lt;ManagedScanResult&gt; Peripherals
+            =&gt; this.scanner.Peripherals;
+    }
+}
+
+
+</code></pre>
+
+
+</div>
+</div>
+
 <h4 id="managed-peripheral">Managed Peripheral</h4>
 <p>The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
 This was painful</p>
 <h2 id="beacons">Beacons</h2>
+<hr />
 <p>Beacons aren't really new, but there has always been a bit of a gap here in the Xamarin community.  You also had to always count on the beacon manufacturer supplying an SDK.
 With Shiny, you get iBeacon (yes the Apple Beacons) out of the box on all of the platforms Shiny supports.  The thing I love about this library is that it is 100% C# and supports all of the monitoring/background scenarios
 on Android as well!</p>
