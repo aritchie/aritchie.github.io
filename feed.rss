@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Sat, 01 May 2021 19:56:10 GMT</pubDate>
-		<lastBuildDate>Sat, 01 May 2021 19:56:10 GMT</lastBuildDate>
+		<pubDate>Sun, 02 May 2021 03:02:20 GMT</pubDate>
+		<lastBuildDate>Sun, 02 May 2021 03:02:20 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -44,11 +44,11 @@ tabs:
   - name: Android Before
     include: "../../includes/shiny20/androidbefore.md"
 
-  - name: iOS Before
-    include: "../../includes/shiny20/iosbefore.md"
-
   - name: Android After
     include: "../../includes/shiny20/androidafter.md"
+
+  - name: iOS Before
+    include: "../../includes/shiny20/iosbefore.md"
 
   - name: iOS After
     include: "../../includes/shiny20/iosafter.md"
@@ -159,6 +159,7 @@ await manager.Send(
 &lt;li&gt;Push&lt;/li&gt;
 &lt;li&gt;Firebase&lt;/li&gt;
 &lt;li&gt;Azure Notification Hubs&lt;/li&gt;
+&lt;li&gt;OneSignal &amp;amp; AWS is in the works&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Why is this such an awesome API? Because you can swap between
 push notification providers with 1 single line of code:&lt;/p&gt;
@@ -274,6 +275,16 @@ tabs:
 &lt;h4 id="managed-peripheral"&gt;Managed Peripheral&lt;/h4&gt;
 &lt;p&gt;The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
 This was painful&lt;/p&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Before
+    include: "../../includes/shiny20/bleperipheralbefore.md"
+
+  - name: After
+    include: "../../includes/shiny20/bleperipheralafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
 &lt;h2 id="beacons"&gt;Beacons&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;Beacons aren't really new, but there has always been a bit of a gap here in the Xamarin community.  You also had to always count on the beacon manufacturer supplying an SDK.
@@ -285,6 +296,16 @@ on Android as well!&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;It will remove beacons from your list that haven't been "heard" in a configurable timestamp&lt;/li&gt;
 &lt;/ul&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Before
+    include: "../../includes/shiny20/beaconscanbefore.md"
+
+  - name: After
+    include: "../../includes/shiny20/beaconscanafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
 &lt;h2 id="links"&gt;LINKS&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;!--?# ConfiguredLink "Documentation" /?--&gt;

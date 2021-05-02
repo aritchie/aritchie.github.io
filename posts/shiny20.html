@@ -63,6 +63,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="/posts">Personal Blog of Allan Ritchie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -73,12 +79,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/posts">Personal Blog of Allan Ritchie</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -135,10 +135,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="a947c374b93548dcacfec8e66ff2bf41-7d7ab31604f34e02a33e5289a9a5d9ec" name="a947c374b93548dcacfec8e66ff2bf41" class="tab" checked><label for="a947c374b93548dcacfec8e66ff2bf41-7d7ab31604f34e02a33e5289a9a5d9ec" >Android Before</label>
-<input type="radio" id="a947c374b93548dcacfec8e66ff2bf41-28e7d94d35504f6780f63e6e5d1d588b" name="a947c374b93548dcacfec8e66ff2bf41" class="tab" ><label for="a947c374b93548dcacfec8e66ff2bf41-28e7d94d35504f6780f63e6e5d1d588b" >iOS Before</label>
-<input type="radio" id="a947c374b93548dcacfec8e66ff2bf41-a1860fa3a03247749a623e17249d8586" name="a947c374b93548dcacfec8e66ff2bf41" class="tab" ><label for="a947c374b93548dcacfec8e66ff2bf41-a1860fa3a03247749a623e17249d8586" >Android After</label>
-<input type="radio" id="a947c374b93548dcacfec8e66ff2bf41-e4d96afe440b407eabd1154d61d804bb" name="a947c374b93548dcacfec8e66ff2bf41" class="tab" ><label for="a947c374b93548dcacfec8e66ff2bf41-e4d96afe440b407eabd1154d61d804bb" >iOS After</label>
+<input type="radio" id="26ffccfec4cc4f2fb47cae17931bad13-52eb0d8b36484423851ffe823be79bb0" name="26ffccfec4cc4f2fb47cae17931bad13" class="tab" checked><label for="26ffccfec4cc4f2fb47cae17931bad13-52eb0d8b36484423851ffe823be79bb0" >Android Before</label>
+<input type="radio" id="26ffccfec4cc4f2fb47cae17931bad13-ad3f066645b34e858bcbbb4e9b8f991e" name="26ffccfec4cc4f2fb47cae17931bad13" class="tab" ><label for="26ffccfec4cc4f2fb47cae17931bad13-ad3f066645b34e858bcbbb4e9b8f991e" >Android After</label>
+<input type="radio" id="26ffccfec4cc4f2fb47cae17931bad13-d92e44856ab24725b6b1833cfc770a18" name="26ffccfec4cc4f2fb47cae17931bad13" class="tab" ><label for="26ffccfec4cc4f2fb47cae17931bad13-d92e44856ab24725b6b1833cfc770a18" >iOS Before</label>
+<input type="radio" id="26ffccfec4cc4f2fb47cae17931bad13-a06251c0da114285843cd888733b7388" name="26ffccfec4cc4f2fb47cae17931bad13" class="tab" ><label for="26ffccfec4cc4f2fb47cae17931bad13-a06251c0da114285843cd888733b7388" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -193,6 +193,17 @@ public partial class MainActivity
 </div>
 <div class="tab__content">
 
+<pre><code class="language-csharp">// Android Application - you don't even have to make one
+// Android Activity
+public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+{
+}
+</code></pre>
+
+
+</div>
+<div class="tab__content">
+
 <pre><code class="language-csharp">// iOS AppDelegate - all features used
 public partial class AppDelegate
 {
@@ -211,17 +222,6 @@ public partial class AppDelegate
 	public override void FailedToRegisterForRemoteNotifications(UIApplication application, NSError error) =&gt; this.ShinyFailedToRegisterForRemoteNotifications(error);
 	public override void PerformFetch(UIApplication application, Action&lt;UIBackgroundFetchResult&gt; completionHandler) =&gt; this.ShinyPerformFetch(completionHandler);
 	public override void HandleEventsForBackgroundUrl(UIApplication application, string sessionIdentifier, Action completionHandler) =&gt; this.ShinyHandleEventsForBackgroundUrl(sessionIdentifier, completionHandler);
-}
-</code></pre>
-
-
-</div>
-<div class="tab__content">
-
-<pre><code class="language-csharp">// Android Application - you don't even have to make one
-// Android Activity
-public partial class MainActivity : Xamarin.Forms.Platform.Android.FormsAppCompatActivity
-{
 }
 </code></pre>
 
@@ -349,6 +349,7 @@ await manager.Send(
 <li>Push</li>
 <li>Firebase</li>
 <li>Azure Notification Hubs</li>
+<li>OneSignal &amp; AWS is in the works</li>
 </ul>
 <p>Why is this such an awesome API? Because you can swap between
 push notification providers with 1 single line of code:</p>
@@ -452,8 +453,8 @@ await push.TryClearTags(...);
 <li>Removing a device from the list that hasn't been heard in a specific time</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="f09e550755ff4b8aa79f569bef939465-b95b8028a30543c8855dbe8f5c36467c" name="f09e550755ff4b8aa79f569bef939465" class="tab" checked><label for="f09e550755ff4b8aa79f569bef939465-b95b8028a30543c8855dbe8f5c36467c" >Before</label>
-<input type="radio" id="f09e550755ff4b8aa79f569bef939465-8d2ffb48900a458e9fbb2df6fcc6eec0" name="f09e550755ff4b8aa79f569bef939465" class="tab" ><label for="f09e550755ff4b8aa79f569bef939465-8d2ffb48900a458e9fbb2df6fcc6eec0" >After</label>
+<input type="radio" id="a211abf1c08041ffa16405f4581c4d6a-fec93604b03c48db868394477eebea1e" name="a211abf1c08041ffa16405f4581c4d6a" class="tab" checked><label for="a211abf1c08041ffa16405f4581c4d6a-fec93604b03c48db868394477eebea1e" >Before</label>
+<input type="radio" id="a211abf1c08041ffa16405f4581c4d6a-085cf2568d0542a8bf2507633507b4ca" name="a211abf1c08041ffa16405f4581c4d6a" class="tab" ><label for="a211abf1c08041ffa16405f4581c4d6a-085cf2568d0542a8bf2507633507b4ca" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -622,6 +623,27 @@ namespace Samples.BluetoothLE
 <h4 id="managed-peripheral">Managed Peripheral</h4>
 <p>The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
 This was painful</p>
+<div class="tab-wrap">
+<input type="radio" id="cee4a6ffbe2d4815a5590593520a5e91-05d44468c96443efaa0d715b2df90463" name="cee4a6ffbe2d4815a5590593520a5e91" class="tab" checked><label for="cee4a6ffbe2d4815a5590593520a5e91-05d44468c96443efaa0d715b2df90463" >Before</label>
+<input type="radio" id="cee4a6ffbe2d4815a5590593520a5e91-bb4f64f2595847618895916a22010c96" name="cee4a6ffbe2d4815a5590593520a5e91" class="tab" ><label for="cee4a6ffbe2d4815a5590593520a5e91-bb4f64f2595847618895916a22010c96" >After</label>
+<div class="tab__content">
+
+<pre><code class="language-csharp">using System;
+
+</code></pre>
+
+
+</div>
+<div class="tab__content">
+
+<pre><code class="language-csharp">using System;
+
+</code></pre>
+
+
+</div>
+</div>
+
 <h2 id="beacons">Beacons</h2>
 <hr />
 <p>Beacons aren't really new, but there has always been a bit of a gap here in the Xamarin community.  You also had to always count on the beacon manufacturer supplying an SDK.
@@ -633,6 +655,27 @@ on Android as well!</p>
 <ul>
 <li>It will remove beacons from your list that haven't been &quot;heard&quot; in a configurable timestamp</li>
 </ul>
+<div class="tab-wrap">
+<input type="radio" id="5397288a6d9940998b3a5197f30fc578-d1ff476fcd0a4ae581d40f0b71d1254a" name="5397288a6d9940998b3a5197f30fc578" class="tab" checked><label for="5397288a6d9940998b3a5197f30fc578-d1ff476fcd0a4ae581d40f0b71d1254a" >Before</label>
+<input type="radio" id="5397288a6d9940998b3a5197f30fc578-ddc5654b13414cf2bea1aef65ec59191" name="5397288a6d9940998b3a5197f30fc578" class="tab" ><label for="5397288a6d9940998b3a5197f30fc578-ddc5654b13414cf2bea1aef65ec59191" >After</label>
+<div class="tab__content">
+
+<pre><code class="language-csharp">using System;
+
+</code></pre>
+
+
+</div>
+<div class="tab__content">
+
+<pre><code class="language-csharp">using System;
+
+</code></pre>
+
+
+</div>
+</div>
+
 <h2 id="links">LINKS</h2>
 <ul>
 <li><a href="https://shinylib.org">Documentation</a>
