@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Tue, 04 May 2021 13:11:16 GMT</pubDate>
-		<lastBuildDate>Tue, 04 May 2021 13:11:16 GMT</lastBuildDate>
+		<pubDate>Tue, 04 May 2021 15:30:17 GMT</pubDate>
+		<lastBuildDate>Tue, 04 May 2021 15:30:17 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -14,7 +14,7 @@
 in friendly, testable, way!&lt;/p&gt;</description>
 			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
 			<guid>https://aritchie.github.io/posts/shiny20</guid>
-			<pubDate>Tue, 27 Apr 2021 00:00:00 GMT</pubDate>
+			<pubDate>Wed, 05 May 2021 00:00:00 GMT</pubDate>
 			<content:encoded>&lt;h2 id="tldr"&gt;TL;DR&lt;/h2&gt;
 &lt;p&gt;Shiny is a Xamarin Framework designed to make dealing with device &amp;amp; background services easy by bringing things like dependency injection, logging, and lots of utilities to bring your workflows to the background
 in friendly, testable, way!&lt;/p&gt;
