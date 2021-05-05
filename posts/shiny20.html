@@ -63,12 +63,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -79,6 +73,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -135,10 +135,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="5457d14839c345eb9abf887848d3f273-2cae3217c7c44664970e0be827dbf948" name="5457d14839c345eb9abf887848d3f273" class="tab" checked><label for="5457d14839c345eb9abf887848d3f273-2cae3217c7c44664970e0be827dbf948" >Android Before</label>
-<input type="radio" id="5457d14839c345eb9abf887848d3f273-2c402a5448694ff2af5b1234f45307f6" name="5457d14839c345eb9abf887848d3f273" class="tab" ><label for="5457d14839c345eb9abf887848d3f273-2c402a5448694ff2af5b1234f45307f6" >Android After</label>
-<input type="radio" id="5457d14839c345eb9abf887848d3f273-d46d173deeee4ae2a62588cfe34f033c" name="5457d14839c345eb9abf887848d3f273" class="tab" ><label for="5457d14839c345eb9abf887848d3f273-d46d173deeee4ae2a62588cfe34f033c" >iOS Before</label>
-<input type="radio" id="5457d14839c345eb9abf887848d3f273-f3cfbb518adb44ecb173f87d50ef78a6" name="5457d14839c345eb9abf887848d3f273" class="tab" ><label for="5457d14839c345eb9abf887848d3f273-f3cfbb518adb44ecb173f87d50ef78a6" >iOS After</label>
+<input type="radio" id="0c2a060190774396b1ce5c56f1c1036f-de90ad0a9ee1403b8984d21dc5b07444" name="0c2a060190774396b1ce5c56f1c1036f" class="tab" checked><label for="0c2a060190774396b1ce5c56f1c1036f-de90ad0a9ee1403b8984d21dc5b07444" >Android Before</label>
+<input type="radio" id="0c2a060190774396b1ce5c56f1c1036f-8a1f8018507a4bef9bd4df79a5ab0b18" name="0c2a060190774396b1ce5c56f1c1036f" class="tab" ><label for="0c2a060190774396b1ce5c56f1c1036f-8a1f8018507a4bef9bd4df79a5ab0b18" >Android After</label>
+<input type="radio" id="0c2a060190774396b1ce5c56f1c1036f-fa8d1150ef6f4faba73762bf50894eee" name="0c2a060190774396b1ce5c56f1c1036f" class="tab" ><label for="0c2a060190774396b1ce5c56f1c1036f-fa8d1150ef6f4faba73762bf50894eee" >iOS Before</label>
+<input type="radio" id="0c2a060190774396b1ce5c56f1c1036f-6f9f94adc9334149946d216442fc6cee" name="0c2a060190774396b1ce5c56f1c1036f" class="tab" ><label for="0c2a060190774396b1ce5c56f1c1036f-6f9f94adc9334149946d216442fc6cee" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -244,12 +244,12 @@ public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDe
 </div>
 </div>
 
-<p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge" /></a> nuget package into your head projects and add the attribute as shown in the &quot;after&quot; tabs above.</p>
+<p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge&label=Shiny" /></a> nuget package into your head projects and add the attribute as shown in the &quot;after&quot; tabs above.</p>
 <p>These new generators can even build your entire startup class, but that's a discussion for a future article :)</p>
 <h2 id="static-class-generation">Static Class Generation</h2>
 <hr />
 <p>There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).<br />
-With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge" /></a> in the library where you want the classes generated and add the attribute in any file as shown below.
+With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge&label=Shiny" /></a> in the library where you want the classes generated and add the attribute in any file as shown below.
 For any Shiny library you have installed in your library, the source generator will create a static equivalent class of the interface.</p>
 <pre><code class="language-csharp">[assembly: StaticClasses(&quot;ILikeStatics&quot;)]
 
@@ -267,8 +267,8 @@ ILikeStatics.ShinyBle.Scan();
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.</p>
 <p>With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
 to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp; Firebase - so I've added the following libs to Shiny</p>
-<a href="https://www.nuget.org/packages/Shiny.Logging.Firebase/" target="Shiny.Logging.Firebase"><img src="https://img.shields.io/nuget/v/Shiny.Logging.Firebase.svg?style=for-the-badge" /></a>
-<a href="https://www.nuget.org/packages/Shiny.Logging.AppCenter/" target="Shiny.Logging.AppCenter"><img src="https://img.shields.io/nuget/v/Shiny.Logging.AppCenter.svg?style=for-the-badge" /></a>
+<a href="https://www.nuget.org/packages/Shiny.Logging.Firebase/" target="Shiny.Logging.Firebase"><img src="https://img.shields.io/nuget/v/Shiny.Logging.Firebase.svg?style=for-the-badge&label=Shiny.Logging.Firebase" /></a>
+<a href="https://www.nuget.org/packages/Shiny.Logging.AppCenter/" target="Shiny.Logging.AppCenter"><img src="https://img.shields.io/nuget/v/Shiny.Logging.AppCenter.svg?style=for-the-badge&label=Shiny.Logging.AppCenter" /></a>
 <p>Wiring providers up is also almost just like ASP.NET Core.  In your Shiny startup file:</p>
 <pre><code class="language-csharp">using System;
 using Shiny;
@@ -463,8 +463,8 @@ await push.TryClearTags(...);
 </ul>
 <p>It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:</p>
 <div class="tab-wrap">
-<input type="radio" id="84a8f0b273154361afe0019414a3bcd9-dd3b245e759b4abaa76a18cd5d5e7b5c" name="84a8f0b273154361afe0019414a3bcd9" class="tab" checked><label for="84a8f0b273154361afe0019414a3bcd9-dd3b245e759b4abaa76a18cd5d5e7b5c" >Before</label>
-<input type="radio" id="84a8f0b273154361afe0019414a3bcd9-c0e6ab59c81241d4ab2c2dd31fe0a334" name="84a8f0b273154361afe0019414a3bcd9" class="tab" ><label for="84a8f0b273154361afe0019414a3bcd9-c0e6ab59c81241d4ab2c2dd31fe0a334" >After</label>
+<input type="radio" id="8e94b4fef78a4960a1f334c7644e33d3-695382da49b940d085cacbaa98b59d27" name="8e94b4fef78a4960a1f334c7644e33d3" class="tab" checked><label for="8e94b4fef78a4960a1f334c7644e33d3-695382da49b940d085cacbaa98b59d27" >Before</label>
+<input type="radio" id="8e94b4fef78a4960a1f334c7644e33d3-f60ceef219a041b3877af6a496885583" name="8e94b4fef78a4960a1f334c7644e33d3" class="tab" ><label for="8e94b4fef78a4960a1f334c7644e33d3-f60ceef219a041b3877af6a496885583" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -642,8 +642,8 @@ This was painful.</p>
 <li>Keeps a list of characteristics you've used instead of having to call GetServices/GetCharacteristics over and over</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="c257791571b74462ac262df8ef00333c-dfa1cab07c77479581571f55d91222d7" name="c257791571b74462ac262df8ef00333c" class="tab" checked><label for="c257791571b74462ac262df8ef00333c-dfa1cab07c77479581571f55d91222d7" >Before</label>
-<input type="radio" id="c257791571b74462ac262df8ef00333c-5aa968d5709648dbbc6958354a2c5c3a" name="c257791571b74462ac262df8ef00333c" class="tab" ><label for="c257791571b74462ac262df8ef00333c-5aa968d5709648dbbc6958354a2c5c3a" >After</label>
+<input type="radio" id="0f56c52aa3004e97a7c4572aa8c8b93c-7e6f311c5f5a42518ae864cc9565375a" name="0f56c52aa3004e97a7c4572aa8c8b93c" class="tab" checked><label for="0f56c52aa3004e97a7c4572aa8c8b93c-7e6f311c5f5a42518ae864cc9565375a" >Before</label>
+<input type="radio" id="0f56c52aa3004e97a7c4572aa8c8b93c-6625a8be39fe4966bf9565143b0bac68" name="0f56c52aa3004e97a7c4572aa8c8b93c" class="tab" ><label for="0f56c52aa3004e97a7c4572aa8c8b93c-6625a8be39fe4966bf9565143b0bac68" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// after a scan, you should have an IPeripheral
@@ -789,8 +789,8 @@ namespace Shiny20Sample
 <li>It will manage the individual items with proximity changes</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="38192ce1a0b3483895579bee83358f9d-dc664d65a62c4b94869c26b07766fe23" name="38192ce1a0b3483895579bee83358f9d" class="tab" checked><label for="38192ce1a0b3483895579bee83358f9d-dc664d65a62c4b94869c26b07766fe23" >Before</label>
-<input type="radio" id="38192ce1a0b3483895579bee83358f9d-c5176382bcce4bfbaa29234fd798be13" name="38192ce1a0b3483895579bee83358f9d" class="tab" ><label for="38192ce1a0b3483895579bee83358f9d-c5176382bcce4bfbaa29234fd798be13" >After</label>
+<input type="radio" id="72831fe608ea40929acd7b903c4ca0be-bfb43c1782204b08b831ec93cc8fed0e" name="72831fe608ea40929acd7b903c4ca0be" class="tab" checked><label for="72831fe608ea40929acd7b903c4ca0be-bfb43c1782204b08b831ec93cc8fed0e" >Before</label>
+<input type="radio" id="72831fe608ea40929acd7b903c4ca0be-e9687b21e9fc46a1ae54e95855bd831f" name="72831fe608ea40929acd7b903c4ca0be" class="tab" ><label for="72831fe608ea40929acd7b903c4ca0be-e9687b21e9fc46a1ae54e95855bd831f" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">
