@@ -5,8 +5,378 @@
 		<link>https://aritchie.github.io/</link>
 		<description>Lots of Xamarin stuffs</description>
 		<copyright>2021</copyright>
-		<pubDate>Wed, 05 May 2021 13:32:47 GMT</pubDate>
-		<lastBuildDate>Wed, 05 May 2021 13:32:47 GMT</lastBuildDate>
+		<pubDate>Wed, 05 May 2021 15:02:52 GMT</pubDate>
+		<lastBuildDate>Wed, 05 May 2021 15:02:52 GMT</lastBuildDate>
+		<item>
+			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
+			<link>https://aritchie.github.io/posts/shiny20</link>
+			<description>&lt;p&gt;Shiny is a Xamarin Framework designed to make dealing with device &amp;amp; background services easy by bringing things like dependency injection, logging, and lots of utilities to bring your workflows to the background
+in friendly, testable, way!&lt;/p&gt;</description>
+			<enclosure url="https://aritchie.github.io/images/shiny_logo.png" length="0" type="image" />
+			<guid>https://aritchie.github.io/posts/shiny20</guid>
+			<pubDate>Wed, 05 May 2021 00:00:00 GMT</pubDate>
+			<content:encoded>&lt;h2 id="the-path-to-2.0"&gt;The Path to 2.0&lt;/h2&gt;
+&lt;p&gt;Shiny is a Xamarin Framework designed to make dealing with device &amp;amp; background services easy by bringing things like dependency injection, logging, and lots of utilities to bring your workflows to the background
+in friendly, testable, way!&lt;/p&gt;
+&lt;p&gt;Version 2.0 is months of work, hundreds of commits (1166 to be exact), and a lot of discovery around how to improve the end experience.  This release focused on improving the background experience
+even more especially on Android.  Android is the source of great pain when it comes to backgrounding and especially around expectations that people
+have (for instance, real time background GPS).  As such, Shiny now uses foreground services in most of these places.  As a developer using Shiny, this is completely
+transparent change for you unless you want to customize the notification.&lt;/p&gt;
+&lt;p&gt;Now that I'm done with the boring rant.  Let's talk about some of the cool new features&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#death-to-boilerplate-code"&gt;Boilerplate Code&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#static-class-generation"&gt;Static Class Generation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#logging"&gt;Microsoft Extensions Logging&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#bluetooth-le"&gt;BluetoothLE&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#notifications"&gt;Local Notifications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#push-notifications"&gt;Push Notifications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://aritchie.github.io/#beacons"&gt;Beacons&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="death-to-boilerplate-code"&gt;Death to Boilerplate Code&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;This was the first source of support pain and issues that users had was usually missed (or wrong) setup.  In 2.0, I set out for how to remove this issue.  With the latest C# 9/.NET5 release,
+source generators were released.  This allows for code to be injected in the places Shiny needed it.  To make things even more convenient for users, I can also wire up all of their
+Xamarin Forms, Xamarin Essentials, and other 3rd party source code.&lt;/p&gt;
+&lt;p&gt;To get an idea, here is a before and after showing both iOS and Android boilerplate&lt;/p&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Android Before
+    include: "../../includes/shiny20/androidbefore.md"
+
+  - name: Android After
+    include: "../../includes/shiny20/androidafter.md"
+
+  - name: iOS Before
+    include: "../../includes/shiny20/iosbefore.md"
+
+  - name: iOS After
+    include: "../../includes/shiny20/iosafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
+&lt;p&gt;To get this "voodoo" magic.  Simply install the &lt;!--?# NugetShield "Shiny" /?--&gt; nuget package into your head projects and add the attribute as shown in the "after" tabs above.&lt;/p&gt;
+&lt;p&gt;These new generators can even build your entire startup class, but that's a discussion for a future article :)&lt;/p&gt;
+&lt;h2 id="static-class-generation"&gt;Static Class Generation&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).&lt;br&gt;
+With those thoughts in mind, source generators once again came to the rescue.  All you need to do is install the &lt;a href="https://www.nuget.org/packages/Shiny/" target="Shiny"&gt;&lt;img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge"&gt;&lt;/a&gt; in the library where you want the classes generated and add the attribute in any file as shown below.
+For any Shiny library you have installed in your library, the source generator will create a static equivalent class of the interface.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;[assembly: StaticClasses("ILikeStatics")]
+
+// core jobs
+ILikeStatics.ShinyJobs.Register(...);
+
+// ble
+ILikeStatics.ShinyBle.Scan();
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pretty statics and NO dependency injection to be seen anywhere.  You still have to create a startup file though ;)&lt;/p&gt;
+&lt;h2 id="logging"&gt;Logging&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of hoping the errors in your VS output window.&lt;br&gt;
+While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.&lt;/p&gt;
+&lt;p&gt;With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
+to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp;amp; Firebase - so I've added the following libs to Shiny&lt;/p&gt;
+&lt;!--?# NugetShield "Shiny.Logging.Firebase" /?--&gt;
+&lt;!--?# NugetShield "Shiny.Logging.AppCenter" /?--&gt;
+&lt;p&gt;Wiring providers up is also almost just like ASP.NET Core.  In your Shiny startup file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using System;
+using Shiny;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+
+namespace YourApp
+{
+    public class YourStartup : ShinyStartup
+    {
+        public override void ConfigureLogging(ILoggingBuilder builder, IPlatform platform)
+        {
+			builder.AddFirebase();
+			builder.AddAppCenter("your appcenter key");
+        }
+	}
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="notifications"&gt;Notifications&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Notifications in Shiny still provide all of the features imaginable for your Xamarin cross platform needs.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scheduling&lt;/li&gt;
+&lt;li&gt;Actions&lt;/li&gt;
+&lt;li&gt;Sounds&lt;/li&gt;
+&lt;li&gt;Priorities&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With 2.0, Notifications had to undergo some changes to make sure things like sounds worked and response actions from notifications were consistent across platforms, thus, channels were
+created as to play ball properly with channels on Android and to a far lesser degree, categories on iOS.&lt;/p&gt;
+&lt;p&gt;Channels are essentially configuration groups.  This provides equivalent functionality to what you find on Android 8+ such as&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Priority&lt;/li&gt;
+&lt;li&gt;Sounds&lt;/li&gt;
+&lt;li&gt;Actions - Text Replies, Buttons, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With iOS, "channels" equate in a way to categories, but apply more to the available actions on a given notification.  With that in mind, I had to bring these two
+worlds together for a consistent design between them (oh... and that UWP thing can come along too).  What's better, channel is required on Android - if you don't care
+about the additional functionality - omit it and Shiny will default it for you!&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-cs"&gt;var manager = ShinyHost.Resolve&amp;lt;Shiny.Notifications.INotificationManager&amp;gt;(); // INJECT THIS
+await manager.AddChannel(new Channel 
+{
+	Identifier = "YourChannelName",
+	Description = "This is your channel",
+	Importance = ChannelImportance.Normal // normal+ will add default sounds on android
+	CustomSoundPath = "notification.mp3",
+	Actions =
+	{
+		new ChannelAction
+		{
+			Identifier = "message",
+			Title = "Leave a Message",
+			ActionType = ChannelActionType.TextReply
+		},
+		new ChannelAction
+		{
+			Identifier = "freeticket",
+			Title = "Free Ticket",
+			ActionType = ChannelActionType.Destructive
+		}
+	}
+});
+
+// BONUS - got a resource file that you want to use instead - make sure to call this before AddChannel
+channel.SetSoundFromEmbeddedResource(this.GetType().Assembly, "Samples.Resources.notification.mp3");
+
+
+// now to use it
+await manager.Send(
+	"WELCOME TO THE CN Tower",
+	"What would you like to do?",
+	"YourChannelName"
+)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which gives you this!&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://aritchie.github.io/images/shiny20/notificationactions.gif" alt="Actions1"&gt;&lt;/p&gt;
+&lt;h2 id="push-notifications"&gt;Push Notifications&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Over the last few years, push notification providers have come and gone.  Google has gone from GCM to Firebase - Other 3rd party push providers have dropped like flies for one reasons or another (ie. AppCenter).
+If you don't have a good design pattern in place, you aren't left a rough spot of being forced to refactor things.&lt;/p&gt;
+&lt;p&gt;As of the 2.0 release, Shiny supports:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Native&lt;/li&gt;
+&lt;li&gt;Firebase&lt;/li&gt;
+&lt;li&gt;Azure Notification Hubs&lt;/li&gt;
+&lt;li&gt;With OneSignal &amp;amp; AWS coming in the near future&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Why is this such an awesome API? Because you can swap between push notification providers with 1 single line of code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using Microsoft.Extensions.DependencyInjection;
+using Shiny;
+
+namespace YourNamespace
+{
+    public class YourShinyStartup : ShinyStartup
+    {
+        public override void ConfigureServices(IServiceCollection services, IPlatform platform)
+        {
+            
+				// NATIVE
+				services.UsePush&amp;lt;MyPushDelegate&amp;gt;(); // native
+       
+				// OR FIREBASE 
+				services.UseFirebaseMessaging&amp;lt;MyPushDelegate&amp;gt;();
+
+				// OR AZURE NOTIFICATION HUBS
+				services.UsePushAzureNotificationHubs&amp;lt;MyPushDelegate&amp;gt;(
+					"Your Listener Connection String",
+					"Your Hub Name"
+				);
+
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This doesn't cover the general push setup like the Info/Entitlements.plist setup and google-services.json.  This will be covered in the docs.&lt;/p&gt;
+&lt;p&gt;Now that we've wired it up, let's request the user permission and get a token.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var result = await ShinyHost.Resolve&amp;lt;Shiny.Push.IPushManager&amp;gt;.RequestAccess();
+if (result.Status == Shiny.AccessState.Available) 
+{
+    result.RegistrationToken; // maybe you want to send this to your server to use in notifications
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And lastly, how you actually get "pushes".  This method is particularily useful if you are doing a real time app for something like chat.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Foreground&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;var subscription = ShinyHost
+	.Resolve&amp;lt;Shiny.Push.IPushManager&amp;gt;()
+	.WhenReceived(push =&amp;gt; {
+		var value = push.Data["ThisIsADictionary"];
+		var title = push.Notification?.Title; // warning: notifications can be null
+	});
+
+// make sure to dispose when you're done or going to the background
+subscription.Dispose();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Background (this still runs in the foreground)&lt;/strong&gt;&lt;/em&gt;
+The background, as with all things in Shiny, is where things begin to shine. The OnReceived is where most of the magic will happen for you.  From here, you can process a push notification
+and do things like call out to an HTTP service to refresh data, maybe acknowledge that your user is available for shift work if they have "punched" into your app.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny.Push;
+using System.Threading.Tasks;
+
+namespace Shiny20Sample
+{
+    public class MyPushDelegate : IPushDelegate
+    {
+        public async Task OnEntry(PushNotificationResponse response)
+        {
+        }
+
+        public async Task OnReceived(PushNotification notification)
+        {
+        }
+
+        public async Task OnTokenChanged(string token)
+        {
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id="tag-support"&gt;Tag Support&lt;/h3&gt;
+&lt;p&gt;Tags are a way of telling the push provider (if supported), I want to listen to these "topics".  This is supported by all of the 3rd party
+messaging systems like Firebase &amp;amp; Azure Notifications Hubs.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;// will not be null if supported
+var tagPushManager = ShinyHost.Resolve&amp;lt;IPushManager&amp;gt;() as IPushTagSupport;
+await tagPushManager.AddTag("YourTag");
+await tagPushManager.RemoveTag("YourTag");
+await tagPushManager.ClearTags();
+await tagPushManager.SetTags("tag1", "tag2"); // remove tags that aren't present and add new tags
+tagPushManager.RegisteredTags; // your current set of registered tags
+
+// OR use the friendly extension methods off the push manager
+var push = ShinyHost.Resolve&amp;lt;IPushManager&amp;gt;();
+await push.TryAddTag(...);
+await push.TryRemoveTag(...);
+await push.TryClearTags(...);
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id="bluetooth-le"&gt;Bluetooth LE&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;I really went through all of the API calls this library had to offer.&lt;/p&gt;
+&lt;p&gt;BLE is still firmly (and always will be) rooted in Reactive Extensions, but I wanted to make the APIs easier to consume for all users including myself.&lt;/p&gt;
+&lt;p&gt;Today, I'm only going to talk about 2 of the super cool features that are new with 2.0.  The Managed BLE mechanics:&lt;/p&gt;
+&lt;h4 id="managed-scans"&gt;Managed Scans&lt;/h4&gt;
+&lt;p&gt;Scanning was riddled with potential issues&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;maintaining a list of unique peripherals while still watching things like the RSSI and name changes&lt;/li&gt;
+&lt;li&gt;synchronizing list updates to your UI&lt;/li&gt;
+&lt;li&gt;Removing a device from the list that hasn't been heard in a specific time&lt;/li&gt;
+&lt;li&gt;preventing the scan from overwhelming your UI with redraws (and subsequently making sure you're on the UI thread when doing anything)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:&lt;/p&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Before
+    include: "../../includes/shiny20/blescanbefore.md"
+
+  - name: After
+    include: "../../includes/shiny20/blescanafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
+&lt;h4 id="managed-peripheral"&gt;Managed Peripheral&lt;/h4&gt;
+&lt;p&gt;The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
+This was painful&lt;/p&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Before
+    include: "../../includes/shiny20/bleperipheralbefore.md"
+
+  - name: After
+    include: "../../includes/shiny20/bleperipheralafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
+&lt;h2 id="beacons"&gt;Beacons&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;Beacons aren't really new, but there has always been a bit of a gap here in the Xamarin community.  You also had to always count on the beacon manufacturer supplying an SDK.
+With Shiny, you get iBeacon (yes the Apple Beacons) out of the box on all of the platforms Shiny supports.  The thing I love about this library is that it is 100% C# and supports all of the monitoring/background scenarios
+on Android as well!&lt;/p&gt;
+&lt;p&gt;Here's a quick look at the main beacon features&lt;/p&gt;
+&lt;h3 id="the-wireup"&gt;The Wireup&lt;/h3&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using Microsoft.Extensions.DependencyInjection;
+using Shiny;
+
+namespace YourNamespace
+{
+    public class YourShinyStartup : ShinyStartup
+    {
+        public override void ConfigureServices(IServiceCollection services, IPlatform platform)
+        {
+            
+				// NOTE: there are 2 different services for beacons 
+				// for ranging - finding individual beacons in the foreground
+				services.UseBeaconRanging();
+       
+				// for monitoring - finding beacon groups (not individual beacons) in the background
+				services.UseBeaconMonitoring&amp;lt;MyBeaconMonitorDelegate&amp;gt;();
+
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id="background-beacons"&gt;Background Beacons&lt;/h4&gt;
+&lt;p&gt;Setting up background monitoring is pretty simple.  Once you've registered, simply call:&lt;/p&gt;
+&lt;p&gt;Here's your delegate:&lt;/p&gt;
+&lt;p&gt;and the code to start monitoring:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;await ShinyHost
+	.Resolve&amp;lt;Shiny.Beacons.IBeaconMonitorManager&amp;gt;()
+	.StartMonitoring(new BeaconRegion(...)) // from here, simply setup the filter criteria you need - remember you only get 20 on iOS!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Simple right!?  StartMonitoring will even request all of the appropropriate permissions!&lt;/p&gt;
+&lt;h4 id="managed-ranging-scan"&gt;Managed Ranging Scan&lt;/h4&gt;
+&lt;p&gt;This essentially works identical to the new managed BLE scan shown earlier with all of the same benefits&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It will use best practices to ensure your UI isn't overwhelmed with updates&lt;/li&gt;
+&lt;li&gt;It will ensure that the bound collection is properly synchronized to prevent crashes&lt;/li&gt;
+&lt;li&gt;It will remove beacons from your list that haven't been "heard" in a configurable timestamp&lt;/li&gt;
+&lt;li&gt;It will manage the individual items with proximity changes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!--?# TabGroup ?--&gt;
+&lt;!--?*
+tabs:
+  - name: Before
+    include: "../../includes/shiny20/beaconscanbefore.md"
+
+  - name: After
+    include: "../../includes/shiny20/beaconscanafter.md"
+?--&gt;
+&lt;!--?#/ TabGroup ?--&gt;
+&lt;h2 id="in-closing"&gt;In Closing&lt;/h2&gt;
+&lt;p&gt;This article only scrapped the surface of the 2.0 upgrade.  There's more articles to come and the docs are shaping up nicely.&lt;/p&gt;
+&lt;p&gt;I want to thank my good friend &lt;a href="https://twitter.com/DanJSiegel"&gt;Dan Siegel&lt;/a&gt; of Prism fam for all of the help, testing, tooling, suggesting, blog articles, and poking (cough...nagging).  Shiny and the Xamarin community as a whole is a better place because of him.
+His work on &lt;a href="https://mobilebuildtools.com/"&gt;Mobile Build Tools&lt;/a&gt; was also immensely helpful for the Shiny samples and integration tests.&lt;/p&gt;
+&lt;p&gt;The future of Shiny now begins to look towards app services which moves from device &amp;amp; background servicing to truly solving real world business cases.  Some of the things I'm working on:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GeoDispatch - Push + GPS for incident management scenarios&lt;/li&gt;
+&lt;li&gt;GPS Tags - like the airtags but with normal beacons and GPS&lt;/li&gt;
+&lt;li&gt;Trip Tracker - tracks your runs, walks, drives, etc in one easy to use API&lt;/li&gt;
+&lt;li&gt;OBD Communications - Talking to these things even with the Shiny BLE API is still a bit of work.  This is going to make it easy!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I'm also still considering future platforms like WASM &amp;amp; macOS, but we'll see how the ecosystem shapes up.  I also want to mention that I've been working with the MAUI team on integrations.  I'll have more to share later this year as it stabilizes.&lt;/p&gt;
+&lt;p&gt;As with all OSS, Shiny is always looking for help.  Head over to GitHub if you've got an issue to report, an enhancement idea, or if you just want to help out.&lt;/p&gt;
+&lt;h2 id="links"&gt;LINKS&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;!--?# ConfiguredLink "Documentation" /?--&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;!--?# ConfiguredLink "Samples" /?--&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;!--?# ConfiguredLink "GitHub" /?--&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;!--?# ConfiguredLink "AllNugets" /?--&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content:encoded>
+			<comments xmlns="http://purl.org/rss/1.0/modules/slash/">0</comments>
+		</item>
 		<item>
 			<title>Startup Tasks, Modules, and Stateful Delegates - Shiny Style</title>
 			<link>https://aritchie.github.io/posts/shiny-di</link>
