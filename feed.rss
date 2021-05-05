@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Wed, 05 May 2021 15:30:59 GMT</pubDate>
-		<lastBuildDate>Wed, 05 May 2021 15:30:59 GMT</lastBuildDate>
+		<pubDate>Wed, 05 May 2021 16:24:38 GMT</pubDate>
+		<lastBuildDate>Wed, 05 May 2021 16:24:38 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -77,8 +77,8 @@ ILikeStatics.ShinyBle.Scan();
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.&lt;/p&gt;
 &lt;p&gt;With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
 to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp;amp; Firebase - so I've added the following libs to Shiny&lt;/p&gt;
-&lt;!--?# NugetShield "Shiny.Logging.Firebase" /?--&gt;
-&lt;!--?# NugetShield "Shiny.Logging.AppCenter" /?--&gt;
+&lt;!--?# NugetShield "Shiny.Logging.Firebase" "label" /?--&gt;
+&lt;!--?# NugetShield "Shiny.Logging.AppCenter" "label" /?--&gt;
 &lt;p&gt;Wiring providers up is also almost just like ASP.NET Core.  In your Shiny startup file:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;using System;
 using Shiny;
@@ -284,7 +284,15 @@ tabs:
 &lt;!--?#/ TabGroup ?--&gt;
 &lt;h4 id="managed-peripheral"&gt;Managed Peripheral&lt;/h4&gt;
 &lt;p&gt;The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
-This was painful&lt;/p&gt;
+This was painful.&lt;/p&gt;
+&lt;p&gt;Managed peripheral to the rescue. The managed peripheral will&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Work like a ViewModel - you can even have it broadcast it's changes on the UI thread for you to bind to&lt;/li&gt;
+&lt;li&gt;Reconnect automatically&lt;/li&gt;
+&lt;li&gt;Restore any characteristic subscription&lt;/li&gt;
+&lt;li&gt;Read/Writes will redetect the characteristics as you used them.  This saves using GetCharacteristic to continously and thereby increasing performance&lt;/li&gt;
+&lt;li&gt;Keeps a list of characteristics you've used instead of having to call GetServices/GetCharacteristics over and over&lt;/li&gt;
+&lt;/ul&gt;
 &lt;!--?# TabGroup ?--&gt;
 &lt;!--?*
 tabs:
@@ -326,6 +334,21 @@ namespace YourNamespace
 &lt;h4 id="background-beacons"&gt;Background Beacons&lt;/h4&gt;
 &lt;p&gt;Setting up background monitoring is pretty simple.  Once you've registered, simply call:&lt;/p&gt;
 &lt;p&gt;Here's your delegate:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny.Beacons;
+using System.Threading.Tasks;
+
+namespace Shiny20Sample
+{
+    public class MyBeaconMonitorDelegate : IBeaconMonitorDelegate
+    {
+        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
+        {
+            // send notifications to say hello or goodbyte
+            // call an http service to track your users
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and the code to start monitoring:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;await ShinyHost
 	.Resolve&amp;lt;Shiny.Beacons.IBeaconMonitorManager&amp;gt;()

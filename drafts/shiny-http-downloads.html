@@ -13,16 +13,16 @@
       <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
       <link type="application/rss+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.rss" />
       <link type="application/atom+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.atom" />
-  
+
   <meta name="application-name" content="Allan Ritchie" />
   <meta name="msapplication-tooltip" content="Allan Ritchie" />
   <meta name="msapplication-starturl" content="/" />
 
   <meta property="og:title" content="Allan Ritchie - HTTP Background Downloads - Shiny Style" />
-    <meta property="og:image" content="/images/toronto_pan.jpg" />
+    <meta property="og:image" content="https://aritchie.github.io/images/toronto_pan.jpg" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://aritchie.github.io/drafts/shiny-http-downloads" />
-  
+
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
@@ -34,15 +34,15 @@
   <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
   <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
-  
+
   <!-- Custom styles for this template -->
   <link href="/scss/clean-blog.css" rel="stylesheet">
-  
+
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
   <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
-  
+
   <link href="/scss/TabGroup.css" rel="stylesheet" type="text/css">
 
 
@@ -102,9 +102,9 @@
 </header>
 
   <!-- Main Content -->
-  <div class="container"> 
+  <div class="container">
     <div class="row">
-      <div id="content" class="col-md-12">  
+      <div id="content" class="col-md-12">
         <p>Large background downloads where the OS kills your app is annoying and not trivial to fix.  Fortunately, Shiny has your back with <a href="https://www.nuget.org/packages/Shiny.Net.Http/">Shiny.Net.Http</a>.  This library allows your downloads to continue and allow the OS to manage things efficiently.  A few other things that aren't an out-of-box-experience (OOBE) with downloads (HttpClient or anything else of that matter) is tracking downloading progress, download speed, and time remaining until completion.  Shiny really provides an ALL-IN-ONE place to manage all of your HTTP transfers.  It also does uploads, but that is a different can of worms for another time.</p>
 <h2 id="get-a-download-going">Get A Download Going</h2>
 <p>So in your ViewModel or Page (whatever floats your boat) - let's queue up a new download.</p>
@@ -203,7 +203,7 @@ namespace YourNamespace
 
   <hr>
 
-  <!-- Footer -->  
+  <!-- Footer -->
   <div id="footer" class="p-3 text-white" style="background: black">
     <div class="container-xl">
         <div class="row">
