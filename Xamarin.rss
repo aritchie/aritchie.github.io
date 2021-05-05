@@ -5,8 +5,8 @@
 		<link>https://aritchie.github.io/</link>
 		<description />
 		<copyright>2021</copyright>
-		<pubDate>Wed, 05 May 2021 18:16:05 GMT</pubDate>
-		<lastBuildDate>Wed, 05 May 2021 18:16:05 GMT</lastBuildDate>
+		<pubDate>Wed, 05 May 2021 22:13:20 GMT</pubDate>
+		<lastBuildDate>Wed, 05 May 2021 22:13:20 GMT</lastBuildDate>
 		<item>
 			<title>Shiny 2.0 For Xamarin - Shinier Than Ever</title>
 			<link>https://aritchie.github.io/posts/shiny20</link>
@@ -374,7 +374,8 @@ tabs:
 ?--&gt;
 &lt;!--?#/ TabGroup ?--&gt;
 &lt;h2 id="in-closing"&gt;In Closing&lt;/h2&gt;
-&lt;p&gt;This article only scrapped the surface of the 2.0 upgrade.  There's more articles to come and the docs are shaping up nicely.&lt;/p&gt;
+&lt;p&gt;This article only scrapped the surface of the 2.0 upgrade.  There's more articles to come and the docs are shaping up nicely.  There are also other packages like NFC, Speech to Text, BLE Hosting, Sensors, and HTTP Transfers that all still exists.  They just didn't see any
+huge feature updates in this release.&lt;/p&gt;
 &lt;p&gt;I want to thank my good friend &lt;a href="https://twitter.com/DanJSiegel"&gt;Dan Siegel&lt;/a&gt; of Prism fam for all of the help, testing, tooling, suggesting, blog articles, and poking (cough...nagging).  Shiny and the Xamarin community as a whole is a better place because of him.
 His work on &lt;a href="https://mobilebuildtools.com/"&gt;Mobile Build Tools&lt;/a&gt; was also immensely helpful for the Shiny samples and integration tests.&lt;/p&gt;
 &lt;p&gt;The future of Shiny now begins to look towards app services which moves from device &amp;amp; background servicing to truly solving real world business cases.  Some of the things I'm working on:&lt;/p&gt;
