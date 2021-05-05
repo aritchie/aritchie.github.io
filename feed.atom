@@ -4,7 +4,7 @@
 	<title>Personal Blog of Allan Ritchie</title>
 	<link rel="self" href="https://aritchie.github.io/" />
 	<rights>2021</rights>
-	<updated>2021-05-05T15:02:51Z</updated>
+	<updated>2021-05-05T15:16:00Z</updated>
 	<logo>https://aritchie.github.io/images/toronto_pan.jpg</logo>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny20</id>
@@ -70,7 +70,7 @@ ILikeStatics.ShinyBle.Scan();
 &lt;p&gt;Pretty statics and NO dependency injection to be seen anywhere.  You still have to create a startup file though ;)&lt;/p&gt;
 &lt;h2 id="logging"&gt;Logging&lt;/h2&gt;
 &lt;hr&gt;
-&lt;p&gt;Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of hoping the errors in your VS output window.&lt;br&gt;
+&lt;p&gt;Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of errors appearing in your VS output window.&lt;br&gt;
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.&lt;/p&gt;
 &lt;p&gt;With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
 to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp;amp; Firebase - so I've added the following libs to Shiny&lt;/p&gt;

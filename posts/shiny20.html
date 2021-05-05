@@ -63,12 +63,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -79,6 +73,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -135,10 +135,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="940c314565de4e9183260c8f0d89a728-b0cca86e2e2c418f89d1aa9b332ca4a6" name="940c314565de4e9183260c8f0d89a728" class="tab" checked><label for="940c314565de4e9183260c8f0d89a728-b0cca86e2e2c418f89d1aa9b332ca4a6" >Android Before</label>
-<input type="radio" id="940c314565de4e9183260c8f0d89a728-7373fbf4a58948ecab947f85134a1d2a" name="940c314565de4e9183260c8f0d89a728" class="tab" ><label for="940c314565de4e9183260c8f0d89a728-7373fbf4a58948ecab947f85134a1d2a" >Android After</label>
-<input type="radio" id="940c314565de4e9183260c8f0d89a728-5661de0b75ee4f348cac2a1b8d55ba81" name="940c314565de4e9183260c8f0d89a728" class="tab" ><label for="940c314565de4e9183260c8f0d89a728-5661de0b75ee4f348cac2a1b8d55ba81" >iOS Before</label>
-<input type="radio" id="940c314565de4e9183260c8f0d89a728-57af2a04b47c43389691c13a5a995c63" name="940c314565de4e9183260c8f0d89a728" class="tab" ><label for="940c314565de4e9183260c8f0d89a728-57af2a04b47c43389691c13a5a995c63" >iOS After</label>
+<input type="radio" id="deb07fb9ed234a34b8b185676eb94861-26a63caf6ea641acb9575210e6bd2714" name="deb07fb9ed234a34b8b185676eb94861" class="tab" checked><label for="deb07fb9ed234a34b8b185676eb94861-26a63caf6ea641acb9575210e6bd2714" >Android Before</label>
+<input type="radio" id="deb07fb9ed234a34b8b185676eb94861-5e5490463b674cf8b106da24c5195436" name="deb07fb9ed234a34b8b185676eb94861" class="tab" ><label for="deb07fb9ed234a34b8b185676eb94861-5e5490463b674cf8b106da24c5195436" >Android After</label>
+<input type="radio" id="deb07fb9ed234a34b8b185676eb94861-c061a192099841f2946388255ab927f7" name="deb07fb9ed234a34b8b185676eb94861" class="tab" ><label for="deb07fb9ed234a34b8b185676eb94861-c061a192099841f2946388255ab927f7" >iOS Before</label>
+<input type="radio" id="deb07fb9ed234a34b8b185676eb94861-7380753f037c4ceb84b449ae8094c2b5" name="deb07fb9ed234a34b8b185676eb94861" class="tab" ><label for="deb07fb9ed234a34b8b185676eb94861-7380753f037c4ceb84b449ae8094c2b5" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -263,7 +263,7 @@ ILikeStatics.ShinyBle.Scan();
 <p>Pretty statics and NO dependency injection to be seen anywhere.  You still have to create a startup file though ;)</p>
 <h2 id="logging">Logging</h2>
 <hr />
-<p>Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of hoping the errors in your VS output window.<br />
+<p>Logging is generally something you want in your app.  When you work in the background, you can't rely on the general dev experience of errors appearing in your VS output window.<br />
 While libraries like AppCenter and Firebase help with crashes, it can be quite dangerous to build them directly into all of your views/viewmodels/classes/etc. Logging providers also tend to disappear and change over time.</p>
 <p>With that being said, I also didn't want to write new providers to plugin into Shiny.  There was an easy answer to this problem - Use Microsoft.Extensions.Logging - the exact same library used by ASP.NET Core devs!  It is a fantastical abstraction
 to build on and support DI out of the gate!  The only thing that was missing was logging providers for AppCenter &amp; Firebase - so I've added the following libs to Shiny</p>
@@ -463,8 +463,8 @@ await push.TryClearTags(...);
 </ul>
 <p>It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:</p>
 <div class="tab-wrap">
-<input type="radio" id="a39c5e1818b543f1b9b9998ecb88ffd1-c8a29c8dfd8e413dbb73906bb90bac80" name="a39c5e1818b543f1b9b9998ecb88ffd1" class="tab" checked><label for="a39c5e1818b543f1b9b9998ecb88ffd1-c8a29c8dfd8e413dbb73906bb90bac80" >Before</label>
-<input type="radio" id="a39c5e1818b543f1b9b9998ecb88ffd1-42296e7864c54e2e9400205446e9197f" name="a39c5e1818b543f1b9b9998ecb88ffd1" class="tab" ><label for="a39c5e1818b543f1b9b9998ecb88ffd1-42296e7864c54e2e9400205446e9197f" >After</label>
+<input type="radio" id="330e2b6731d24d4b8e7ec0b369ea09b9-d9a47616379e4bd4974e85d9601b666b" name="330e2b6731d24d4b8e7ec0b369ea09b9" class="tab" checked><label for="330e2b6731d24d4b8e7ec0b369ea09b9-d9a47616379e4bd4974e85d9601b666b" >Before</label>
+<input type="radio" id="330e2b6731d24d4b8e7ec0b369ea09b9-1c33d39fd3704c839b1b5b57595c95ef" name="330e2b6731d24d4b8e7ec0b369ea09b9" class="tab" ><label for="330e2b6731d24d4b8e7ec0b369ea09b9-1c33d39fd3704c839b1b5b57595c95ef" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -634,8 +634,8 @@ namespace Samples.BluetoothLE
 <p>The problem with traditional peripheral managed is that with every connection, you had to rescan for all of the services and characteristics you had.  You also had to restore any notifications you had.
 This was painful</p>
 <div class="tab-wrap">
-<input type="radio" id="4d03d49310374cf09a05b8286ccc7392-174a330e0cbd43968c8c6ae0fbfb29ec" name="4d03d49310374cf09a05b8286ccc7392" class="tab" checked><label for="4d03d49310374cf09a05b8286ccc7392-174a330e0cbd43968c8c6ae0fbfb29ec" >Before</label>
-<input type="radio" id="4d03d49310374cf09a05b8286ccc7392-70240629bdb74babb5d83a03015a8e60" name="4d03d49310374cf09a05b8286ccc7392" class="tab" ><label for="4d03d49310374cf09a05b8286ccc7392-70240629bdb74babb5d83a03015a8e60" >After</label>
+<input type="radio" id="33973ddaa3d347258b6c66cad6bf69e1-825e3c73db0344b383a5dd5b4cc3ba53" name="33973ddaa3d347258b6c66cad6bf69e1" class="tab" checked><label for="33973ddaa3d347258b6c66cad6bf69e1-825e3c73db0344b383a5dd5b4cc3ba53" >Before</label>
+<input type="radio" id="33973ddaa3d347258b6c66cad6bf69e1-12ccebd020c346dd9e3bb780e7e0afd1" name="33973ddaa3d347258b6c66cad6bf69e1" class="tab" ><label for="33973ddaa3d347258b6c66cad6bf69e1-12ccebd020c346dd9e3bb780e7e0afd1" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">using System;
@@ -710,8 +710,8 @@ namespace YourNamespace
 <li>It will manage the individual items with proximity changes</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="ea35d256ae29451095cc470b0d5acd56-07641507f1b54bee8be67dc3e081dd27" name="ea35d256ae29451095cc470b0d5acd56" class="tab" checked><label for="ea35d256ae29451095cc470b0d5acd56-07641507f1b54bee8be67dc3e081dd27" >Before</label>
-<input type="radio" id="ea35d256ae29451095cc470b0d5acd56-6f55926fdcdf439e8eaa2a868bda376d" name="ea35d256ae29451095cc470b0d5acd56" class="tab" ><label for="ea35d256ae29451095cc470b0d5acd56-6f55926fdcdf439e8eaa2a868bda376d" >After</label>
+<input type="radio" id="5875a937f4ff48e581a4656da8f0f075-7c76e2f0089144178252fd534f175db1" name="5875a937f4ff48e581a4656da8f0f075" class="tab" checked><label for="5875a937f4ff48e581a4656da8f0f075-7c76e2f0089144178252fd534f175db1" >Before</label>
+<input type="radio" id="5875a937f4ff48e581a4656da8f0f075-3125b52285204ded833d345b189e5068" name="5875a937f4ff48e581a4656da8f0f075" class="tab" ><label for="5875a937f4ff48e581a4656da8f0f075-3125b52285204ded833d345b189e5068" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">
