@@ -63,12 +63,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -76,6 +70,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -132,10 +132,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="b7de7e65824c49c18b51f6136a8075af-e6537c38d32b4816898cd8c878c2bc6b" name="b7de7e65824c49c18b51f6136a8075af" class="tab" checked><label for="b7de7e65824c49c18b51f6136a8075af-e6537c38d32b4816898cd8c878c2bc6b" >Android Before</label>
-<input type="radio" id="b7de7e65824c49c18b51f6136a8075af-fa9484baa9734e3eaed82c88762e3b64" name="b7de7e65824c49c18b51f6136a8075af" class="tab" ><label for="b7de7e65824c49c18b51f6136a8075af-fa9484baa9734e3eaed82c88762e3b64" >Android After</label>
-<input type="radio" id="b7de7e65824c49c18b51f6136a8075af-7f1eaee3306d4d9c93a28f6189af8020" name="b7de7e65824c49c18b51f6136a8075af" class="tab" ><label for="b7de7e65824c49c18b51f6136a8075af-7f1eaee3306d4d9c93a28f6189af8020" >iOS Before</label>
-<input type="radio" id="b7de7e65824c49c18b51f6136a8075af-08d28bafa5464fb2adbad2f83d78ba5f" name="b7de7e65824c49c18b51f6136a8075af" class="tab" ><label for="b7de7e65824c49c18b51f6136a8075af-08d28bafa5464fb2adbad2f83d78ba5f" >iOS After</label>
+<input type="radio" id="4ce81f72c8924d80ac9ae1101e554b92-9f16bda12f6448179bdd462e7da4dac5" name="4ce81f72c8924d80ac9ae1101e554b92" class="tab" checked><label for="4ce81f72c8924d80ac9ae1101e554b92-9f16bda12f6448179bdd462e7da4dac5" >Android Before</label>
+<input type="radio" id="4ce81f72c8924d80ac9ae1101e554b92-59718ac17aa44b4092c5c3f79a2394ea" name="4ce81f72c8924d80ac9ae1101e554b92" class="tab" ><label for="4ce81f72c8924d80ac9ae1101e554b92-59718ac17aa44b4092c5c3f79a2394ea" >Android After</label>
+<input type="radio" id="4ce81f72c8924d80ac9ae1101e554b92-a184fab3ffc245578162e46496a3f8b1" name="4ce81f72c8924d80ac9ae1101e554b92" class="tab" ><label for="4ce81f72c8924d80ac9ae1101e554b92-a184fab3ffc245578162e46496a3f8b1" >iOS Before</label>
+<input type="radio" id="4ce81f72c8924d80ac9ae1101e554b92-75f67d0491b248a88b64f101f549f207" name="4ce81f72c8924d80ac9ae1101e554b92" class="tab" ><label for="4ce81f72c8924d80ac9ae1101e554b92-75f67d0491b248a88b64f101f549f207" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -246,7 +246,7 @@ public partial class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDe
 
 <p>To get this &quot;voodoo&quot; magic.  Simply install the <a href="https://www.nuget.org/packages/Shiny/" target="Shiny"><img src="https://img.shields.io/nuget/v/Shiny.svg?style=for-the-badge&label=Shiny" /></a> nuget package into your head projects and add the attribute as shown in the &quot;after&quot; tabs above.  Also note how the activity and appdelegate are partial.
 These new generators can even build your entire startup class, but that's a discussion for a future article :)</p>
-<p><strong>NOTE: If you are using this on Azure DevOps or CI systems, MSBuild 16.8 is required which is not part of Mono yet.  You need to use a tool like Boots to update to the latest beta OR simply use the &quot;BEFORE&quot; versions above</strong></p>
+<p><strong>NOTE: If you are using this on Azure DevOps or CI systems, MSBuild 16.8 is required which is not part of Mono yet.  You need to use a tool like Boots to update to the latest beta OR simply use the &quot;BEFORE&quot; versions above and install <a href="https://www.nuget.org/packages/Shiny.Core/" target="Shiny.Core"><img src="https://img.shields.io/nuget/v/Shiny.Core.svg?style=for-the-badge&label=Shiny.Core" /></a> instead</strong></p>
 <h2 id="static-class-generation">Static Class Generation</h2>
 <hr />
 <p>There are a lot of users that don't like dependency injection.  I can't see or live in a world without it (for now).<br />
@@ -464,8 +464,8 @@ await push.TryClearTags(...);
 </ul>
 <p>It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:</p>
 <div class="tab-wrap">
-<input type="radio" id="66c818f2ca7d4bedb6bb707b4a5d13ed-87357b34ce2f4648ae955dc0877617c2" name="66c818f2ca7d4bedb6bb707b4a5d13ed" class="tab" checked><label for="66c818f2ca7d4bedb6bb707b4a5d13ed-87357b34ce2f4648ae955dc0877617c2" >Before</label>
-<input type="radio" id="66c818f2ca7d4bedb6bb707b4a5d13ed-dd18e81c18714f99989ece5028e7504b" name="66c818f2ca7d4bedb6bb707b4a5d13ed" class="tab" ><label for="66c818f2ca7d4bedb6bb707b4a5d13ed-dd18e81c18714f99989ece5028e7504b" >After</label>
+<input type="radio" id="ad3825ea8083477fb4f40ab0ff105b5a-06aab41a0b924b88856da83325e66284" name="ad3825ea8083477fb4f40ab0ff105b5a" class="tab" checked><label for="ad3825ea8083477fb4f40ab0ff105b5a-06aab41a0b924b88856da83325e66284" >Before</label>
+<input type="radio" id="ad3825ea8083477fb4f40ab0ff105b5a-8be6a1186f5a4d1ababcdd6d6cc9e51f" name="ad3825ea8083477fb4f40ab0ff105b5a" class="tab" ><label for="ad3825ea8083477fb4f40ab0ff105b5a-8be6a1186f5a4d1ababcdd6d6cc9e51f" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -643,8 +643,8 @@ This was painful.</p>
 <li>Keeps a list of characteristics you've used instead of having to call GetServices/GetCharacteristics over and over</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="61ca76bab7ea47c08974998aeb695ce3-d827dc63b5be4aa0b0d20c535fb94a01" name="61ca76bab7ea47c08974998aeb695ce3" class="tab" checked><label for="61ca76bab7ea47c08974998aeb695ce3-d827dc63b5be4aa0b0d20c535fb94a01" >Before</label>
-<input type="radio" id="61ca76bab7ea47c08974998aeb695ce3-8144cd3675534c43b4f0bf2787e503f6" name="61ca76bab7ea47c08974998aeb695ce3" class="tab" ><label for="61ca76bab7ea47c08974998aeb695ce3-8144cd3675534c43b4f0bf2787e503f6" >After</label>
+<input type="radio" id="e6e567059f1748f38bfa31c1821e6b09-73f0f78085f3456e8243051627357186" name="e6e567059f1748f38bfa31c1821e6b09" class="tab" checked><label for="e6e567059f1748f38bfa31c1821e6b09-73f0f78085f3456e8243051627357186" >Before</label>
+<input type="radio" id="e6e567059f1748f38bfa31c1821e6b09-196a7e2f7b034541ae096412f38c3564" name="e6e567059f1748f38bfa31c1821e6b09" class="tab" ><label for="e6e567059f1748f38bfa31c1821e6b09-196a7e2f7b034541ae096412f38c3564" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// after a scan, you should have an IPeripheral
@@ -790,8 +790,8 @@ namespace Shiny20Sample
 <li>It will manage the individual items with proximity changes</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="17a8d7f7aec445dbb5ee6eb9adeccf8b-b0760d7c8fbc4c8d82d67fac2e4c6ec9" name="17a8d7f7aec445dbb5ee6eb9adeccf8b" class="tab" checked><label for="17a8d7f7aec445dbb5ee6eb9adeccf8b-b0760d7c8fbc4c8d82d67fac2e4c6ec9" >Before</label>
-<input type="radio" id="17a8d7f7aec445dbb5ee6eb9adeccf8b-ba20d205e2b44a12a0796b59966c2640" name="17a8d7f7aec445dbb5ee6eb9adeccf8b" class="tab" ><label for="17a8d7f7aec445dbb5ee6eb9adeccf8b-ba20d205e2b44a12a0796b59966c2640" >After</label>
+<input type="radio" id="5e889fb7dd36425fb57a489940dd44ad-fad9e23e65c54b29bca77e78c9040e7d" name="5e889fb7dd36425fb57a489940dd44ad" class="tab" checked><label for="5e889fb7dd36425fb57a489940dd44ad-fad9e23e65c54b29bca77e78c9040e7d" >Before</label>
+<input type="radio" id="5e889fb7dd36425fb57a489940dd44ad-ed0a2e2a62e0484aaec7152fad90b07d" name="5e889fb7dd36425fb57a489940dd44ad" class="tab" ><label for="5e889fb7dd36425fb57a489940dd44ad-ed0a2e2a62e0484aaec7152fad90b07d" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">
