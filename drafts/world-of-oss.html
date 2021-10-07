@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Allan Ritchie - Life as an Open Source Maintainer (from a Xamarin perspective)</title>
+
+  <link rel="canonical" href="https://aritchie.github.io/drafts/world-of-oss">
+
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
+      <link type="application/rss+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.rss" />
+      <link type="application/atom+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.atom" />
+
+  <meta name="application-name" content="Allan Ritchie" />
+  <meta name="msapplication-tooltip" content="Allan Ritchie" />
+  <meta name="msapplication-starturl" content="/" />
+
+  <meta property="og:title" content="Life as an Open Source Maintainer (from a Xamarin perspective)" />
+    <meta property="og:image" content="https://aritchie.github.io/images/toronto_pan.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://aritchie.github.io/drafts/world-of-oss" />
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/scss/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/vendor/fontawesome-free/css/brands.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css' data-no-mirror>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' data-no-mirror>
+
+  <!-- Custom styles for this template -->
+  <link href="/scss/clean-blog.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/components/prism-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/plugins/autoloader/prism-autoloader.min.js" data-no-mirror></script>
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@2.0.0/dist/quicklink.umd.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css">
+
+  <link href="/scss/TabGroup.css" rel="stylesheet" type="text/css">
+
+
+  
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Allan Ritchie</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+</ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url(&quot;/images/toronto_pan.jpg&quot;)">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="site-heading">
+          <h1>
+            Life as an Open Source Maintainer (from a Xamarin perspective)
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div id="content" class="col-md-12">
+        <p>Why do I do open source?</p>
+<ul>
+<li>It's fun</li>
+<li>I learn from it by trying things</li>
+<li>It serves my customers and my projects for my needs</li>
+<li>I wanted to give back to the open source community - I'm an consumer, therefore I wanted to be a supplier as well.  Give &amp; Take!</li>
+</ul>
+<p>Where do I see it failing for people?
+Those that use open source as a crutch.  What do I mean by this?  Simple - you use open source to get around areas you don't know
+or have experience with.  You really should understand what you are using, why you are using it, and if given the time - you could build
+yourself with a reasonable amount of effort.  Open source usage should be about saving you time, not about covering a gap in knowledge.<br />
+An example of this would be people who use Shiny.BluetoothLE on Android and often complain about the internal queue mechanism &quot;slowing&quot; things down.
+I often encourage them to go write Android Bluetooth code on their own before issuing a &quot;complaint&quot;</p>
+<p>Xamarin failures
+.NET web developers use Xamarin thinking they'll be fine because they know the language, but this is the failure.  Knowing the language and general
+workings on .NET is great, but knowing the laws of the operating system are a must.  Developers coming from ASP.NET or Windows, are generally used
+to a ton of resources.  Mobile doesn't have that.</p>
+<h2 id="question-answer-time">QUESTION &amp; ANSWER TIME</h2>
+<blockquote>
+<p>&quot;I'm new to Xamarin&quot;</p>
+</blockquote>
+<ul>
+<li>Great - welcome!  I'd suggest learning the platform before using a project as deep as Shiny.  Get to know the operating system(s) you are working with.
+While I'm happy you're working with Xamarin, this doesn't mean I'm here to walk you through setting it up.  I do the best I can to offer samples and docs where I have
+time, but the amount of emails I get asking me to do a sample is rediculous and not welcome.</li>
+</ul>
+<blockquote>
+<p>&quot;It doesn't do this&quot;</p>
+</blockquote>
+<ul>
+<li>Ok - send a PR?  Open source isn't a laundry list.  You can make it yourself, send a PR to the project for discussion, or simply find something else</li>
+</ul>
+<blockquote>
+<p>&quot;I don't like the way this works&quot;</p>
+</blockquote>
+<ul>
+<li>Same as &quot;it doesn't do this&quot;.</li>
+</ul>
+<blockquote>
+<p>&quot;I only want to use notifications - why do I need all of this other stuff&quot;</p>
+</blockquote>
+<ul>
+<li>This library likely isn't for you.  It was meant to solve tough technical background problems.  Notifications is considered an &quot;addon&quot; to help with backgrounding.  That being said, notifications internally uses a lot
+of the Shiny internals.</li>
+</ul>
+<blockquote>
+<p>&quot;The samples are too hard&quot;</p>
+</blockquote>
+<ul>
+<li>You probably shouldn't use the library then.  Take time to understand what it is solving, how it is solving it, and how it works then.</li>
+</ul>
+<blockquote>
+<p>&quot;The documentation isn't complete&quot;</p>
+</blockquote>
+<ul>
+<li>You're right, the documentation isn't finished, but my library isn't a product.  It is something I do for fun and for my customer base.  I know how it works.
+I understand the internals thoroughly and therefore I am able to justify the usage to safely apply for use to my work.</li>
+</ul>
+<blockquote>
+<p>&quot;When will X be released/fixed&quot;</p>
+</blockquote>
+<ul>
+<li>When it's done.  OSS Maintainers aren't under timelines.  You can always submit a PR for something and have it discussed.</li>
+</ul>
+<blockquote>
+<p>&quot;You closed my issue without any explanation&quot;</p>
+</blockquote>
+<ul>
+<li>When you get emails, messages, tweet, etc about something, maintainers burn out.  If you simply file something that says &quot;It doesn't work&quot;, as a professional developer
+how do you solve this with a customer?  It isn't helpful is it.  You'll often check logs for crashes and then plan a fix based of that stack trace... correct?  Why is it that
+a maintainer should have to ask for this?  If the issue template even state &quot;include XYZ or this issue will be closed without explanation&quot; that people still ask &quot;why was this closed&quot;?</li>
+</ul>
+<blockquote>
+<p>&quot;Why did you shutdown project XYZ&quot;</p>
+</blockquote>
+<ul>
+<li>Because I don't use it anymore.  You can fork it and do what you will with it.  In some cases, with things like ACR User Dialogs, I decided I had enough
+with the constant support questions for something I didn't use anymore.  People can still submit PR's that I review and push through.</li>
+</ul>
+<blockquote>
+<p>&quot;That's not what open source is about&quot;</p>
+</blockquote>
+<ul>
+<li>I love this one.  The source code I made in my free time that is all out in the open for you to use for free means that I can apply
+whatever principles or rules to how I operate that code freely.  As with all things free, you don't have to use them.  If I don't like
+a feature request, change, or anything to do with something coming into the project - I can &amp; will decline it.</li>
+</ul>
+<h2 id="realizations">Realizations</h2>
+<ul>
+<li>You didn't pay for the open source work</li>
+<li>The project doesn't owe you anything</li>
+<li>You don't have to use project XYZ if you find it complex, poorly documented, or simply don't like the way it solves something</li>
+</ul>
+<h2 id="closing-notes">Closing Notes</h2>
+<p>While some of these seem &quot;harsh&quot; - they are just cold hard facts.  The first fact was that most of us doing open source got into it for the very first things
+I said in my opening notes.  We didn't ask for all of the rest of this stuff!</p>
+<p>People often ask if this means I'll quit open source?  The answer is simply no because of all the main opening points again.  The positive outweighs the negative and I'm learning
+new ways of managing the negative.  Better issue templates, public speaking about these experiences in open source, blog posts like this, etc.</p>
+
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <div id="footer" class="p-3 text-white" style="background: black">
+    <div class="container-xl">
+        <div class="row">
+            <div class="offset-lg-2 col-12 col-lg-8">
+                <div class="text-light text-center font-size-sm">
+                    <a target="_NEWWINDOW" href="https://github.com/aritchie" class="text-light pr-2 mr-1"><i class="fab fa-github"></i> GitHub</a>
+                    <a target="_NEWWINDOW" href="https://twitter.com/allanritchie911" class="text-light pr-2 mr-1"><i class="fab fa-twitter"></i> Twitter</a>
+                    <a target="_NEWWINDOW" href="https://twitch.tv/allancritchie" class="text-light pr-2 mr-1"><i class="fab fa-twitch"></i> Twitch</a>
+                    <a target="_NEWWINDOW" class="text-light font-weight-bold" href="https://github.com/sponsors/aritchie"><i class="fa fa-heart"></i> Support</a>
+                </div>
+                <div class="pt-2 font-size-sm text-muted text-center">
+                    © 2021 Allan Ritchie
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134251257-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-134251257-1');
+</script>
+
+
+  
+
+  <!-- Custom scripts for this template -->
+  <script src="/js/clean-blog.js"></script>
+
+</body>
+
+</html>

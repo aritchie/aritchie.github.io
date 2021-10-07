@@ -6,9 +6,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Allan Ritchie - Shiny Framework = Shiny &#x2B; Prism &#x2B; ReactiveUI</title>
+  <title>Allan Ritchie - Shiny - What is it trying to solve</title>
 
-  <link rel="canonical" href="https://aritchie.github.io/drafts/shiny-framework">
+  <link rel="canonical" href="https://aritchie.github.io/drafts/shiny-whatitsolves">
 
       <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
       <link type="application/rss+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.rss" />
@@ -18,10 +18,10 @@
   <meta name="msapplication-tooltip" content="Allan Ritchie" />
   <meta name="msapplication-starturl" content="/" />
 
-  <meta property="og:title" content="Shiny Framework = Shiny &#x2B; Prism &#x2B; ReactiveUI" />
+  <meta property="og:title" content="Shiny - What is it trying to solve" />
     <meta property="og:image" content="https://aritchie.github.io/images/shiny_logo.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://aritchie.github.io/drafts/shiny-framework" />
+  <meta property="og:url" content="https://aritchie.github.io/drafts/shiny-whatitsolves" />
 
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -63,12 +63,6 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -76,6 +70,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -90,7 +90,7 @@
       <div class="col-md-12">
         <div class="site-heading">
           <h1>
-            Shiny Framework = Shiny &#x2B; Prism &#x2B; ReactiveUI
+            Shiny - What is it trying to solve
           </h1>
         </div>
       </div>
@@ -102,7 +102,34 @@
   <div class="container">
     <div class="row">
       <div id="content" class="col-md-12">
-        <p>It's been almost 2 months since the Shiny 2.0 release.  There have been 2 patch releases already</p>
+        <p>Some have called Shiny, heavy weight.... Guess what - they're right!  Why is it heavyweight?  I'm trying to solve
+problems that others may or may not have come across in a way that seems logical to me.</p>
+<h2 id="the-trouble-with-plugins">The trouble with Plugins</h2>
+<p>As of late, I've seen numerous videos and articles coming out showing how to do push notifications.  I love these ones because
+often people want the notification part, but what they really want/need is the background portion of when a notification is received.
+These samples simply can't offer or fix that with any sort of ease. Some of the big plugins do try to fix these, but not before paying the &quot;devils due&quot;
+to get there.  The issue with Android &amp; iOS plugins is that they need some form of boilerplate code.  They also require you have some sort of understanding of &quot;where/when/why&quot; to hook
+to the lifecycle of the platform.</p>
+<ul>
+<li>They often need their own internal stuff for persistenance, scheduling, lifecycle, etc</li>
+<li>They are often too lightweight</li>
+<li>You end with a hodgepodge of a bunch of plugins, all with their own internals</li>
+<li>James Montemagno &amp; I got smart over the years by having a dependency chain of differing nugets.</li>
+</ul>
+<p>But I just want to use Shiny.X
+Ok so....?  Go ahead... It doesn't mean I'm going to change the way I'm doing things because you just want to use X.
+Honestly though, if you are only taking in Shiny for just notifications, it's a waste.</p>
+<h2 id="links">LINKS</h2>
+<ul>
+<li><a href="https://shinyorg.github.io/">Documentation</a>
+</li>
+<li><a href="https://samples.shinylib.net/">Samples</a>
+</li>
+<li><a href="https://github.com/shinyorg/shiny/">GitHub</a>
+</li>
+<li><a href="https://www.nuget.org/profiles/ShinyLib">NuGets</a>
+</li>
+</ul>
 
       </div>
     </div>
