@@ -63,6 +63,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -70,12 +76,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -132,10 +132,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="f0ed763db57849cca8b0547bf950377c-c7757a325d9d49e3bb071bf72b00e60e" name="f0ed763db57849cca8b0547bf950377c" class="tab" checked><label for="f0ed763db57849cca8b0547bf950377c-c7757a325d9d49e3bb071bf72b00e60e" >Android Before</label>
-<input type="radio" id="f0ed763db57849cca8b0547bf950377c-a8c1d0779aa24fe38df66a8c4d853d56" name="f0ed763db57849cca8b0547bf950377c" class="tab" ><label for="f0ed763db57849cca8b0547bf950377c-a8c1d0779aa24fe38df66a8c4d853d56" >Android After</label>
-<input type="radio" id="f0ed763db57849cca8b0547bf950377c-e8333b051d0245dd854370e05c5e5e90" name="f0ed763db57849cca8b0547bf950377c" class="tab" ><label for="f0ed763db57849cca8b0547bf950377c-e8333b051d0245dd854370e05c5e5e90" >iOS Before</label>
-<input type="radio" id="f0ed763db57849cca8b0547bf950377c-a9c9c27bd76d4c628697d173c76b9e7e" name="f0ed763db57849cca8b0547bf950377c" class="tab" ><label for="f0ed763db57849cca8b0547bf950377c-a9c9c27bd76d4c628697d173c76b9e7e" >iOS After</label>
+<input type="radio" id="a72edb9e1d174598ad7af8e30f066fa3-0091a461fae94125b9b40e525d851a1a" name="a72edb9e1d174598ad7af8e30f066fa3" class="tab" checked><label for="a72edb9e1d174598ad7af8e30f066fa3-0091a461fae94125b9b40e525d851a1a" >Android Before</label>
+<input type="radio" id="a72edb9e1d174598ad7af8e30f066fa3-4dd6a65a1b6047b0a12c9781d1929c3e" name="a72edb9e1d174598ad7af8e30f066fa3" class="tab" ><label for="a72edb9e1d174598ad7af8e30f066fa3-4dd6a65a1b6047b0a12c9781d1929c3e" >Android After</label>
+<input type="radio" id="a72edb9e1d174598ad7af8e30f066fa3-75c21f598acd4457afb7b37336c98f48" name="a72edb9e1d174598ad7af8e30f066fa3" class="tab" ><label for="a72edb9e1d174598ad7af8e30f066fa3-75c21f598acd4457afb7b37336c98f48" >iOS Before</label>
+<input type="radio" id="a72edb9e1d174598ad7af8e30f066fa3-93f42235307b416f8617a647b41a3901" name="a72edb9e1d174598ad7af8e30f066fa3" class="tab" ><label for="a72edb9e1d174598ad7af8e30f066fa3-93f42235307b416f8617a647b41a3901" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -464,8 +464,8 @@ await push.TryClearTags(...);
 </ul>
 <p>It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:</p>
 <div class="tab-wrap">
-<input type="radio" id="86de3d5c316948039665a721b0e5c650-4d5712631fe048289526ca914d80e880" name="86de3d5c316948039665a721b0e5c650" class="tab" checked><label for="86de3d5c316948039665a721b0e5c650-4d5712631fe048289526ca914d80e880" >Before</label>
-<input type="radio" id="86de3d5c316948039665a721b0e5c650-1faed30d2f73436783c0b64d378a60e8" name="86de3d5c316948039665a721b0e5c650" class="tab" ><label for="86de3d5c316948039665a721b0e5c650-1faed30d2f73436783c0b64d378a60e8" >After</label>
+<input type="radio" id="9dbf3d7695a44f239f817cf8d62b2279-da2c9252e4354cd1be4457a68de6af73" name="9dbf3d7695a44f239f817cf8d62b2279" class="tab" checked><label for="9dbf3d7695a44f239f817cf8d62b2279-da2c9252e4354cd1be4457a68de6af73" >Before</label>
+<input type="radio" id="9dbf3d7695a44f239f817cf8d62b2279-72a74d59cd7849448d48195973b65bd4" name="9dbf3d7695a44f239f817cf8d62b2279" class="tab" ><label for="9dbf3d7695a44f239f817cf8d62b2279-72a74d59cd7849448d48195973b65bd4" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -643,8 +643,8 @@ This was painful.</p>
 <li>Keeps a list of characteristics you've used instead of having to call GetServices/GetCharacteristics over and over</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="841d8efeb7f24979849da44086d4f419-9f79aed94f8547a38437893722fada57" name="841d8efeb7f24979849da44086d4f419" class="tab" checked><label for="841d8efeb7f24979849da44086d4f419-9f79aed94f8547a38437893722fada57" >Before</label>
-<input type="radio" id="841d8efeb7f24979849da44086d4f419-55f81756fa164fbeb4e0039be06bd0f1" name="841d8efeb7f24979849da44086d4f419" class="tab" ><label for="841d8efeb7f24979849da44086d4f419-55f81756fa164fbeb4e0039be06bd0f1" >After</label>
+<input type="radio" id="2c32e0deaad540cc9ef30fffd095b66c-eedcb4ff8e9d4ca798c8943ae43ebe03" name="2c32e0deaad540cc9ef30fffd095b66c" class="tab" checked><label for="2c32e0deaad540cc9ef30fffd095b66c-eedcb4ff8e9d4ca798c8943ae43ebe03" >Before</label>
+<input type="radio" id="2c32e0deaad540cc9ef30fffd095b66c-680e47489bc64bc0aec4c94b4509582e" name="2c32e0deaad540cc9ef30fffd095b66c" class="tab" ><label for="2c32e0deaad540cc9ef30fffd095b66c-680e47489bc64bc0aec4c94b4509582e" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// after a scan, you should have an IPeripheral
@@ -790,8 +790,8 @@ namespace Shiny20Sample
 <li>It will manage the individual items with proximity changes</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="122dbe8031fd4ab19789d143de79ca69-774e030881664b268fc6dc9dd0b73861" name="122dbe8031fd4ab19789d143de79ca69" class="tab" checked><label for="122dbe8031fd4ab19789d143de79ca69-774e030881664b268fc6dc9dd0b73861" >Before</label>
-<input type="radio" id="122dbe8031fd4ab19789d143de79ca69-b0f39a924ff347799da256a5d098c22e" name="122dbe8031fd4ab19789d143de79ca69" class="tab" ><label for="122dbe8031fd4ab19789d143de79ca69-b0f39a924ff347799da256a5d098c22e" >After</label>
+<input type="radio" id="70c671f35abd4af18e3dbdeb88708da8-208d5a1713274298971cb3c8eb6f545f" name="70c671f35abd4af18e3dbdeb88708da8" class="tab" checked><label for="70c671f35abd4af18e3dbdeb88708da8-208d5a1713274298971cb3c8eb6f545f" >Before</label>
+<input type="radio" id="70c671f35abd4af18e3dbdeb88708da8-f6ce59d4cf764303aa45c96b73ebb313" name="70c671f35abd4af18e3dbdeb88708da8" class="tab" ><label for="70c671f35abd4af18e3dbdeb88708da8-f6ce59d4cf764303aa45c96b73ebb313" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">
