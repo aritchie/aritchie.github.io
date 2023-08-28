@@ -10,8 +10,8 @@
 
   <link rel="canonical" href="https://aritchie.github.io/posts/shiny20">
 
-      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
       <link type="application/rss+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.rss" />
+      <link type="application/rss+xml" rel="alternate" title="Allan Ritchie&#x27;s Blog" href="/Xamarin.rss" />
       <link type="application/atom+xml" rel="alternate" title="Personal Blog of Allan Ritchie" href="/feed.atom" />
 
   <meta name="application-name" content="Allan Ritchie" />
@@ -63,6 +63,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
             <li class="nav-item">
+                <a class="nav-link" href="/posts">Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/tags">Tags</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>
             <li class="nav-item">
@@ -70,12 +76,6 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/speaking">Speaking</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/posts">Posts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/tags">Tags</a>
             </li>
 </ul>
     </div>
@@ -132,10 +132,10 @@ source generators were released.  This allows for code to be injected in the pla
 Xamarin Forms, Xamarin Essentials, and other 3rd party source code.</p>
 <p>To get an idea, here is a before and after showing both iOS and Android boilerplate</p>
 <div class="tab-wrap">
-<input type="radio" id="a6c1c1a9c99a46a8bddc37c619abc8f5-88a258321f3f4f79bc2e9e3f05839161" name="a6c1c1a9c99a46a8bddc37c619abc8f5" class="tab" checked><label for="a6c1c1a9c99a46a8bddc37c619abc8f5-88a258321f3f4f79bc2e9e3f05839161" >Android Before</label>
-<input type="radio" id="a6c1c1a9c99a46a8bddc37c619abc8f5-36d04f41617c4571941967cb5e89f58a" name="a6c1c1a9c99a46a8bddc37c619abc8f5" class="tab" ><label for="a6c1c1a9c99a46a8bddc37c619abc8f5-36d04f41617c4571941967cb5e89f58a" >Android After</label>
-<input type="radio" id="a6c1c1a9c99a46a8bddc37c619abc8f5-fbe2fd2a19cb4182b749a4ee69ed89bd" name="a6c1c1a9c99a46a8bddc37c619abc8f5" class="tab" ><label for="a6c1c1a9c99a46a8bddc37c619abc8f5-fbe2fd2a19cb4182b749a4ee69ed89bd" >iOS Before</label>
-<input type="radio" id="a6c1c1a9c99a46a8bddc37c619abc8f5-3f273b01e6084719bf79a8b09308ba31" name="a6c1c1a9c99a46a8bddc37c619abc8f5" class="tab" ><label for="a6c1c1a9c99a46a8bddc37c619abc8f5-3f273b01e6084719bf79a8b09308ba31" >iOS After</label>
+<input type="radio" id="6a0882c5759d4f37b0f264000caf6ea0-ed35b5ff3a0d4affa79a810416d35576" name="6a0882c5759d4f37b0f264000caf6ea0" class="tab" checked><label for="6a0882c5759d4f37b0f264000caf6ea0-ed35b5ff3a0d4affa79a810416d35576" >Android Before</label>
+<input type="radio" id="6a0882c5759d4f37b0f264000caf6ea0-b47d0c2264244ea09cfe6f186dd9ee6e" name="6a0882c5759d4f37b0f264000caf6ea0" class="tab" ><label for="6a0882c5759d4f37b0f264000caf6ea0-b47d0c2264244ea09cfe6f186dd9ee6e" >Android After</label>
+<input type="radio" id="6a0882c5759d4f37b0f264000caf6ea0-c1a39880b8694dbfac6c7c94ca6d6f56" name="6a0882c5759d4f37b0f264000caf6ea0" class="tab" ><label for="6a0882c5759d4f37b0f264000caf6ea0-c1a39880b8694dbfac6c7c94ca6d6f56" >iOS Before</label>
+<input type="radio" id="6a0882c5759d4f37b0f264000caf6ea0-db2b8b5e44554d4c9f8c763f676fc172" name="6a0882c5759d4f37b0f264000caf6ea0" class="tab" ><label for="6a0882c5759d4f37b0f264000caf6ea0-db2b8b5e44554d4c9f8c763f676fc172" >iOS After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// Android App
@@ -410,27 +410,6 @@ subscription.Dispose();
 <p><em><strong>Background (this still runs in the foreground)</strong></em>
 The background, as with all things in Shiny, is where things begin to shine. The OnReceived is where most of the magic will happen for you.  From here, you can process a push notification
 and do things like call out to an HTTP service to refresh data, maybe acknowledge that your user is available for shift work if they have &quot;punched&quot; into your app.</p>
-<pre><code class="language-csharp">using Shiny.Push;
-using System.Threading.Tasks;
-
-namespace Shiny20Sample
-{
-    public class MyPushDelegate : IPushDelegate
-    {
-        public async Task OnEntry(PushNotificationResponse response)
-        {
-        }
-
-        public async Task OnReceived(PushNotification notification)
-        {
-        }
-
-        public async Task OnTokenChanged(string token)
-        {
-        }
-    }
-}
-</code></pre>
 <h3 id="tag-support">Tag Support</h3>
 <p>Tags are a way of telling the push provider (if supported), I want to listen to these &quot;topics&quot;.  This is supported by all of the 3rd party
 messaging systems like Firebase &amp; Azure Notifications Hubs.</p>
@@ -464,8 +443,8 @@ await push.TryClearTags(...);
 </ul>
 <p>It took a fair of code to manage this even with Shiny, but with the new managed scanner - take a look at the difference:</p>
 <div class="tab-wrap">
-<input type="radio" id="f37d3811ea004f6798c744223dfdbd50-052503916cec4aa9a39490e5301bd13c" name="f37d3811ea004f6798c744223dfdbd50" class="tab" checked><label for="f37d3811ea004f6798c744223dfdbd50-052503916cec4aa9a39490e5301bd13c" >Before</label>
-<input type="radio" id="f37d3811ea004f6798c744223dfdbd50-19e2a3cc31ff42a78654a2ee6d8a8df2" name="f37d3811ea004f6798c744223dfdbd50" class="tab" ><label for="f37d3811ea004f6798c744223dfdbd50-19e2a3cc31ff42a78654a2ee6d8a8df2" >After</label>
+<input type="radio" id="9b7c1b4eda6e4f0e88112fd0e07224bc-b6ea5bfe99e84a9691d77e42a9373d55" name="9b7c1b4eda6e4f0e88112fd0e07224bc" class="tab" checked><label for="9b7c1b4eda6e4f0e88112fd0e07224bc-b6ea5bfe99e84a9691d77e42a9373d55" >Before</label>
+<input type="radio" id="9b7c1b4eda6e4f0e88112fd0e07224bc-3a2695d393c74830bdbd071cc86b766c" name="9b7c1b4eda6e4f0e88112fd0e07224bc" class="tab" ><label for="9b7c1b4eda6e4f0e88112fd0e07224bc-3a2695d393c74830bdbd071cc86b766c" >After</label>
 <div class="tab__content">
 
 <p>This isn't even doing things like removing items if a peripheral isn't seen for a configured amount of seconds.</p>
@@ -643,8 +622,8 @@ This was painful.</p>
 <li>Keeps a list of characteristics you've used instead of having to call GetServices/GetCharacteristics over and over</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="8f6369ba1ed04a49ba3b39881fded524-ad69b1759bec43bd8230ce1eb0a969c8" name="8f6369ba1ed04a49ba3b39881fded524" class="tab" checked><label for="8f6369ba1ed04a49ba3b39881fded524-ad69b1759bec43bd8230ce1eb0a969c8" >Before</label>
-<input type="radio" id="8f6369ba1ed04a49ba3b39881fded524-6d04f7a2db78454785456146abb21a8c" name="8f6369ba1ed04a49ba3b39881fded524" class="tab" ><label for="8f6369ba1ed04a49ba3b39881fded524-6d04f7a2db78454785456146abb21a8c" >After</label>
+<input type="radio" id="285e7e1a3c0c4ab98c35cc3b4d6969eb-284a1a0d0e70427e88db20d4e1db45d2" name="285e7e1a3c0c4ab98c35cc3b4d6969eb" class="tab" checked><label for="285e7e1a3c0c4ab98c35cc3b4d6969eb-284a1a0d0e70427e88db20d4e1db45d2" >Before</label>
+<input type="radio" id="285e7e1a3c0c4ab98c35cc3b4d6969eb-647bc85f451f490187dcacfa18591d4d" name="285e7e1a3c0c4ab98c35cc3b4d6969eb" class="tab" ><label for="285e7e1a3c0c4ab98c35cc3b4d6969eb-647bc85f451f490187dcacfa18591d4d" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">// after a scan, you should have an IPeripheral
@@ -760,21 +739,6 @@ namespace YourNamespace
 <h4 id="background-beacons">Background Beacons</h4>
 <p>Setting up background monitoring is pretty simple.  Once you've registered, simply call:</p>
 <p>Here's your delegate:</p>
-<pre><code class="language-csharp">using Shiny.Beacons;
-using System.Threading.Tasks;
-
-namespace Shiny20Sample
-{
-    public class MyBeaconMonitorDelegate : IBeaconMonitorDelegate
-    {
-        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
-        {
-            // send notifications to say hello or goodbyte
-            // call an http service to track your users
-        }
-    }
-}
-</code></pre>
 <p>and the code to start monitoring:</p>
 <pre><code class="language-csharp">await ShinyHost
 	.Resolve&lt;Shiny.Beacons.IBeaconMonitorManager&gt;()
@@ -790,8 +754,8 @@ namespace Shiny20Sample
 <li>It will manage the individual items with proximity changes</li>
 </ul>
 <div class="tab-wrap">
-<input type="radio" id="79fcf361fe834950bc6fde828e750c67-9557793be95844f2b4a4902e59387962" name="79fcf361fe834950bc6fde828e750c67" class="tab" checked><label for="79fcf361fe834950bc6fde828e750c67-9557793be95844f2b4a4902e59387962" >Before</label>
-<input type="radio" id="79fcf361fe834950bc6fde828e750c67-20c3c815671e4655a7aaf252cc2216e4" name="79fcf361fe834950bc6fde828e750c67" class="tab" ><label for="79fcf361fe834950bc6fde828e750c67-20c3c815671e4655a7aaf252cc2216e4" >After</label>
+<input type="radio" id="c0ff33f83aac4a659561dc88cb3e0e63-7049182c37a14f6385d38b704322fa2d" name="c0ff33f83aac4a659561dc88cb3e0e63" class="tab" checked><label for="c0ff33f83aac4a659561dc88cb3e0e63-7049182c37a14f6385d38b704322fa2d" >Before</label>
+<input type="radio" id="c0ff33f83aac4a659561dc88cb3e0e63-460b3bcbfd61446b9df5f649606057dc" name="c0ff33f83aac4a659561dc88cb3e0e63" class="tab" ><label for="c0ff33f83aac4a659561dc88cb3e0e63-460b3bcbfd61446b9df5f649606057dc" >After</label>
 <div class="tab__content">
 
 <pre><code class="language-csharp">

@@ -4,7 +4,7 @@
 	<title>Personal Blog of Allan Ritchie</title>
 	<link rel="self" href="https://aritchie.github.io/" />
 	<rights>2023</rights>
-	<updated>2023-06-19T13:09:11Z</updated>
+	<updated>2023-08-28T17:58:05Z</updated>
 	<logo>https://aritchie.github.io/images/toronto_pan.jpg</logo>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny20</id>
@@ -217,27 +217,6 @@ subscription.Dispose();
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;Background (this still runs in the foreground)&lt;/strong&gt;&lt;/em&gt;
 The background, as with all things in Shiny, is where things begin to shine. The OnReceived is where most of the magic will happen for you.  From here, you can process a push notification
 and do things like call out to an HTTP service to refresh data, maybe acknowledge that your user is available for shift work if they have "punched" into your app.&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny.Push;
-using System.Threading.Tasks;
-
-namespace Shiny20Sample
-{
-    public class MyPushDelegate : IPushDelegate
-    {
-        public async Task OnEntry(PushNotificationResponse response)
-        {
-        }
-
-        public async Task OnReceived(PushNotification notification)
-        {
-        }
-
-        public async Task OnTokenChanged(string token)
-        {
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
 &lt;h3 id="tag-support"&gt;Tag Support&lt;/h3&gt;
 &lt;p&gt;Tags are a way of telling the push provider (if supported), I want to listen to these "topics".  This is supported by all of the 3rd party
 messaging systems like Firebase &amp;amp; Azure Notifications Hubs.&lt;/p&gt;
@@ -332,21 +311,6 @@ namespace YourNamespace
 &lt;h4 id="background-beacons"&gt;Background Beacons&lt;/h4&gt;
 &lt;p&gt;Setting up background monitoring is pretty simple.  Once you've registered, simply call:&lt;/p&gt;
 &lt;p&gt;Here's your delegate:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="language-csharp"&gt;using Shiny.Beacons;
-using System.Threading.Tasks;
-
-namespace Shiny20Sample
-{
-    public class MyBeaconMonitorDelegate : IBeaconMonitorDelegate
-    {
-        public async Task OnStatusChanged(BeaconRegionState newStatus, BeaconRegion region)
-        {
-            // send notifications to say hello or goodbyte
-            // call an http service to track your users
-        }
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;and the code to start monitoring:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-csharp"&gt;await ShinyHost
 	.Resolve&amp;lt;Shiny.Beacons.IBeaconMonitorManager&amp;gt;()
@@ -681,7 +645,7 @@ namespace YourNamespace
 &lt;li&gt;&lt;a href="https://estimote.com/products/"&gt;Estimote Beacons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>&lt;p&gt;Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a "location" of some type.  They are like an invisible light house.  If you have a device that can "see" those signals, you can find out how close you are to it.&lt;/p&gt;</summary>
+		<summary>&lt;p&gt;Beacons are low powered IoT devices that emit a signal over Bluetooth advertising that contains a specific (and very small piece of data) that is like an address.  You attach that address to a &amp;quot;location&amp;quot; of some type.  They are like an invisible light house.  If you have a device that can &amp;quot;see&amp;quot; those signals, you can find out how close you are to it.&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/shiny-geofencing</id>
@@ -954,7 +918,7 @@ var result = await Shiny.ShinyHost.Resolve&amp;lt;Shiny.Jobs.IJobManager&amp;gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 </content>
-		<summary>&lt;p&gt;Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the "pretty" from Android to Xamarin cross platform!&lt;/p&gt;</summary>
+		<summary>&lt;p&gt;Performing background jobs on mobile is a necessity these days whether you are synchronizing data with your background, triggering notifications to say happy birthday, or just tracking your user for every step they make.  With Shiny, I set out to make this process a breeze.  Android has such a beautiful scheduled jobs engine that keeps improving.  iOS is painful mainly because Apple hates your code that isn't UI.  UWP does have a background tasks which work quite well, but lack some structure.  I attempted to bring most of the &amp;quot;pretty&amp;quot; from Android to Xamarin cross platform!&lt;/p&gt;</summary>
 	</entry>
 	<entry>
 		<id>https://aritchie.github.io/posts/introducingshiny</id>
